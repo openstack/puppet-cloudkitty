@@ -22,16 +22,16 @@ describe 'cloudkitty::keystone::auth' do
         :roles   => ['admin']
       )}
 
-      it { is_expected.to contain_keystone_service('cloudkitty::FIXME').with(
+      it { is_expected.to contain_keystone_service('cloudkitty::rating').with(
         :ensure      => 'present',
-        :description => 'cloudkitty FIXME Service'
+        :description => 'OpenStack Rating Service'
       ) }
 
-      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty::FIXME').with(
+      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty::rating').with(
         :ensure       => 'present',
-        :public_url   => 'http://127.0.0.1:FIXME',
-        :admin_url    => 'http://127.0.0.1:FIXME',
-        :internal_url => 'http://127.0.0.1:FIXME',
+        :public_url   => 'http://127.0.0.1:8889',
+        :admin_url    => 'http://127.0.0.1:8889',
+        :internal_url => 'http://127.0.0.1:8889',
       ) }
     end
 
@@ -43,7 +43,7 @@ describe 'cloudkitty::keystone::auth' do
           :admin_url    => 'http://10.10.10.12:81', }
       end
 
-      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty::FIXME').with(
+      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty::rating').with(
         :ensure       => 'present',
         :public_url   => 'https://10.10.10.10:80',
         :internal_url => 'http://10.10.10.11:81',
@@ -59,8 +59,8 @@ describe 'cloudkitty::keystone::auth' do
 
       it { is_expected.to contain_keystone_user('cloudkittyy') }
       it { is_expected.to contain_keystone_user_role('cloudkittyy@services') }
-      it { is_expected.to contain_keystone_service('cloudkitty::FIXME') }
-      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty::FIXME') }
+      it { is_expected.to contain_keystone_service('cloudkitty::rating') }
+      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty::rating') }
     end
 
     context 'when overriding service name' do
@@ -72,8 +72,8 @@ describe 'cloudkitty::keystone::auth' do
 
       it { is_expected.to contain_keystone_user('cloudkitty') }
       it { is_expected.to contain_keystone_user_role('cloudkitty@services') }
-      it { is_expected.to contain_keystone_service('cloudkitty_service::FIXME') }
-      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty_service::FIXME') }
+      it { is_expected.to contain_keystone_service('cloudkitty_service::rating') }
+      it { is_expected.to contain_keystone_endpoint('RegionOne/cloudkitty_service::rating') }
     end
 
     context 'when disabling user configuration' do
@@ -87,9 +87,9 @@ describe 'cloudkitty::keystone::auth' do
 
       it { is_expected.not_to contain_keystone_user('cloudkitty') }
       it { is_expected.to contain_keystone_user_role('cloudkitty@services') }
-      it { is_expected.to contain_keystone_service('cloudkitty::FIXME').with(
+      it { is_expected.to contain_keystone_service('cloudkitty::rating').with(
         :ensure      => 'present',
-        :description => 'cloudkitty FIXME Service'
+        :description => 'OpenStack Rating Service'
       ) }
 
     end
@@ -106,9 +106,9 @@ describe 'cloudkitty::keystone::auth' do
 
       it { is_expected.not_to contain_keystone_user('cloudkitty') }
       it { is_expected.not_to contain_keystone_user_role('cloudkitty@services') }
-      it { is_expected.to contain_keystone_service('cloudkitty::FIXME').with(
+      it { is_expected.to contain_keystone_service('cloudkitty::rating').with(
         :ensure      => 'present',
-        :description => 'cloudkitty FIXME Service'
+        :description => 'OpenStack Rating Service'
       ) }
 
     end

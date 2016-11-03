@@ -39,18 +39,18 @@
 #
 # [*service_description*]
 #   (optional) Description of the service.
-#   Default to 'cloudkitty FIXME Service'
+#   Default to 'OpenStack Rating Service'
 #
 # [*public_url*]
-#   (optional) The endpoint's public url. (Defaults to 'http://127.0.0.1:FIXME')
+#   (optional) The endpoint's public url. (Defaults to 'http://127.0.0.1:8889')
 #   This url should *not* contain any trailing '/'.
 #
 # [*admin_url*]
-#   (optional) The endpoint's admin url. (Defaults to 'http://127.0.0.1:FIXME')
+#   (optional) The endpoint's admin url. (Defaults to 'http://127.0.0.1:8889')
 #   This url should *not* contain any trailing '/'.
 #
 # [*internal_url*]
-#   (optional) The endpoint's internal url. (Defaults to 'http://127.0.0.1:FIXME')
+#   (optional) The endpoint's internal url. (Defaults to 'http://127.0.0.1:8889')
 #
 class cloudkitty::keystone::auth (
   $password,
@@ -61,12 +61,12 @@ class cloudkitty::keystone::auth (
   $configure_user      = true,
   $configure_user_role = true,
   $service_name        = 'cloudkitty',
-  $service_description = 'cloudkitty FIXME Service',
-  $service_type        = 'FIXME',
+  $service_description = 'OpenStack Rating Service',
+  $service_type        = 'rating',
   $region              = 'RegionOne',
-  $public_url          = 'http://127.0.0.1:FIXME',
-  $admin_url           = 'http://127.0.0.1:FIXME',
-  $internal_url        = 'http://127.0.0.1:FIXME',
+  $public_url          = 'http://127.0.0.1:8889',
+  $admin_url           = 'http://127.0.0.1:8889',
+  $internal_url        = 'http://127.0.0.1:8889',
 ) {
 
   if $configure_user_role {
