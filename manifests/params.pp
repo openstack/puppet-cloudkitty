@@ -3,6 +3,11 @@
 # Parameters for puppet-cloudkitty
 #
 class cloudkitty::params {
+  include ::openstacklib::defaults
+
+  $client_package_name    = 'python-cloudkittyclient'
+  $api_service_name       = 'cloudkitty-api'
+  $processor_service_name = 'cloudkitty-processor'
 
   case $::osfamily {
     'RedHat': {
@@ -11,10 +16,6 @@ class cloudkitty::params {
     $processor_package_name = 'openstack-cloudkitty-processor'
     $ui_package_name        = 'openstack-cloudkitty-ui'
     $common_package_name    = 'openstack-cloudkitty-common'
-    $client_package_name    = 'python-cloudkittyclient'
-    # service names
-    $api_service_name       = 'cloudkitty-api'
-    $processor_service_name = 'cloudkitty-processor'
     }
     'Debian': {
     # package names
@@ -22,10 +23,6 @@ class cloudkitty::params {
     $processor_package_name = 'cloudkitty-processor'
     $ui_package_name        = 'cloudkitty-dashboard'
     $common_package_name    = 'cloudkitty-common'
-    $client_package_name    = 'python-cloudkittyclient'
-    # service names
-    $api_service_name       = 'cloudkitty-api'
-    $processor_service_name = 'cloudkitty-processor'
     }
     default: {
       fail("Unsupported osfamily: ${::osfamily} operatingsystem")
