@@ -26,6 +26,11 @@ class cloudkitty::deps {
   ~> Service<| tag == 'cloudkitty-service' |>
   ~> anchor { 'cloudkitty::service::end': }
 
+  # policy config should occur in the config block also.
+  Anchor['cloudkitty::config::begin']
+  -> Openstacklib::Policy::Base<||>
+  ~> Anchor['cloudkitty::config::end']
+
   # Installation or config changes will always restart services.
   Anchor['cloudkitty::install::end'] ~> Anchor['cloudkitty::service::begin']
   Anchor['cloudkitty::config::end']  ~> Anchor['cloudkitty::service::begin']

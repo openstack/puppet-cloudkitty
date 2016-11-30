@@ -28,6 +28,8 @@ class cloudkitty::policy (
   $policy_path = '/etc/cloudkitty/policy.json',
 ) {
 
+  include ::cloudkitty::deps
+
   validate_hash($policies)
 
   Openstacklib::Policy::Base {

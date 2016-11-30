@@ -53,6 +53,8 @@ class cloudkitty::db::mysql(
   $allowed_hosts = undef
 ) {
 
+  include ::cloudkitty::deps
+
   validate_string($password)
 
   ::openstacklib::db::mysql { 'cloudkitty':
@@ -65,5 +67,8 @@ class cloudkitty::db::mysql(
     allowed_hosts => $allowed_hosts,
   }
 
-  ::Openstacklib::Db::Mysql['cloudkitty'] ~> Exec<| title == 'cloudkitty-manage db_sync' |>
+  Anchor['cloudkitty::db::begin']
+  ~> Class['cloudkitty::db::mysql']
+  ~> Anchor['cloudkitty::db::end']
+
 }

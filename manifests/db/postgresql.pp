@@ -40,7 +40,7 @@ class cloudkitty::db::postgresql(
   $privileges = 'ALL',
 ) {
 
-  Class['cloudkitty::db::postgresql'] -> Service<| title == 'cloudkitty' |>
+  include ::cloudkitty::deps
 
   ::openstacklib::db::postgresql { 'cloudkitty':
     password_hash => postgresql_password($user, $password),
@@ -50,6 +50,8 @@ class cloudkitty::db::postgresql(
     privileges    => $privileges,
   }
 
-  ::Openstacklib::Db::Postgresql['cloudkitty'] ~> Exec<| title == 'cloudkitty-manage db_sync' |>
+  Anchor['cloudkitty::db::begin']
+  ~> Class['cloudkitty::db::postgresql']
+  ~> Anchor['cloudkitty::db::end']
 
 }

@@ -10,7 +10,12 @@ describe 'cloudkitty::storage' do
         :path        => '/usr/bin',
         :refreshonly => 'true',
         :user        => 'cloudkitty',
-        :logoutput   => 'on_failure'
+        :logoutput   => 'on_failure',
+        :subscribe   => ['Anchor[cloudkitty::install::end]',
+                         'Anchor[cloudkitty::config::end]',
+                         'Anchor[cloudkitty::dbsync::begin]',
+                         'Anchor[cloudkitty::storageinit::begin]'],
+        :notify      => 'Anchor[cloudkitty::storageinit::end]',
       )
     end
 

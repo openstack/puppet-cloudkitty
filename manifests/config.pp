@@ -24,6 +24,8 @@ class cloudkitty::config (
   $cloudkitty_config = {},
 ) {
 
+  include ::cloudkitty::deps
+
   validate_hash($cloudkitty_config)
 
   create_resources('cloudkitty_config', $cloudkitty_config)

@@ -222,6 +222,8 @@ class cloudkitty::keystone::authtoken(
   $token_cache_time               = $::os_service_default,
 ) {
 
+  include ::cloudkitty::deps
+
   keystone::resource::authtoken { 'cloudkitty_config':
     username                       => $username,
     password                       => $password,

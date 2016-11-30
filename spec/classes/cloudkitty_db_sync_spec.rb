@@ -10,7 +10,11 @@ describe 'cloudkitty::db::sync' do
         :path        => [ '/bin', '/usr/bin', ],
         :refreshonly => 'true',
         :user        => 'cloudkitty',
-        :logoutput   => 'on_failure'
+        :logoutput   => 'on_failure',
+        :subscribe   => ['Anchor[cloudkitty::install::end]',
+                         'Anchor[cloudkitty::config::end]',
+                         'Anchor[cloudkitty::dbsync::begin]'],
+        :notify      => 'Anchor[cloudkitty::dbsync::end]',
       )
     end
 
