@@ -81,4 +81,15 @@ class cloudkitty::processor (
     'collect/services':     value => $services;
   }
 
+  if !is_service_default($collector) and !empty($collector){
+    warning('Valid values of the collector option are ceilometer and gnocchi')
+    cloudkitty_config{
+      'gnocchi_collector/auth_section': value => 'keystone_authtoken';
+    }
+  } else{
+    cloudkitty_config {
+      'gnocchi_collector/auth_section': ensure => absent;
+    }
+  }
+
 }

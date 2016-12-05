@@ -43,6 +43,17 @@ describe 'cloudkitty::processor' do
 
     end
 
+    context 'with gnocchi backend' do
+      before do
+        params.merge!({
+          :collector    => 'gnocchi',
+        })
+      end
+
+      it { is_expected.to contain_cloudkitty_config('collect/collector').with_value( params[:collector] ) }
+      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_section').with_value('keystone_authtoken') }
+    end
+
     context 'when disabled' do
       let :params do
         { :enabled => false }
