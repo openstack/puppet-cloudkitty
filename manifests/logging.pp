@@ -27,7 +27,7 @@
 #
 #  [*log_file*]
 #    (optional) File where logs should be stored.
-#    Defaults to '/var/log/cloudkitty/cloudkitty.log'
+#    Defaults to $::os_service_default
 #
 #  [*logging_context_format_string*]
 #    (optional) Format string to use for log messages with context.
@@ -98,7 +98,7 @@ class cloudkitty::logging(
   $use_stderr                    = $::os_service_default,
   $syslog_log_facility           = $::os_service_default,
   $log_dir                       = '/var/log/cloudkitty',
-  $log_file                      = '/var/log/cloudkitty/cloudkitty.log',
+  $log_file                      = $::os_service_default,
   $debug                         = $::os_service_default,
   $logging_context_format_string = $::os_service_default,
   $logging_default_format_string = $::os_service_default,

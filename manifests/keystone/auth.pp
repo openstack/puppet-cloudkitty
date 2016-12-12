@@ -72,9 +72,9 @@ class cloudkitty::keystone::auth (
   include ::cloudkitty::deps
 
   if $configure_user_role {
-    Keystone_user_role["${auth_name}@${tenant}"] ~> Anchor['cloudkitty::service::end']
+    Keystone_user_role["${auth_name}@${tenant}"] ~> Anchor['cloudkitty::config::end']
   }
-  Keystone_endpoint["${region}/${service_name}::${service_type}"]  ~> Anchor['cloudkitty::service::end']
+  Keystone_endpoint["${region}/${service_name}::${service_type}"]  ~> Anchor['cloudkitty::config::end']
 
   keystone::resource::service_identity { 'cloudkitty':
     configure_user      => $configure_user,

@@ -25,7 +25,7 @@ class cloudkitty::storage(
     subscribe   => [
       Anchor['cloudkitty::install::end'],
       Anchor['cloudkitty::config::end'],
-      Anchor['cloudkitty::dbsync::begin'],
+      Anchor['cloudkitty::dbsync::end'],
       Anchor['cloudkitty::storageinit::begin']
     ],
     notify      => Anchor['cloudkitty::storageinit::end'],

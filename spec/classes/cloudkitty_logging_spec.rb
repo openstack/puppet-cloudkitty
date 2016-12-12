@@ -61,7 +61,7 @@ describe 'cloudkitty::logging' do
       is_expected.to contain_cloudkitty_config('DEFAULT/use_stderr').with(:value => '<SERVICE DEFAULT>')
       is_expected.to contain_cloudkitty_config('DEFAULT/syslog_log_facility').with(:value => '<SERVICE DEFAULT>')
       is_expected.to contain_cloudkitty_config('DEFAULT/log_dir').with(:value => '/var/log/cloudkitty')
-      is_expected.to contain_cloudkitty_config('DEFAULT/log_file').with(:value => '/var/log/cloudkitty/cloudkitty.log')
+      is_expected.to contain_cloudkitty_config('DEFAULT/log_file').with(:value => '<SERVICE DEFAULT>')
       is_expected.to contain_cloudkitty_config('DEFAULT/debug').with(:value => '<SERVICE DEFAULT>')
     end
   end

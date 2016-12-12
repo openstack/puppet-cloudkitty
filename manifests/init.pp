@@ -224,6 +224,14 @@
 #   (Optional) Driver used to fetch tenant list.
 #   Defaults to $::os_service_default.
 #
+# [*auth_section*]
+#   (Optional) Config Section from which to load plugin specific options
+#   Defaults to 'keystone_authtoken'
+#
+# [*keystone_version*]
+#   (Optional) Keystone version to use.
+#   Defaults to '3'
+#
 class cloudkitty(
   $ensure_package                     = 'present',
   $rpc_backend                        = $::os_service_default,
@@ -270,6 +278,8 @@ class cloudkitty(
   $pipeline                           = $::os_service_default,
   $storage_backend                    = $::os_service_default,
   $tenant_fetcher_backend             = $::os_service_default,
+  $auth_section                       = 'keystone_authtoken',
+  $keystone_version                   = '3',
 ) {
 
   include ::cloudkitty::params
@@ -356,4 +366,10 @@ class cloudkitty(
     'storage/backend':        value => $storage_backend;
     'tenant_fetcher/backend': value => $tenant_fetcher_backend;
   }
+
+  cloudkitty_config {
+    'keystone_fetcher/auth_section':     value => 'keystone_authtoken';
+    'keystone_fetcher/keystone_version': value => '3';
+  }
+
 }
