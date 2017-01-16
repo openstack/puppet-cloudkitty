@@ -368,8 +368,8 @@ class cloudkitty(
   }
 
   cloudkitty_config {
-    'keystone_fetcher/auth_section':     value => 'keystone_authtoken';
-    'keystone_fetcher/keystone_version': value => '3';
+    'keystone_fetcher/auth_section':     value => $auth_section;
+    'keystone_fetcher/keystone_version': value => $keystone_version;
   }
 
 }
