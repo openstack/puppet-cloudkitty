@@ -26,6 +26,10 @@ class cloudkitty::deps {
   ~> Service<| tag == 'cloudkitty-service' |>
   ~> anchor { 'cloudkitty::service::end': }
 
+  # all db settings should be applied and all packages should be installed
+  # before dbsync starts
+  Oslo::Db<||> -> Anchor['cloudkitty::dbsync::begin']
+
   # policy config should occur in the config block also.
   Anchor['cloudkitty::config::begin']
   -> Openstacklib::Policy::Base<||>
