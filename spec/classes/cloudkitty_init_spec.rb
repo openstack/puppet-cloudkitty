@@ -24,6 +24,8 @@ describe 'cloudkitty' do
 
       it 'configures rabbit' do
         is_expected.to contain_cloudkitty_config('DEFAULT/transport_url').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('DEFAULT/rpc_response_timeout').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('DEFAULT/control_exchange').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_timeout_threshold').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_rate').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/kombu_compression').with_value('<SERVICE DEFAULT>')
@@ -51,6 +53,8 @@ describe 'cloudkitty' do
           :ensure_package                     => '2012.1.1-15.el6',
           :notification_topics                => 'openstack',
           :default_transport_url              => 'rabbit://rabbit_user:password@localhost:5673',
+          :rpc_response_timeout               => '120',
+          :control_exchange                   => 'cloudkitty',
           :storage_backend                    => 'gnocchi',
           :auth_section                       => 'keystone_authtoken',
           :keystone_version                   => '3',
@@ -60,6 +64,8 @@ describe 'cloudkitty' do
       it 'configures rabbit' do
         is_expected.to contain_cloudkitty_config('DEFAULT/rpc_backend').with_value('rabbit')
         is_expected.to contain_cloudkitty_config('DEFAULT/transport_url').with_value('rabbit://rabbit_user:password@localhost:5673')
+        is_expected.to contain_cloudkitty_config('DEFAULT/rpc_response_timeout').with_value('120')
+        is_expected.to contain_cloudkitty_config('DEFAULT/control_exchange').with_value('cloudkitty')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_timeout_threshold').with_value('60')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_rate').with_value('10')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/kombu_compression').with_value('gzip')
