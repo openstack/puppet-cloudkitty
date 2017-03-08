@@ -4,7 +4,7 @@
 #
 # === Parameters
 #
-# [*ensure_package*]
+# [*package_ensure*]
 #    (Optional) Ensure state for package.
 #    Defaults to 'present'
 #
@@ -243,7 +243,7 @@
 #   Defaults to '3'
 #
 class cloudkitty(
-  $ensure_package                     = 'present',
+  $package_ensure                     = 'present',
   $rpc_backend                        = $::os_service_default,
   $rabbit_use_ssl                     = $::os_service_default,
   $rabbit_heartbeat_timeout_threshold = $::os_service_default,
@@ -301,7 +301,7 @@ class cloudkitty(
   include ::cloudkitty::storage
 
   package { 'cloudkitty-common':
-    ensure => $ensure_package,
+    ensure => $package_ensure,
     name   => $::cloudkitty::params::common_package_name,
     tag    => ['openstack','cloudkitty-package'],
   }
