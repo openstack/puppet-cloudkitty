@@ -36,6 +36,14 @@
 #   (optional) Services to monitor.
 #   Defaults to $::os_service_default.
 #
+# [*auth_type*]
+#   (optional) Authentication type to load.
+#   Default to 'password'.
+#
+# [*auth_section*]
+#   (optional) Config Section from which to load plugin specific options
+#   Default to 'keystone_authtoken'.
+#
 class cloudkitty::processor (
   $package_ensure    = 'present',
   $manage_service    = true,
@@ -45,6 +53,8 @@ class cloudkitty::processor (
   $period            = $::os_service_default,
   $wait_periods      = $::os_service_default,
   $services          = $::os_service_default,
+  $auth_type         = 'password',
+  $auth_section      = 'keystone_authtoken',
 ) {
 
   include ::cloudkitty::deps
@@ -82,18 +92,22 @@ class cloudkitty::processor (
 
   if $collector == 'ceilometer' {
     cloudkitty_config{
-      'ceilometer_collector/auth_section': value => 'keystone_authtoken';
+      'ceilometer_collector/auth_type':    value => $auth_type;
+      'ceilometer_collector/auth_section': value => $auth_section
     }
     cloudkitty_config {
+      'gnocchi_collector/auth_type': ensure => absent;
       'gnocchi_collector/auth_section': ensure => absent;
     }
     $collector_real = $collector
   } else{
     warning('Valid values of the collector option are ceilometer and gnocchi')
     cloudkitty_config{
-      'gnocchi_collector/auth_section': value => 'keystone_authtoken';
+      'gnocchi_collector/auth_type':    value => $auth_type;
+      'gnocchi_collector/auth_section': value => $auth_section;
     }
     cloudkitty_config {
+      'ceilometer_collector/auth_type':    ensure => absent;
       'ceilometer_collector/auth_section': ensure => absent;
     }
     $collector_real = 'gnocchi'
