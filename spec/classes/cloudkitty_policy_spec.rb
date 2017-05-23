@@ -19,7 +19,9 @@ describe 'cloudkitty::policy' do
         :key   => 'context_is_admin',
         :value => 'foo:bar'
       })
-      is_expected.to contain_cloudkitty_config('oslo_policy/policy_file').with_value('/etc/cloudkitty/policy.json')
+      is_expected.to contain_oslo__policy('cloudkitty_config').with(
+        :policy_file => '/etc/cloudkitty/policy.json',
+      )
     end
   end
 
