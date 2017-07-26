@@ -17,16 +17,22 @@
 #     DEFAULT/bar:
 #       value: barValue
 #
+# [*cloudkitty_api_paste_ini*]
+#   (optional) Allow configuration of /etc/cloudkitty/api_paste.ini options.
+#
 #   NOTE: The configuration MUST NOT be already handled by this module
 #   or Puppet catalog compilation will fail with duplicate resources.
 #
 class cloudkitty::config (
-  $cloudkitty_config = {},
+  $cloudkitty_config        = {},
+  $cloudkitty_api_paste_ini = {},
 ) {
 
   include ::cloudkitty::deps
 
   validate_hash($cloudkitty_config)
+  validate_hash($cloudkitty_api_paste_ini)
 
   create_resources('cloudkitty_config', $cloudkitty_config)
+  create_resources('cloudkitty_api_paste_ini', $cloudkitty_api_paste_ini)
 }
