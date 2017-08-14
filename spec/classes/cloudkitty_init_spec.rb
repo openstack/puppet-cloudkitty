@@ -45,7 +45,6 @@ describe 'cloudkitty' do
     context 'with overridden parameters' do
       let :params do
         {
-          :rpc_backend                        => 'rabbit',
           :rabbit_ha_queues                   => 'undef',
           :rabbit_heartbeat_timeout_threshold => '60',
           :rabbit_heartbeat_rate              => '10',
@@ -62,7 +61,6 @@ describe 'cloudkitty' do
       end
 
       it 'configures rabbit' do
-        is_expected.to contain_cloudkitty_config('DEFAULT/rpc_backend').with_value('rabbit')
         is_expected.to contain_cloudkitty_config('DEFAULT/transport_url').with_value('rabbit://rabbit_user:password@localhost:5673')
         is_expected.to contain_cloudkitty_config('DEFAULT/rpc_response_timeout').with_value('120')
         is_expected.to contain_cloudkitty_config('DEFAULT/control_exchange').with_value('cloudkitty')
@@ -150,37 +148,30 @@ describe 'cloudkitty' do
       end
     end
 
-    context 'with amqp rpc_backend' do
-      let :params do
-        { :rpc_backend => 'amqp' }
-      end
-
-      context 'with default parameters' do
-        it 'configures amqp' do
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/server_request_prefix').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/broadcast_prefix').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/group_request_prefix').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/container_name').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/idle_timeout').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/trace').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_ca_file').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_cert_file').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_key_file').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_key_password').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/allow_insecure_clients').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/sasl_mechanisms').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/sasl_config_dir').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/sasl_config_name').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/username').with_value('<SERVICE DEFAULT>')
-          is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/password').with_value('<SERVICE DEFAULT>')
-        end
+    context 'with amqp default parameters' do
+      it 'configures amqp' do
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/server_request_prefix').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/broadcast_prefix').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/group_request_prefix').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/container_name').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/idle_timeout').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/trace').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_ca_file').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_cert_file').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_key_file').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/ssl_key_password').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/allow_insecure_clients').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/sasl_mechanisms').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/sasl_config_dir').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/sasl_config_name').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/username').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/password').with_value('<SERVICE DEFAULT>')
       end
     end
 
     context 'with overriden amqp parameters' do
       let :params do
-        { :rpc_backend        => 'amqp',
-          :amqp_idle_timeout  => '60',
+        { :amqp_idle_timeout  => '60',
           :amqp_trace         => true,
           :amqp_ssl_ca_file   => '/etc/ca.cert',
           :amqp_ssl_cert_file => '/etc/certfile',

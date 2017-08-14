@@ -31,6 +31,15 @@
 #   (optional) Run cloudkitty-dbsync command on api nodes after installing the package.
 #   Defaults to true.
 #
+# [*service_name*]
+#   (optional) Name of the service that will be providing the
+#   server functionality of cloudkitty-api.
+#   If the value is 'httpd', this means cloudkitty-api will be a web
+#   service, and you must use another class to configure that
+#   web service. For example, use class { 'cloudkitty::wsgi::apache'...}
+#   to make cloudkitty-api be a web app using apache mod_wsgi.
+#   Defaults to 'httpd'
+#
 class cloudkitty::api (
   $package_ensure = 'present',
   $manage_service = true,
@@ -39,6 +48,7 @@ class cloudkitty::api (
   $port           = $::os_service_default,
   $pecan_debug    = $::os_service_default,
   $sync_db        = true,
+  $service_name   = 'httpd',
 ) {
 
   include ::cloudkitty
@@ -64,13 +74,16 @@ class cloudkitty::api (
     include ::cloudkitty::db::sync
   }
 
-  service { 'cloudkitty-api':
-    ensure     => $service_ensure,
-    name       => $::cloudkitty::params::api_service_name,
-    enable     => $enabled,
-    hasstatus  => true,
-    hasrestart => true,
-    tag        => 'cloudkitty-service',
+  if $service_name == 'httpd' {
+    include ::apache::params
+    service { 'cloudkitty-api':
+      ensure => 'stopped',
+      name   => $::cloudkitty::params::api_service_name,
+      enable => false,
+      tag    => 'cloudkitty-service',
+    }
+  } else {
+    fail('Invalid service_name. Only httpd for being run by a httpd server')
   }
 
   cloudkitty_config {
@@ -78,4 +91,5 @@ class cloudkitty::api (
     'api/port':        value => $port;
     'api/pecan_debug': value => $pecan_debug;
   }
+
 }

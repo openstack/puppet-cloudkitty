@@ -38,47 +38,45 @@ describe 'cloudkitty::api' do
       )
     end
 
-    [{:enabled => true}, {:enabled => false}].each do |param_hash|
-      context "when service should be #{param_hash[:enabled] ? 'enabled' : 'disabled'}" do
-        before do
-          params.merge!(param_hash)
-        end
+    context 'when running cloudkitty-api in wsgi' do
+      before do
+        params.merge!({ :service_name => 'httpd' })
+      end
 
-        it 'configures cloudkitty-api service' do
+      let :pre_condition do
+        "include ::apache
+         include ::cloudkitty::db
+         class { 'cloudkitty': }
+         class { '::cloudkitty::keystone::authtoken':
+           password => 'a_big_secret',
+         }"
+      end
 
-          is_expected.to contain_service('cloudkitty-api').with(
-            :ensure     => (params[:manage_service] && params[:enabled]) ? 'running' : 'stopped',
-            :name       => platform_params[:api_service_name],
-            :enable     => params[:enabled],
-            :hasstatus  => true,
-            :hasrestart => true,
-            :tag        => 'cloudkitty-service',
-          )
-          is_expected.to contain_service('cloudkitty-api').that_subscribes_to('Anchor[cloudkitty::service::begin]')
-          is_expected.to contain_service('cloudkitty-api').that_notifies('Anchor[cloudkitty::service::end]')
-        end
+      it 'configures cloudkitty-api service with Apache' do
+        is_expected.to contain_service('cloudkitty-api').with(
+          :ensure => 'stopped',
+          :name   => platform_params[:api_service_name],
+          :enable => false,
+          :tag    => 'cloudkitty-service',
+        )
       end
     end
 
-    context 'with disabled service managing' do
+    context 'when service_name is not valid' do
       before do
-        params.merge!({
-          :manage_service => false,
-          :enabled        => false })
+        params.merge!({ :service_name => 'foobar' })
       end
 
-      it 'configures cloudkitty-api service' do
-
-        is_expected.to contain_service('cloudkitty-api').with(
-          :ensure     => nil,
-          :name       => platform_params[:api_service_name],
-          :enable     => false,
-          :hasstatus  => true,
-          :hasrestart => true,
-          :tag        => 'cloudkitty-service',
-        )
-        is_expected.to contain_service('cloudkitty-api').that_subscribes_to(nil)
+      let :pre_condition do
+        "include ::apache
+         include ::cloudkitty::db
+         class { 'cloudkitty': }
+         class { '::cloudkitty::keystone::authtoken':
+           password => 'a_big_secret',
+         }"
       end
+
+      it_raises 'a Puppet::Error', /Invalid service_name/
     end
 
     context 'with $sync_db set to false in ::cloudkitty' do

@@ -51,7 +51,13 @@ describe 'basic cloudkitty' do
           class { '::cloudkitty::db::mysql':
             password => 'a_big_secret',
           }
-          class { '::cloudkitty::api': }
+          class { '::cloudkitty::api':
+            service_name => 'httpd',
+          }
+          include ::apache
+          class { '::cloudkitty::wsgi::apache':
+            ssl => false,
+          }
           class { '::cloudkitty::processor': }
           class { '::cloudkitty::client': }
         }

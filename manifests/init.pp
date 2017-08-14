@@ -8,10 +8,6 @@
 #    (Optional) Ensure state for package.
 #    Defaults to 'present'
 #
-# [*rpc_backend*]
-#   (Optional) Use these options to configure the message system.
-#   Defaults to $::os_service_default.
-#
 # [*rpc_response_timeout*]
 #   (Optional) Configure the timeout (in seconds) for rpc responses
 #   Defaults to $::os_service_default.
@@ -242,9 +238,14 @@
 #   (Optional) Keystone version to use.
 #   Defaults to '3'
 #
+# DEPRECATED PARAMETERS
+#
+# [*rpc_backend*]
+#   (Optional) Use these options to configure the message system.
+#   Defaults to $::os_service_default.
+#
 class cloudkitty(
   $package_ensure                     = 'present',
-  $rpc_backend                        = $::os_service_default,
   $rabbit_use_ssl                     = $::os_service_default,
   $rabbit_heartbeat_timeout_threshold = $::os_service_default,
   $rabbit_heartbeat_rate              = $::os_service_default,
@@ -292,6 +293,8 @@ class cloudkitty(
   $tenant_fetcher_backend             = $::os_service_default,
   $auth_section                       = 'keystone_authtoken',
   $keystone_version                   = '3',
+  # DEPRECATED PARAMETERS
+  $rpc_backend                        = $::os_service_default,
 ) {
 
   include ::cloudkitty::params
@@ -310,41 +313,42 @@ class cloudkitty(
     purge => $purge_config,
   }
 
-  if $rpc_backend == 'rabbit' or is_service_default($rpc_backend) {
-    oslo::messaging::rabbit { 'cloudkitty_config':
-      rabbit_ha_queues            => $rabbit_ha_queues,
-      rabbit_use_ssl              => $rabbit_use_ssl,
-      amqp_durable_queues         => $amqp_durable_queues,
-      heartbeat_timeout_threshold => $rabbit_heartbeat_timeout_threshold,
-      heartbeat_rate              => $rabbit_heartbeat_rate,
-      kombu_ssl_version           => $kombu_ssl_version,
-      kombu_ssl_keyfile           => $kombu_ssl_keyfile,
-      kombu_ssl_certfile          => $kombu_ssl_certfile,
-      kombu_ssl_ca_certs          => $kombu_ssl_ca_certs,
-      kombu_reconnect_delay       => $kombu_reconnect_delay,
-      kombu_failover_strategy     => $kombu_failover_strategy,
-      kombu_compression           => $kombu_compression,
-    }
+  if $rpc_backend {
+    warning('The rpc_backend parameter has been deprecated, please use default_transport_url instead.')
   }
-  elsif $rpc_backend == 'amqp' {
-    oslo::messaging::amqp { 'cloudkitty_config':
-      server_request_prefix  => $amqp_server_request_prefix,
-      broadcast_prefix       => $amqp_broadcast_prefix,
-      group_request_prefix   => $amqp_group_request_prefix,
-      container_name         => $amqp_container_name,
-      idle_timeout           => $amqp_idle_timeout,
-      trace                  => $amqp_trace,
-      ssl_ca_file            => $amqp_ssl_ca_file,
-      ssl_cert_file          => $amqp_ssl_cert_file,
-      ssl_key_file           => $amqp_ssl_key_file,
-      ssl_key_password       => $amqp_ssl_key_password,
-      allow_insecure_clients => $amqp_allow_insecure_clients,
-      sasl_mechanisms        => $amqp_sasl_mechanisms,
-      sasl_config_dir        => $amqp_sasl_config_dir,
-      sasl_config_name       => $amqp_sasl_config_name,
-      username               => $amqp_username,
-      password               => $amqp_password,
-    }
+
+  oslo::messaging::rabbit { 'cloudkitty_config':
+    rabbit_ha_queues            => $rabbit_ha_queues,
+    rabbit_use_ssl              => $rabbit_use_ssl,
+    amqp_durable_queues         => $amqp_durable_queues,
+    heartbeat_timeout_threshold => $rabbit_heartbeat_timeout_threshold,
+    heartbeat_rate              => $rabbit_heartbeat_rate,
+    kombu_ssl_version           => $kombu_ssl_version,
+    kombu_ssl_keyfile           => $kombu_ssl_keyfile,
+    kombu_ssl_certfile          => $kombu_ssl_certfile,
+    kombu_ssl_ca_certs          => $kombu_ssl_ca_certs,
+    kombu_reconnect_delay       => $kombu_reconnect_delay,
+    kombu_failover_strategy     => $kombu_failover_strategy,
+    kombu_compression           => $kombu_compression,
+  }
+
+  oslo::messaging::amqp { 'cloudkitty_config':
+    server_request_prefix  => $amqp_server_request_prefix,
+    broadcast_prefix       => $amqp_broadcast_prefix,
+    group_request_prefix   => $amqp_group_request_prefix,
+    container_name         => $amqp_container_name,
+    idle_timeout           => $amqp_idle_timeout,
+    trace                  => $amqp_trace,
+    ssl_ca_file            => $amqp_ssl_ca_file,
+    ssl_cert_file          => $amqp_ssl_cert_file,
+    ssl_key_file           => $amqp_ssl_key_file,
+    ssl_key_password       => $amqp_ssl_key_password,
+    allow_insecure_clients => $amqp_allow_insecure_clients,
+    sasl_mechanisms        => $amqp_sasl_mechanisms,
+    sasl_config_dir        => $amqp_sasl_config_dir,
+    sasl_config_name       => $amqp_sasl_config_name,
+    username               => $amqp_username,
+    password               => $amqp_password,
   }
 
   oslo::messaging::default { 'cloudkitty_config':
