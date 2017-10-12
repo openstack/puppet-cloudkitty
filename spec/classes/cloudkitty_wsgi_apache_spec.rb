@@ -23,6 +23,8 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_script_file            => 'app',
         :wsgi_script_source          => platform_params[:wsgi_script_source],
         :custom_wsgi_process_options => {},
+        :access_log_file             => false,
+        :access_log_format           => false,
       )}
     end
 
@@ -38,6 +40,9 @@ describe 'cloudkitty::wsgi::apache' do
           :custom_wsgi_process_options => {
             'python_path' => '/my/python/admin/path',
           },
+          :access_log_file             => '/var/log/httpd/access_log',
+          :access_log_format           => 'some format',
+          :error_log_file              => '/var/log/httpd/error_log'
         }
       end
       it { is_expected.to contain_class('cloudkitty::params') }
@@ -45,24 +50,27 @@ describe 'cloudkitty::wsgi::apache' do
       it { is_expected.to contain_class('apache::mod::wsgi') }
       it { is_expected.to_not contain_class('apache::mod::ssl') }
       it { is_expected.to contain_openstacklib__wsgi__apache('cloudkitty_wsgi').with(
-        :bind_host                 => '10.42.51.1',
-        :bind_port                 => 12345,
-        :group                     => 'cloudkitty',
-        :path                      => '/',
-        :servername                => 'dummy.host',
-        :ssl                       => false,
-        :threads                   => facts[:os_workers],
-        :user                      => 'cloudkitty',
-        :workers                   => 37,
-        :wsgi_daemon_process       => 'cloudkitty',
-        :wsgi_process_display_name => 'cloudkitty',
-        :wsgi_process_group        => 'cloudkitty',
-        :wsgi_script_dir           => platform_params[:wsgi_script_path],
-        :wsgi_script_file          => 'app',
-        :wsgi_script_source        => platform_params[:wsgi_script_source],
+        :bind_host                   => '10.42.51.1',
+        :bind_port                   => 12345,
+        :group                       => 'cloudkitty',
+        :path                        => '/',
+        :servername                  => 'dummy.host',
+        :ssl                         => false,
+        :threads                     => facts[:os_workers],
+        :user                        => 'cloudkitty',
+        :workers                     => 37,
+        :wsgi_daemon_process         => 'cloudkitty',
+        :wsgi_process_display_name   => 'cloudkitty',
+        :wsgi_process_group          => 'cloudkitty',
+        :wsgi_script_dir             => platform_params[:wsgi_script_path],
+        :wsgi_script_file            => 'app',
+        :wsgi_script_source          => platform_params[:wsgi_script_source],
         :custom_wsgi_process_options => {
           'python_path'  => '/my/python/admin/path',
         },
+        :access_log_file             => '/var/log/httpd/access_log',
+        :access_log_format           => 'some format',
+        :error_log_file              => '/var/log/httpd/error_log'
       )}
     end
   end
