@@ -52,6 +52,14 @@
 # [*internal_url*]
 #   (optional) The endpoint's internal url. (Defaults to 'http://127.0.0.1:8889')
 #
+# [*manage_rating_role*]
+#   (optional) If true, this will manage the Keystone role for $rating_role.
+#   Defaults to 'true'.
+#
+# [*rating_role*]
+#   (optional) Keystone role for cloudkitty rating users.
+#   Defaults to 'rating'.
+#
 class cloudkitty::keystone::auth (
   $password,
   $auth_name           = 'cloudkitty',
@@ -67,6 +75,8 @@ class cloudkitty::keystone::auth (
   $public_url          = 'http://127.0.0.1:8889',
   $admin_url           = 'http://127.0.0.1:8889',
   $internal_url        = 'http://127.0.0.1:8889',
+  $manage_rating_role  = true,
+  $rating_role         = 'rating',
 ) {
 
   include ::cloudkitty::deps
@@ -93,4 +103,11 @@ class cloudkitty::keystone::auth (
     admin_url           => $admin_url,
   }
 
+  if $manage_rating_role {
+    keystone_role { $rating_role:
+      ensure => present,
+    }
+  }
+
 }
+

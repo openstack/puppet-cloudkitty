@@ -33,6 +33,10 @@ describe 'cloudkitty::keystone::auth' do
         :admin_url    => 'http://127.0.0.1:8889',
         :internal_url => 'http://127.0.0.1:8889',
       ) }
+
+      it { is_expected.to contain_keystone_role('rating').with(
+        :ensure       => 'present',
+      ) }
     end
 
     context 'when overriding URL parameters' do
@@ -111,6 +115,19 @@ describe 'cloudkitty::keystone::auth' do
         :description => 'OpenStack Rating Service'
       ) }
 
+    end
+
+    context 'when disabling rating role management' do
+
+      let :params do
+	{
+	  :password           => 'cloudkitty_password',
+	  :manage_rating_role => false,
+	  :rating_role        => 'rating',
+	}
+      end
+
+      it { is_expected.not_to contain_keystone_role('rating') }
     end
   end
 
