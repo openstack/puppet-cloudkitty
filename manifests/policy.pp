@@ -29,11 +29,14 @@ class cloudkitty::policy (
 ) {
 
   include ::cloudkitty::deps
+  include ::cloudkitty::params
 
   validate_hash($policies)
 
   Openstacklib::Policy::Base {
-    file_path => $policy_path,
+    file_path  => $policy_path,
+    file_user  => 'root',
+    file_group => $::cloudkitty::params::group,
   }
 
   create_resources('openstacklib::policy::base', $policies)

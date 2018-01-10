@@ -8,6 +8,7 @@ class cloudkitty::params {
   $client_package_name    = 'python-cloudkittyclient'
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
+  $group                  = 'cloudkitty'
 
   case $::osfamily {
     'RedHat': {
