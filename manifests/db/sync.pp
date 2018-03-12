@@ -28,5 +28,6 @@ class cloudkitty::db::sync(
       Anchor['cloudkitty::dbsync::begin']
     ],
     notify      => Anchor['cloudkitty::dbsync::end'],
+    tag         => 'openstack-db',
   }
 }

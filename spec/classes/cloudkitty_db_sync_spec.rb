@@ -17,6 +17,7 @@ describe 'cloudkitty::db::sync' do
                          'Anchor[cloudkitty::config::end]',
                          'Anchor[cloudkitty::dbsync::begin]'],
         :notify      => 'Anchor[cloudkitty::dbsync::end]',
+        :tag         => 'openstack-db',
       )
     end
 
