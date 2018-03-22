@@ -18,7 +18,7 @@
 #
 # [*collector*]
 #   (Optional) Data collector.
-#   Defaults to 'ceilometer'.
+#   Defaults to 'gnocchi'.
 #
 # [*window*]
 #   (Optional) Number of samples to collect per call.
@@ -48,7 +48,7 @@ class cloudkitty::processor (
   $package_ensure    = 'present',
   $manage_service    = true,
   $enabled           = true,
-  $collector         = 'ceilometer',
+  $collector         = 'gnocchi',
   $window            = $::os_service_default,
   $period            = $::os_service_default,
   $wait_periods      = $::os_service_default,
@@ -90,30 +90,15 @@ class cloudkitty::processor (
     'collect/services':     value => $services;
   }
 
-  if $collector == 'ceilometer' {
-    cloudkitty_config{
-      'ceilometer_collector/auth_type':    value => $auth_type;
-      'ceilometer_collector/auth_section': value => $auth_section
-    }
-    cloudkitty_config {
-      'gnocchi_collector/auth_type': ensure => absent;
-      'gnocchi_collector/auth_section': ensure => absent;
-    }
-    $collector_real = $collector
-  } else{
-    warning('Valid values of the collector option are ceilometer and gnocchi')
-    cloudkitty_config{
-      'gnocchi_collector/auth_type':    value => $auth_type;
-      'gnocchi_collector/auth_section': value => $auth_section;
-    }
-    cloudkitty_config {
-      'ceilometer_collector/auth_type':    ensure => absent;
-      'ceilometer_collector/auth_section': ensure => absent;
-    }
-    $collector_real = 'gnocchi'
+  if $collector != 'gnocchi' {
+    warning('Valid value of the collector option is gnocchi')
+    $collector = 'gnocchi'
   }
 
   cloudkitty_config {
-    'collect/collector': value => $collector_real;
+    'collect/collector':              value => $collector;
+    'gnocchi_collector/auth_type':    value => $auth_type;
+    'gnocchi_collector/auth_section': value => $auth_section
   }
+
 }
