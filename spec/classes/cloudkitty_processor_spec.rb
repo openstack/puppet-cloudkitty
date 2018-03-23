@@ -5,7 +5,7 @@ describe 'cloudkitty::processor' do
   let :params do
     { :enabled        => true,
       :manage_service => true,
-      :collector      => 'ceilometer',
+      :collector      => 'gnocchi',
       :period         => '60',
       :wait_periods   => '1',
       :window         => '3600',}
@@ -21,10 +21,8 @@ describe 'cloudkitty::processor' do
       it { is_expected.to contain_cloudkitty_config('collect/window').with_value( params[:window] ) }
       it { is_expected.to contain_cloudkitty_config('collect/period').with_value( params[:period] ) }
       it { is_expected.to contain_cloudkitty_config('collect/wait_periods').with_value( params[:wait_periods] ) }
-      it { is_expected.to contain_cloudkitty_config('ceilometer_collector/auth_type').with_value('password') }
-      it { is_expected.to contain_cloudkitty_config('ceilometer_collector/auth_section').with_value('keystone_authtoken') }
-      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_type').with_ensure('absent') }
-      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_section').with_ensure('absent') }
+      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_type').with_value('password') }
+      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_section').with_value('keystone_authtoken') }
 
       it 'installs cloudkitty-processor package' do
         is_expected.to contain_package('cloudkitty-processor').with(
@@ -45,20 +43,6 @@ describe 'cloudkitty::processor' do
         )
       end
 
-    end
-
-    context 'with gnocchi backend' do
-      before do
-        params.merge!({
-          :collector    => 'gnocchi',
-        })
-      end
-
-      it { is_expected.to contain_cloudkitty_config('collect/collector').with_value( params[:collector] ) }
-      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_type').with_value('password') }
-      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_section').with_value('keystone_authtoken') }
-      it { is_expected.to contain_cloudkitty_config('ceilometer_collector/auth_type').with_ensure('absent') }
-      it { is_expected.to contain_cloudkitty_config('ceilometer_collector/auth_section').with_ensure('absent') }
     end
 
     context 'when disabled' do

@@ -1,0 +1,5 @@
+---
+other:
+  - Change default value from 'ceilometer' to 'gnocchi' for collector option in
+    ::cloudkitty::processer class. Because the ceilometer collector has been
+    removed in cloudkitty repo.
