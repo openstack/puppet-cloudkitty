@@ -21,7 +21,7 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_process_group          => 'cloudkitty',
         :wsgi_script_dir             => platform_params[:wsgi_script_path],
         :wsgi_script_file            => 'app',
-        :wsgi_script_source          => platform_params[:wsgi_script_source],
+        :wsgi_script_source          => '/usr/bin/cloudkitty-api',
         :custom_wsgi_process_options => {},
         :access_log_file             => false,
         :access_log_format           => false,
@@ -64,7 +64,7 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_process_group          => 'cloudkitty',
         :wsgi_script_dir             => platform_params[:wsgi_script_path],
         :wsgi_script_file            => 'app',
-        :wsgi_script_source          => platform_params[:wsgi_script_source],
+        :wsgi_script_source          => '/usr/bin/cloudkitty-api',
         :custom_wsgi_process_options => {
           'python_path'  => '/my/python/admin/path',
         },
@@ -92,12 +92,10 @@ describe 'cloudkitty::wsgi::apache' do
         when 'Debian'
           {
             :wsgi_script_path   => '/usr/lib/cgi-bin/cloudkitty',
-            :wsgi_script_source => '/usr/lib/python2.7/dist-packages/cloudkitty/api/app.wsgi'
           }
         when 'RedHat'
           {
             :wsgi_script_path   => '/var/www/cgi-bin/cloudkitty',
-            :wsgi_script_source => '/usr/lib/python2.7/site-packages/cloudkitty/api/app.wsgi'
           }
         end
       end
