@@ -5,7 +5,12 @@
 class cloudkitty::params {
   include ::openstacklib::defaults
 
-  $client_package_name    = 'python-cloudkittyclient'
+  if ($::os_package_type == 'debian') {
+    $pyvers = '3'
+  } else {
+    $pyvers = ''
+  }
+  $client_package_name    = "python${pyvers}-cloudkittyclient"
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
   $group                  = 'cloudkitty'
