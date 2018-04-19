@@ -14,6 +14,8 @@ describe 'cloudkitty::config' do
       { :cloudkitty_config => config_hash }
     end
 
+    it { is_expected.to contain_class('cloudkitty::deps') }
+
     it 'configures arbitrary cloudkitty-config configurations' do
       is_expected.to contain_cloudkitty_config('DEFAULT/foo').with_value('fooValue')
       is_expected.to contain_cloudkitty_config('DEFAULT/bar').with_value('barValue')
