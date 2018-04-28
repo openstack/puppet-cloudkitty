@@ -33,7 +33,7 @@ Setup
 
 **What the cloudkitty module affects**
 
-* [Cloudkitty](https://wiki.openstack.org/wiki/Cloudkitty), the Rating-as-a-Service for OpenStack.
+* [Cloudkitty](https://wiki.openstack.org/wiki/CloudKitty), the Rating-as-a-Service for OpenStack.
 
 ### Installing cloudkitty
 
