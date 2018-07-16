@@ -1,0 +1,5 @@
+---
+upgrade:
+  - |
+    The deprecated parameter cloudkitty::rpc_backend is removed.
+    Please use cloudkitty::default_transport_url instead.

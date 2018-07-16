@@ -238,12 +238,6 @@
 #   (Optional) Keystone version to use.
 #   Defaults to '3'
 #
-# DEPRECATED PARAMETERS
-#
-# [*rpc_backend*]
-#   (Optional) Use these options to configure the message system.
-#   Defaults to $::os_service_default.
-#
 class cloudkitty(
   $package_ensure                     = 'present',
   $rabbit_use_ssl                     = $::os_service_default,
@@ -293,8 +287,6 @@ class cloudkitty(
   $tenant_fetcher_backend             = $::os_service_default,
   $auth_section                       = 'keystone_authtoken',
   $keystone_version                   = '3',
-  # DEPRECATED PARAMETERS
-  $rpc_backend                        = $::os_service_default,
 ) {
 
   include ::cloudkitty::params
@@ -311,10 +303,6 @@ class cloudkitty(
 
   resources { 'cloudkitty_config':
     purge => $purge_config,
-  }
-
-  if $rpc_backend {
-    warning('The rpc_backend parameter has been deprecated, please use default_transport_url instead.')
   }
 
   oslo::messaging::rabbit { 'cloudkitty_config':
