@@ -6,7 +6,7 @@ Team and repository tags
 <!-- Change things from this point on -->
 
 cloudkitty
-=======
+==========
 
 #### Table of Contents
 
@@ -52,7 +52,7 @@ Implementation
 cloudkitty is a combination of Puppet manifest and ruby code to delivery configuration and extra functionality through types and providers.
 
 Limitations
-------------
+-----------
 
 * All the cloudkitty types use the CLI tools and so need to be ran on the cloudkitty node.
 
@@ -88,7 +88,7 @@ Contributors
 * https://github.com/openstack/puppet-cloudkitty/graphs/contributors
 
 Repository
--------------
+----------
 
 * https://git.openstack.org/cgit/openstack/puppet-cloudkitty
 
