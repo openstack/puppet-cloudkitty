@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    cloudkitty::logging is now not included by default in init class.

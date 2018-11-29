@@ -290,7 +290,6 @@ class cloudkitty(
 ) {
 
   include ::cloudkitty::params
-  include ::cloudkitty::logging
   include ::cloudkitty::db
   include ::cloudkitty::deps
   include ::cloudkitty::storage

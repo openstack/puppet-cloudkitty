@@ -8,7 +8,6 @@ describe 'cloudkitty' do
 
       it 'contains related class' do
         is_expected.to contain_class('cloudkitty::params')
-        is_expected.to contain_class('cloudkitty::logging')
         is_expected.to contain_class('cloudkitty::deps')
         is_expected.to contain_class('cloudkitty::db')
         is_expected.to contain_class('cloudkitty::storage')
