@@ -4,7 +4,7 @@
 # == Parameters
 #
 # [*extra_params*]
-#   (optional) String of extra command line parameters to append
+#   (Optional) String of extra command line parameters to append
 #   to the cloudkitty-dbsync command.
 #   Defaults to undef
 #

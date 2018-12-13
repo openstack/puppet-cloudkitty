@@ -5,59 +5,68 @@
 # === Parameters
 #
 # [*password*]
-#   (required) Password for cloudkitty user.
+#   (Required) Password for cloudkitty user.
 #
 # [*auth_name*]
-#   Username for cloudkitty service. Defaults to 'cloudkitty'.
+#   (Optional) Username for cloudkitty service.
+#   Defaults to 'cloudkitty'.
 #
 # [*email*]
-#   Email for cloudkitty user. Defaults to 'cloudkitty@localhost'.
+#   (Optional) Email for cloudkitty user.
+#   Defaults to 'cloudkitty@localhost'.
 #
 # [*tenant*]
-#   Tenant for cloudkitty user. Defaults to 'services'.
+#   (Optional) Tenant for cloudkitty user.
+#   Defaults to 'services'.
 #
 # [*configure_endpoint*]
-#   Should cloudkitty endpoint be configured? Defaults to 'true'.
+#   (Optional) Should cloudkitty endpoint be configured?
+#   Defaults to true
 #
 # [*configure_user*]
 #   (Optional) Should the service user be configured?
-#   Defaults to 'true'.
+#   Defaults to true
 #
 # [*configure_user_role*]
 #   (Optional) Should the admin role be configured for the service user?
-#   Defaults to 'true'.
+#   Defaults to true
 #
 # [*service_type*]
-#   Type of service. Defaults to 'key-manager'.
+#   (Optional) Type of service.
+#   Defaults to 'key-manager'.
 #
 # [*region*]
-#   Region for endpoint. Defaults to 'RegionOne'.
+#   (Optional) Region for endpoint.
+#   Defaults to 'RegionOne'.
 #
 # [*service_name*]
-#   (optional) Name of the service.
+#   (Optional) Name of the service.
 #   Defaults to the value of 'cloudkitty'.
 #
 # [*service_description*]
-#   (optional) Description of the service.
+#   (Optional) Description of the service.
 #   Default to 'OpenStack Rating Service'
 #
 # [*public_url*]
-#   (optional) The endpoint's public url. (Defaults to 'http://127.0.0.1:8889')
+#   (0ptional) The endpoint's public url.
 #   This url should *not* contain any trailing '/'.
+#   Defaults to 'http://127.0.0.1:8889'
 #
 # [*admin_url*]
-#   (optional) The endpoint's admin url. (Defaults to 'http://127.0.0.1:8889')
+#   (Optional) The endpoint's admin url.
 #   This url should *not* contain any trailing '/'.
+#   Defaults to 'http://127.0.0.1:8889'
 #
 # [*internal_url*]
-#   (optional) The endpoint's internal url. (Defaults to 'http://127.0.0.1:8889')
+#   (Optional) The endpoint's internal url.
+#   Defaults to 'http://127.0.0.1:8889'
 #
 # [*manage_rating_role*]
-#   (optional) If true, this will manage the Keystone role for $rating_role.
-#   Defaults to 'true'.
+#   (Optional) If true, this will manage the Keystone role for $rating_role.
+#   Defaults to true
 #
 # [*rating_role*]
-#   (optional) Keystone role for cloudkitty rating users.
+#   (Optional) Keystone role for cloudkitty rating users.
 #   Defaults to 'rating'.
 #
 class cloudkitty::keystone::auth (
