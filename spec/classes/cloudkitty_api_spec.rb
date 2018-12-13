@@ -10,15 +10,17 @@ describe 'cloudkitty::api' do
       :pecan_debug    => false }
   end
 
-  shared_examples_for 'cloudkitty-api' do
-    let :pre_condition do
-      "class { 'cloudkitty::keystone::authtoken':
-           password => 'a_big_secret',
-       }"
-    end
+  let :pre_condition do
+     "include cloudkitty::db
+     include apache
+     class { 'cloudkitty': }
+     class { 'cloudkitty::keystone::authtoken':
+       password => 'a_big_secret',
+     }"
+   end
 
-    context 'config params' do
-
+  shared_examples 'cloudkitty-api' do
+    context 'with required params' do
       it { is_expected.to contain_class('cloudkitty') }
       it { is_expected.to contain_class('cloudkitty::params') }
       it { is_expected.to contain_class('cloudkitty::deps') }
@@ -28,28 +30,18 @@ describe 'cloudkitty::api' do
       it { is_expected.to contain_cloudkitty_config('api/port').with_value( params[:port] ) }
       it { is_expected.to contain_cloudkitty_config('api/pecan_debug').with_value( params[:pecan_debug] ) }
 
-    end
-
-    it 'installs cloudkitty-api package' do
-      is_expected.to contain_package('cloudkitty-api').with(
-        :ensure => 'present',
-        :name   => platform_params[:api_package_name],
-        :tag    => ['openstack', 'cloudkitty-package'],
-      )
+      it 'installs cloudkitty-api package' do
+        is_expected.to contain_package('cloudkitty-api').with(
+          :ensure => 'present',
+          :name   => platform_params[:api_package_name],
+          :tag    => ['openstack', 'cloudkitty-package'],
+        )
+      end
     end
 
     context 'when running cloudkitty-api in wsgi' do
       before do
         params.merge!({ :service_name => 'httpd' })
-      end
-
-      let :pre_condition do
-        "include apache
-         include cloudkitty::db
-         class { 'cloudkitty': }
-         class { 'cloudkitty::keystone::authtoken':
-           password => 'a_big_secret',
-         }"
       end
 
       it 'configures cloudkitty-api service with Apache' do
@@ -67,15 +59,6 @@ describe 'cloudkitty::api' do
         params.merge!({ :service_name => 'foobar' })
       end
 
-      let :pre_condition do
-        "include apache
-         include cloudkitty::db
-         class { 'cloudkitty': }
-         class { 'cloudkitty::keystone::authtoken':
-           password => 'a_big_secret',
-         }"
-      end
-
       it_raises 'a Puppet::Error', /Invalid service_name/
     end
 
@@ -85,11 +68,6 @@ describe 'cloudkitty::api' do
           :sync_db => false,
         })
       end
-      let :pre_condition do
-        "class { 'cloudkitty::keystone::authtoken':
-           password => 'a_big_secret',
-         }"
-      end
 
       it 'configures cloudkitty-api service to not subscribe to the dbsync resource' do
         is_expected.to contain_service('cloudkitty-api').that_subscribes_to(nil)
@@ -98,7 +76,7 @@ describe 'cloudkitty::api' do
   end
 
   on_supported_os({
-    :supported_os   => OSDefaults.get_supported_os
+    :supported_os => OSDefaults.get_supported_os
   }).each do |os,facts|
     context "on #{os}" do
       let (:facts) do
@@ -119,5 +97,4 @@ describe 'cloudkitty::api' do
       it_behaves_like 'cloudkitty-api'
     end
   end
-
 end
