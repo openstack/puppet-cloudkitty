@@ -4,13 +4,8 @@
 #
 class cloudkitty::params {
   include ::openstacklib::defaults
+  $pyvers = $::openstacklib::defaults::pyvers
 
-  if ($::os_package_type == 'debian') or ($::os['name'] == 'Fedora') or
-    ($::os['family'] == 'RedHat' and Integer.new($::os['release']['major']) > 7) {
-    $pyvers = '3'
-  } else {
-    $pyvers = ''
-  }
   $client_package_name    = "python${pyvers}-cloudkittyclient"
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
