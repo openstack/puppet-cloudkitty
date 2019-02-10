@@ -30,8 +30,8 @@ class cloudkitty::config (
 
   include ::cloudkitty::deps
 
-  validate_hash($cloudkitty_config)
-  validate_hash($cloudkitty_api_paste_ini)
+  validate_legacy(Hash, 'validate_hash', $cloudkitty_config)
+  validate_legacy(Hash, 'validate_hash', $cloudkitty_api_paste_ini)
 
   create_resources('cloudkitty_config', $cloudkitty_config)
   create_resources('cloudkitty_api_paste_ini', $cloudkitty_api_paste_ini)

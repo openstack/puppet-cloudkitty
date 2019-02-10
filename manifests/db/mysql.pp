@@ -45,7 +45,7 @@ class cloudkitty::db::mysql(
 
   include ::cloudkitty::deps
 
-  validate_string($password)
+  validate_legacy(String, 'validate_string', $password)
 
   ::openstacklib::db::mysql { 'cloudkitty':
     user          => $user,
