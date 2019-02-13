@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    Added cloudkitty::storage_version that can be used to set the version of
+    the storage backend.

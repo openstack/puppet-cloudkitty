@@ -31,6 +31,7 @@ describe 'cloudkitty' do
         is_expected.to contain_cloudkitty_config('oslo_messaging_notifications/transport_url').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_notifications/driver').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('storage/backend').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('storage/version').with_value('<SERVICE DEFAULT>')
       end
 
       it 'passes purge to resource' do
@@ -54,6 +55,7 @@ describe 'cloudkitty' do
           :rpc_response_timeout               => '120',
           :control_exchange                   => 'cloudkitty',
           :storage_backend                    => 'gnocchi',
+          :storage_version                    => '1',
           :auth_section                       => 'keystone_authtoken',
           :keystone_version                   => '3',
         }
@@ -71,6 +73,7 @@ describe 'cloudkitty' do
       it 'configures various things' do
         is_expected.to contain_cloudkitty_config('oslo_messaging_notifications/topics').with_value('openstack')
         is_expected.to contain_cloudkitty_config('storage/backend').with_value('gnocchi')
+        is_expected.to contain_cloudkitty_config('storage/version').with_value('1')
         is_expected.to contain_cloudkitty_config('keystone_fetcher/auth_section').with_value('keystone_authtoken')
         is_expected.to contain_cloudkitty_config('keystone_fetcher/keystone_version').with_value('3')
       end
