@@ -41,6 +41,11 @@ describe 'basic cloudkitty' do
           }
           class { '::cloudkitty':
             default_transport_url => 'rabbit://cloudkitty:an_even_bigger_secret@127.0.0.1:5672',
+            # NOTE(tobias-urdin): Cloudkitty in Stein has moved to storage v2 by default and the
+            # only driver available is InfluxDB which we do not deploy. This sets it back to the
+            # old sqlalchemy storage driver in version 1.
+            storage_backend       => 'sqlalchemy',
+            storage_version       => '1',
           }
           class { '::cloudkitty::keystone::auth':
             password => 'a_big_secret',

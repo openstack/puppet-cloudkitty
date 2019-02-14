@@ -226,6 +226,10 @@
 #   (Optional) Name of the storage backend driver.
 #   Defaults to $::os_service_default.
 #
+# [*storage_version*]
+#   (Optional) Version of the storage backend to use.
+#   Defaults to $::os_service_default
+#
 # [*tenant_fetcher_backend*]
 #   (Optional) Driver used to fetch tenant list.
 #   Defaults to $::os_service_default.
@@ -284,6 +288,7 @@ class cloudkitty(
   $output_basepath                    = $::os_service_default,
   $pipeline                           = $::os_service_default,
   $storage_backend                    = $::os_service_default,
+  $storage_version                    = $::os_service_default,
   $tenant_fetcher_backend             = $::os_service_default,
   $auth_section                       = 'keystone_authtoken',
   $keystone_version                   = '3',
@@ -369,6 +374,7 @@ class cloudkitty(
 
   cloudkitty_config {
     'storage/backend':        value => $storage_backend;
+    'storage/version':        value => $storage_version;
     'tenant_fetcher/backend': value => $tenant_fetcher_backend;
   }
 
