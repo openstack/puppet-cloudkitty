@@ -95,6 +95,6 @@ Contributors
 Repository
 ----------
 
-* https://git.openstack.org/cgit/openstack/puppet-cloudkitty
+* https://opendev.org/openstack/puppet-cloudkitty
 
 
