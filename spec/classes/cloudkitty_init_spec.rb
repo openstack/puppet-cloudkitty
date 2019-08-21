@@ -27,6 +27,7 @@ describe 'cloudkitty' do
         is_expected.to contain_cloudkitty_config('DEFAULT/control_exchange').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_timeout_threshold').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_rate').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_in_pthread').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/kombu_compression').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_notifications/transport_url').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('oslo_messaging_notifications/driver').with_value('<SERVICE DEFAULT>')
@@ -48,6 +49,7 @@ describe 'cloudkitty' do
           :rabbit_ha_queues                   => 'undef',
           :rabbit_heartbeat_timeout_threshold => '60',
           :rabbit_heartbeat_rate              => '10',
+          :rabbit_heartbeat_in_pthread        => true,
           :kombu_compression                  => 'gzip',
           :package_ensure                     => '2012.1.1-15.el6',
           :notification_topics                => 'openstack',
@@ -67,6 +69,7 @@ describe 'cloudkitty' do
         is_expected.to contain_cloudkitty_config('DEFAULT/control_exchange').with_value('cloudkitty')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_timeout_threshold').with_value('60')
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_rate').with_value('10')
+        is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/heartbeat_in_pthread').with_value(true)
         is_expected.to contain_cloudkitty_config('oslo_messaging_rabbit/kombu_compression').with_value('gzip')
       end
 
