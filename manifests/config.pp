@@ -28,7 +28,7 @@ class cloudkitty::config (
   $cloudkitty_api_paste_ini = {},
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   validate_legacy(Hash, 'validate_hash', $cloudkitty_config)
   validate_legacy(Hash, 'validate_hash', $cloudkitty_api_paste_ini)

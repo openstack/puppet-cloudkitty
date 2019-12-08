@@ -44,10 +44,10 @@ describe 'cloudkitty::api' do
       end
 
       let :pre_condition do
-        "include ::apache
-         include ::cloudkitty::db
+        "include apache
+         include cloudkitty::db
          class { 'cloudkitty': }
-         class { '::cloudkitty::keystone::authtoken':
+         class { 'cloudkitty::keystone::authtoken':
            password => 'a_big_secret',
          }"
       end
@@ -68,10 +68,10 @@ describe 'cloudkitty::api' do
       end
 
       let :pre_condition do
-        "include ::apache
-         include ::cloudkitty::db
+        "include apache
+         include cloudkitty::db
          class { 'cloudkitty': }
-         class { '::cloudkitty::keystone::authtoken':
+         class { 'cloudkitty::keystone::authtoken':
            password => 'a_big_secret',
          }"
       end
@@ -86,7 +86,7 @@ describe 'cloudkitty::api' do
         })
       end
       let :pre_condition do
-        "class { '::cloudkitty::keystone::authtoken':
+        "class { 'cloudkitty::keystone::authtoken':
            password => 'a_big_secret',
          }"
       end

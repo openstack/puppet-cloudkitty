@@ -202,7 +202,7 @@ class cloudkitty::keystone::authtoken(
   $service_token_roles_required   = $::os_service_default,
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   keystone::resource::authtoken { 'cloudkitty_config':
     username                       => $username,

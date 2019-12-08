@@ -28,8 +28,8 @@ class cloudkitty::policy (
   $policy_path = '/etc/cloudkitty/policy.json',
 ) {
 
-  include ::cloudkitty::deps
-  include ::cloudkitty::params
+  include cloudkitty::deps
+  include cloudkitty::params
 
   validate_legacy(Hash, 'validate_hash', $policies)
 

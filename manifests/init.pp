@@ -305,10 +305,10 @@ class cloudkitty(
   $keystone_version                   = '3',
 ) {
 
-  include ::cloudkitty::params
-  include ::cloudkitty::db
-  include ::cloudkitty::deps
-  include ::cloudkitty::storage
+  include cloudkitty::params
+  include cloudkitty::db
+  include cloudkitty::deps
+  include cloudkitty::storage
 
   package { 'cloudkitty-common':
     ensure => $package_ensure,

@@ -62,7 +62,7 @@ class cloudkitty::db (
   $database_idle_timeout            = undef,
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   validate_legacy(Oslo::Dbconn, 'validate_re', $database_connection,
     ['^(sqlite|mysql(\+pymysql)?|postgresql):\/\/(\S+:\S+@\S+\/\S+)?'])

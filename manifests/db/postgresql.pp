@@ -32,7 +32,7 @@ class cloudkitty::db::postgresql(
   $privileges = 'ALL',
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   ::openstacklib::db::postgresql { 'cloudkitty':
     password_hash => postgresql_password($user, $password),

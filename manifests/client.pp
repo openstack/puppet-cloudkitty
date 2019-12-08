@@ -12,8 +12,8 @@ class cloudkitty::client (
   $ensure = 'present'
 ) {
 
-  include ::cloudkitty::deps
-  include ::cloudkitty::params
+  include cloudkitty::deps
+  include cloudkitty::params
 
   package { 'python-cloudkittyclient':
     ensure => $ensure,

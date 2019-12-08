@@ -119,12 +119,12 @@ class cloudkitty::wsgi::apache (
   $custom_wsgi_process_options = {},
 ) {
 
-  include ::cloudkitty::deps
-  include ::cloudkitty::params
-  include ::apache
-  include ::apache::mod::wsgi
+  include cloudkitty::deps
+  include cloudkitty::params
+  include apache
+  include apache::mod::wsgi
   if $ssl {
-    include ::apache::mod::ssl
+    include apache::mod::ssl
   }
 
   ::openstacklib::wsgi::apache { 'cloudkitty_wsgi':

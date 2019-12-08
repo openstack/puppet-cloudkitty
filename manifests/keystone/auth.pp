@@ -88,7 +88,7 @@ class cloudkitty::keystone::auth (
   $rating_role         = 'rating',
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   if $configure_user_role {
     Keystone_user_role["${auth_name}@${tenant}"] ~> Anchor['cloudkitty::config::end']

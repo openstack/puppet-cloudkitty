@@ -12,8 +12,8 @@ class cloudkitty::ui (
   $package_ensure = 'present',
 ) {
 
-  include ::cloudkitty::deps
-  include ::cloudkitty::params
+  include cloudkitty::deps
+  include cloudkitty::params
 
   package { 'cloudkitty-ui':
     ensure => $package_ensure,

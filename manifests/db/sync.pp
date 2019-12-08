@@ -12,7 +12,7 @@ class cloudkitty::db::sync(
   $extra_params  = undef,
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   exec { 'cloudkitty-db-sync':
     command     => "cloudkitty-dbsync upgrade ${extra_params}",

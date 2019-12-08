@@ -51,10 +51,10 @@ class cloudkitty::api (
   $service_name   = 'httpd',
 ) {
 
-  include ::cloudkitty
-  include ::cloudkitty::deps
-  include ::cloudkitty::params
-  include ::cloudkitty::policy
+  include cloudkitty
+  include cloudkitty::deps
+  include cloudkitty::params
+  include cloudkitty::policy
 
   package { 'cloudkitty-api':
     ensure => $package_ensure,
@@ -71,11 +71,11 @@ class cloudkitty::api (
   }
 
   if $sync_db {
-    include ::cloudkitty::db::sync
+    include cloudkitty::db::sync
   }
 
   if $service_name == 'httpd' {
-    include ::apache::params
+    include apache::params
     service { 'cloudkitty-api':
       ensure => 'stopped',
       name   => $::cloudkitty::params::api_service_name,

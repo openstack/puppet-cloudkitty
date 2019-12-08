@@ -6,11 +6,11 @@ describe 'basic cloudkitty' do
 
     it 'should work with no errors' do
       pp= <<-EOS
-      include ::openstack_integration
-      include ::openstack_integration::repos
-      include ::openstack_integration::rabbitmq
-      include ::openstack_integration::mysql
-      include ::openstack_integration::keystone
+      include openstack_integration
+      include openstack_integration::repos
+      include openstack_integration::rabbitmq
+      include openstack_integration::mysql
+      include openstack_integration::keystone
 
       rabbitmq_user { 'cloudkitty':
         admin    => true,
@@ -33,13 +33,13 @@ describe 'basic cloudkitty' do
           warning('Cloudkitty is not yet packaged on Debian systems.')
         }
         'RedHat': {
-          class { '::cloudkitty::db':
+          class { 'cloudkitty::db':
             database_connection => 'mysql+pymysql://cloudkitty:a_big_secret@127.0.0.1/cloudkitty?charset=utf8',
           }
-          class { '::cloudkitty::logging':
+          class { 'cloudkitty::logging':
             debug => true,
           }
-          class { '::cloudkitty':
+          class { 'cloudkitty':
             default_transport_url => 'rabbit://cloudkitty:an_even_bigger_secret@127.0.0.1:5672',
             # NOTE(tobias-urdin): Cloudkitty in Stein has moved to storage v2 by default and the
             # only driver available is InfluxDB which we do not deploy. This sets it back to the
@@ -47,24 +47,24 @@ describe 'basic cloudkitty' do
             storage_backend       => 'sqlalchemy',
             storage_version       => '1',
           }
-          class { '::cloudkitty::keystone::auth':
+          class { 'cloudkitty::keystone::auth':
             password => 'a_big_secret',
           }
-          class { '::cloudkitty::keystone::authtoken':
+          class { 'cloudkitty::keystone::authtoken':
             password  => 'a_big_secret',
           }
-          class { '::cloudkitty::db::mysql':
+          class { 'cloudkitty::db::mysql':
             password => 'a_big_secret',
           }
-          class { '::cloudkitty::api':
+          class { 'cloudkitty::api':
             service_name => 'httpd',
           }
-          include ::apache
-          class { '::cloudkitty::wsgi::apache':
+          include apache
+          class { 'cloudkitty::wsgi::apache':
             ssl => false,
           }
-          class { '::cloudkitty::processor': }
-          class { '::cloudkitty::client': }
+          class { 'cloudkitty::processor': }
+          class { 'cloudkitty::client': }
         }
         default: {
           fail("Unsupported osfamily (${::osfamily})")

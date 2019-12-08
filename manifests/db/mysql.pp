@@ -43,7 +43,7 @@ class cloudkitty::db::mysql(
   $allowed_hosts = undef
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   validate_legacy(String, 'validate_string', $password)
 

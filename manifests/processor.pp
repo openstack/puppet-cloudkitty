@@ -57,8 +57,8 @@ class cloudkitty::processor (
   $auth_section      = 'keystone_authtoken',
 ) {
 
-  include ::cloudkitty::deps
-  include ::cloudkitty::params
+  include cloudkitty::deps
+  include cloudkitty::params
 
   package { 'cloudkitty-processor':
     ensure => $package_ensure,

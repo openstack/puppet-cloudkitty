@@ -12,7 +12,7 @@ class cloudkitty::storage(
   $extra_params = '--config-file /etc/cloudkitty/cloudkitty.conf',
 ){
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   exec { 'cloudkitty-storage-init':
     command     => "cloudkitty-storage-init ${extra_params}",

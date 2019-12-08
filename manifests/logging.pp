@@ -123,7 +123,7 @@ class cloudkitty::logging(
   $log_date_format               = $::os_service_default,
 ) {
 
-  include ::cloudkitty::deps
+  include cloudkitty::deps
 
   oslo::log { 'cloudkitty_config':
     use_stderr                    => $use_stderr,
