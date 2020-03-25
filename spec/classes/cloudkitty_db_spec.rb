@@ -10,7 +10,6 @@ describe 'cloudkitty::db' do
         :db_max_retries          => '<SERVICE DEFAULT>',
         :connection              => 'sqlite:////var/lib/cloudkitty/cloudkitty.sqlite',
         :connection_recycle_time => '<SERVICE DEFAULT>',
-        :min_pool_size           => '<SERVICE DEFAULT>',
         :max_pool_size           => '<SERVICE DEFAULT>',
         :max_retries             => '<SERVICE DEFAULT>',
         :retry_interval          => '<SERVICE DEFAULT>',
@@ -24,7 +23,6 @@ describe 'cloudkitty::db' do
         {
           :database_connection              => 'mysql+pymysql://cloudkitty:cloudkitty@localhost/cloudkitty',
           :database_connection_recycle_time => '3601',
-          :database_min_pool_size           => '2',
           :database_db_max_retries          => '-1',
           :database_max_retries             => '11',
           :database_retry_interval          => '11',
@@ -40,7 +38,6 @@ describe 'cloudkitty::db' do
         :db_max_retries          => '-1',
         :connection              => 'mysql+pymysql://cloudkitty:cloudkitty@localhost/cloudkitty',
         :connection_recycle_time => '3601',
-        :min_pool_size           => '2',
         :max_pool_size           => '11',
         :max_retries             => '11',
         :retry_interval          => '11',
