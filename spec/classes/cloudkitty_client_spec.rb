@@ -29,7 +29,15 @@ describe 'cloudkitty::client' do
         when 'Debian'
           { :client_package_name => 'python3-cloudkittyclient' }
         when 'RedHat'
-          { :client_package_name => 'python-cloudkittyclient' }
+          if facts[:operatingsystem] == 'Fedora'
+            { :client_package_name => 'python3-cloudkittyclient' }
+          else
+            if facts[:operatingsystemmajrelease] > '7'
+              { :client_package_name => 'python3-cloudkittyclient' }
+            else
+              { :client_package_name => 'python-cloudkittyclient' }
+            end
+          end
         end
       end
 
