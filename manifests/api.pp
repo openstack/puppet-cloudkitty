@@ -82,6 +82,10 @@ class cloudkitty::api (
       enable => false,
       tag    => 'cloudkitty-service',
     }
+    Service <| title == 'httpd' |> { tag +> 'cloudkitty-service' }
+
+    # we need to make sure cloudkitty-api/eventlet is stopped before trying to start apache
+    Service['cloudkitty-api'] -> Service[$service_name]
   } else {
     fail('Invalid service_name. Only httpd for being run by a httpd server')
   }
