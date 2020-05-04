@@ -52,12 +52,12 @@ describe 'Puppet::Type.type(:cloudkitty_config)' do
 
   it 'should autorequire the package that install the file' do
     catalog = Puppet::Resource::Catalog.new
-    package = Puppet::Type.type(:package).new(:name => 'cloudkitty')
-    catalog.add_resource package, @cloudkitty_config
+    anchor = Puppet::Type.type(:anchor).new(:name => 'cloudkitty::install::end')
+    catalog.add_resource anchor, @cloudkitty_config
     dependency = @cloudkitty_config.autorequire
     expect(dependency.size).to eq(1)
     expect(dependency[0].target).to eq(@cloudkitty_config)
-    expect(dependency[0].source).to eq(package)
+    expect(dependency[0].source).to eq(anchor)
   end
 
 

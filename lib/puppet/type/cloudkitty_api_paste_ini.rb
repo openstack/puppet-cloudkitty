@@ -45,8 +45,8 @@ Puppet::Type.newtype(:cloudkitty_api_paste_ini) do
     defaultto('<SERVICE DEFAULT>')
   end
 
-  autorequire(:package) do
-    'cloudkitty-common'
+  autorequire(:anchor) do
+    ['cloudkitty::install::end']
   end
 
 end
