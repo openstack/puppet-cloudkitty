@@ -35,11 +35,11 @@ class cloudkitty::db::postgresql(
   include cloudkitty::deps
 
   ::openstacklib::db::postgresql { 'cloudkitty':
-    password_hash => postgresql_password($user, $password),
-    dbname        => $dbname,
-    user          => $user,
-    encoding      => $encoding,
-    privileges    => $privileges,
+    password   => $password,
+    dbname     => $dbname,
+    user       => $user,
+    encoding   => $encoding,
+    privileges => $privileges,
   }
 
   Anchor['cloudkitty::db::begin']

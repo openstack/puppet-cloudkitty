@@ -7,7 +7,7 @@ describe 'cloudkitty::db::postgresql' do
   end
 
   let :required_params do
-    { :password => 'pw' }
+    { :password => 'cloudkittypass' }
   end
 
   shared_examples_for 'cloudkitty-db-postgresql' do
@@ -16,9 +16,12 @@ describe 'cloudkitty::db::postgresql' do
         required_params
       end
 
-      it { is_expected.to contain_postgresql__server__db('cloudkitty').with(
-        :user     => 'cloudkitty',
-        :password => 'md53482d86a9afd805efeb0f628944a7ecc'
+      it { is_expected.to contain_openstacklib__db__postgresql('cloudkitty').with(
+        :user       => 'cloudkitty',
+        :password   => 'cloudkittypass',
+        :dbname     => 'cloudkitty',
+        :encoding   => nil,
+        :privileges => 'ALL',
       )}
     end
   end
