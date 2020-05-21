@@ -74,7 +74,15 @@ class cloudkitty::api (
     include cloudkitty::db::sync
   }
 
-  if $service_name == 'httpd' {
+  if $service_name == $::cloudkitty::params::api_service_name {
+    service { 'cloudkitty-api':
+      enable     => $enabled,
+      name       => 'cloudkitty-api',
+      hasstatus  => true,
+      hasrestart => true,
+      tag        => 'cloudkitty-service',
+    }
+  } elsif $service_name == 'httpd' {
     include apache::params
     service { 'cloudkitty-api':
       ensure => 'stopped',

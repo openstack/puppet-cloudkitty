@@ -1,0 +1,6 @@
+---
+features:
+  - |
+    It is now possible to run cloudkitty-api using the default package service,
+    which may be useful if running under Debian, where cloudkitty-api runs
+    using uwsgi.
