@@ -49,7 +49,7 @@ class cloudkitty::db::mysql(
 
   ::openstacklib::db::mysql { 'cloudkitty':
     user          => $user,
-    password_hash => mysql::password($password),
+    password      => $password,
     dbname        => $dbname,
     host          => $host,
     charset       => $charset,

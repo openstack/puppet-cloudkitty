@@ -7,7 +7,7 @@ describe 'cloudkitty::db::mysql' do
   end
 
   let :required_params do
-    { :password => 'fooboozoo_default_password', }
+    { :password => 'cloudkittypass', }
   end
 
   shared_examples_for 'cloudkitty-db-mysql' do
@@ -17,12 +17,12 @@ describe 'cloudkitty::db::mysql' do
       end
 
       it { is_expected.to contain_openstacklib__db__mysql('cloudkitty').with(
-        :user           => 'cloudkitty',
-        :password_hash  => '*3DDF34A86854A312A8E2C65B506E21C91800D206',
-        :dbname         => 'cloudkitty',
-        :host           => '127.0.0.1',
-        :charset        => 'utf8',
-        :collate        => 'utf8_general_ci',
+        :user     => 'cloudkitty',
+        :password => 'cloudkittypass',
+        :dbname   => 'cloudkitty',
+        :host     => '127.0.0.1',
+        :charset  => 'utf8',
+        :collate  => 'utf8_general_ci',
       )}
     end
 
@@ -32,13 +32,13 @@ describe 'cloudkitty::db::mysql' do
       end
 
       it { is_expected.to contain_openstacklib__db__mysql('cloudkitty').with(
-        :user           => 'cloudkitty',
-        :password_hash  => '*3DDF34A86854A312A8E2C65B506E21C91800D206',
-        :dbname         => 'cloudkitty',
-        :host           => '127.0.0.1',
-        :charset        => 'utf8',
-        :collate        => 'utf8_general_ci',
-        :allowed_hosts  => ['127.0.0.1','%']
+        :user          => 'cloudkitty',
+        :password      => 'cloudkittypass',
+        :dbname        => 'cloudkitty',
+        :host          => '127.0.0.1',
+        :charset       => 'utf8',
+        :collate       => 'utf8_general_ci',
+        :allowed_hosts => ['127.0.0.1','%']
       )}
     end
 
@@ -48,13 +48,13 @@ describe 'cloudkitty::db::mysql' do
       end
 
       it { is_expected.to contain_openstacklib__db__mysql('cloudkitty').with(
-        :user           => 'cloudkitty',
-        :password_hash  => '*3DDF34A86854A312A8E2C65B506E21C91800D206',
-        :dbname         => 'cloudkitty',
-        :host           => '127.0.0.1',
-        :charset        => 'utf8',
-        :collate        => 'utf8_general_ci',
-        :allowed_hosts  => '192.168.1.1'
+        :user          => 'cloudkitty',
+        :password      => 'cloudkittypass',
+        :dbname        => 'cloudkitty',
+        :host          => '127.0.0.1',
+        :charset       => 'utf8',
+        :collate       => 'utf8_general_ci',
+        :allowed_hosts => '192.168.1.1'
       )}
     end
   end
