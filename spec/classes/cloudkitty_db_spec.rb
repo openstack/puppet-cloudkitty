@@ -15,6 +15,7 @@ describe 'cloudkitty::db' do
         :retry_interval          => '<SERVICE DEFAULT>',
         :max_overflow            => '<SERVICE DEFAULT>',
         :pool_timeout            => '<SERVICE DEFAULT>',
+        :mysql_enable_ndb        => '<SERVICE DEFAULT>',
       )}
     end
 
@@ -29,6 +30,7 @@ describe 'cloudkitty::db' do
           :database_max_pool_size           => '11',
           :database_max_overflow            => '21',
           :database_pool_timeout            => '21',
+          :mysql_enable_ndb                 => true,
         }
       end
 
@@ -43,6 +45,7 @@ describe 'cloudkitty::db' do
         :retry_interval          => '11',
         :max_overflow            => '21',
         :pool_timeout            => '21',
+        :mysql_enable_ndb        => true,
       )}
     end
   end
