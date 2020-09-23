@@ -1,0 +1,3 @@
+---
+features:
+  - add class cloudkitty::storage::influxdb to configure influxdb storage
