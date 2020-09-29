@@ -391,8 +391,8 @@ class cloudkitty(
   }
 
   cloudkitty_config {
-    'keystone_fetcher/auth_section':     value => $auth_section;
-    'keystone_fetcher/keystone_version': value => $keystone_version;
+    'fetcher_keystone/auth_section':     value => $auth_section;
+    'fetcher_keystone/keystone_version': value => $keystone_version;
   }
 
 }

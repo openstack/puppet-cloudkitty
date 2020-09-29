@@ -77,8 +77,8 @@ describe 'cloudkitty' do
         is_expected.to contain_cloudkitty_config('oslo_messaging_notifications/topics').with_value('openstack')
         is_expected.to contain_cloudkitty_config('storage/backend').with_value('gnocchi')
         is_expected.to contain_cloudkitty_config('storage/version').with_value('1')
-        is_expected.to contain_cloudkitty_config('keystone_fetcher/auth_section').with_value('keystone_authtoken')
-        is_expected.to contain_cloudkitty_config('keystone_fetcher/keystone_version').with_value('3')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_section').with_value('keystone_authtoken')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value('3')
       end
 
     end

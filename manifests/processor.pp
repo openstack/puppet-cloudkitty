@@ -97,8 +97,8 @@ class cloudkitty::processor (
 
   cloudkitty_config {
     'collect/collector':              value => $collector;
-    'gnocchi_collector/auth_type':    value => $auth_type;
-    'gnocchi_collector/auth_section': value => $auth_section
+    'collector_gnocchi/auth_type':    value => $auth_type;
+    'collector_gnocchi/auth_section': value => $auth_section
   }
 
 }

@@ -21,8 +21,8 @@ describe 'cloudkitty::processor' do
       it { is_expected.to contain_cloudkitty_config('collect/window').with_value( params[:window] ) }
       it { is_expected.to contain_cloudkitty_config('collect/period').with_value( params[:period] ) }
       it { is_expected.to contain_cloudkitty_config('collect/wait_periods').with_value( params[:wait_periods] ) }
-      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_type').with_value('password') }
-      it { is_expected.to contain_cloudkitty_config('gnocchi_collector/auth_section').with_value('keystone_authtoken') }
+      it { is_expected.to contain_cloudkitty_config('collector_gnocchi/auth_type').with_value('password') }
+      it { is_expected.to contain_cloudkitty_config('collector_gnocchi/auth_section').with_value('keystone_authtoken') }
 
       it 'installs cloudkitty-processor package' do
         is_expected.to contain_package('cloudkitty-processor').with(
