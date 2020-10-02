@@ -1,0 +1,3 @@
+---
+features:
+  - Add cloudkitty::fetcher::gnocchi class to configure the gnocchi tenant fetcher.
