@@ -240,7 +240,7 @@
 #   (Optional) Version of the storage backend to use.
 #   Defaults to $::os_service_default
 #
-# [*tenant_fetcher_backend*]
+# [*fetcher_backend*]
 #   (Optional) Driver used to fetch tenant list.
 #   Defaults to $::os_service_default.
 #
@@ -251,6 +251,13 @@
 # [*keystone_version*]
 #   (Optional) Keystone version to use.
 #   Defaults to '3'
+#
+# DEPRECATED PARAMETERS
+#
+# [*tenant_fetcher_backend*]
+#   (Optional) Driver used to fetch tenant list.
+#   Defaults to $::os_service_default.
+#   Deprecated, use fetcher_backend instead
 #
 class cloudkitty(
   $package_ensure                     = 'present',
@@ -300,10 +307,16 @@ class cloudkitty(
   $pipeline                           = $::os_service_default,
   $storage_backend                    = $::os_service_default,
   $storage_version                    = $::os_service_default,
-  $tenant_fetcher_backend             = $::os_service_default,
+  $fetcher_backend                    = $::os_service_default,
   $auth_section                       = 'keystone_authtoken',
   $keystone_version                   = '3',
+  # DEPRECATED PARAMETERS
+  $tenant_fetcher_backend             = undef,
 ) {
+
+  if $tenant_fetcher_backend != undef {
+    warning('The parameter cloudkitty::tenant_fetcher_backend was deprecated and has no effect. Use fetcher_backend instead.')
+  }
 
   include cloudkitty::params
   include cloudkitty::db
@@ -385,9 +398,9 @@ class cloudkitty(
   }
 
   cloudkitty_config {
-    'storage/backend':        value => $storage_backend;
-    'storage/version':        value => $storage_version;
-    'tenant_fetcher/backend': value => $tenant_fetcher_backend;
+    'storage/backend': value => $storage_backend;
+    'storage/version': value => $storage_version;
+    'fetcher/backend': value => $fetcher_backend;
   }
 
   cloudkitty_config {
