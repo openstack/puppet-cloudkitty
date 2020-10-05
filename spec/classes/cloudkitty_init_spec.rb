@@ -196,6 +196,24 @@ describe 'cloudkitty' do
         is_expected.to contain_cloudkitty_config('oslo_messaging_amqp/password').with_value('password')
       end
     end
+
+    context 'with metrics_donfig' do
+      let :params do
+        { :metrics_config => {'metrics' => {}},
+        }
+      end
+
+      it 'configures metrics.yml' do
+        is_expected.to contain_file('metrics.yml')
+          .with_ensure('present')
+          .with_path('/etc/cloudkitty/metrics.yml')
+          .with_selinux_ignore_defaults(TRUE)
+          .with_mode('0640')
+          .with_owner('root')
+          .with_group('cloudkitty')
+          .with_tag('cloudkitty-yamls')
+      end
+    end
   end
 
   on_supported_os({

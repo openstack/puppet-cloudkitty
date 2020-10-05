@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    add new parameter $cloudkitty::metrics_config to configure the content of
+    /etc/metrics.yml file wich defines the values to catch.
