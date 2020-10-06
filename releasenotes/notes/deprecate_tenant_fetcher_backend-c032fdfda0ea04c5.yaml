@@ -1,0 +1,3 @@
+---
+deprecations:
+  - cloudkitty::tenant_fetcher_backend parameter is deprecated instead use cloudkitty::fetcher_backend
