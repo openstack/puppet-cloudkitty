@@ -16,6 +16,8 @@ describe 'cloudkitty::db::mysql' do
         required_params
       end
 
+      it { is_expected.to contain_class('cloudkitty::deps') }
+
       it { is_expected.to contain_openstacklib__db__mysql('cloudkitty').with(
         :user     => 'cloudkitty',
         :password => 'cloudkittypass',
