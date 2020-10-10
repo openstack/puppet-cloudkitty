@@ -16,6 +16,8 @@ describe 'cloudkitty::db::postgresql' do
         required_params
       end
 
+      it { is_expected.to contain_class('cloudkitty::deps') }
+
       it { is_expected.to contain_openstacklib__db__postgresql('cloudkitty').with(
         :user       => 'cloudkitty',
         :password   => 'cloudkittypass',
