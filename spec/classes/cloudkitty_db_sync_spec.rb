@@ -4,6 +4,8 @@ describe 'cloudkitty::db::sync' do
 
   shared_examples_for 'cloudkitty-dbsync' do
 
+    it { is_expected.to contain_class('cloudkitty::deps') }
+
     it 'runs cloudkitty-db-sync' do
       is_expected.to contain_exec('cloudkitty-db-sync').with(
         :command     => 'cloudkitty-dbsync upgrade ',
