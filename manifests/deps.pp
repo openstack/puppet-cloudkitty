@@ -35,6 +35,11 @@ class cloudkitty::deps {
   -> Openstacklib::Policy::Base<||>
   ~> Anchor['cloudkitty::config::end']
 
+  # Ensure files are modified in the config block
+  Anchor['cloudkitty::config::begin']
+  -> File<| tag == 'cloudkitty-yamls' |>
+  ~> Anchor['cloudkitty::config::end']
+
   # Installation or config changes will always restart services.
   Anchor['cloudkitty::install::end'] ~> Anchor['cloudkitty::service::begin']
   Anchor['cloudkitty::config::end']  ~> Anchor['cloudkitty::service::begin']

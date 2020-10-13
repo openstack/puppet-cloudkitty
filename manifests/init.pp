@@ -252,6 +252,10 @@
 #   (Optional) Keystone version to use.
 #   Defaults to '3'
 #
+# [*metrics_config*]
+#   (Optional) A hash of the metrics.yaml configuration.
+#   Defaults to undef
+#
 # DEPRECATED PARAMETERS
 #
 # [*tenant_fetcher_backend*]
@@ -310,6 +314,7 @@ class cloudkitty(
   $fetcher_backend                    = $::os_service_default,
   $auth_section                       = 'keystone_authtoken',
   $keystone_version                   = '3',
+  Optional[Hash] $metrics_config      = undef,
   # DEPRECATED PARAMETERS
   $tenant_fetcher_backend             = undef,
 ) {
@@ -408,4 +413,16 @@ class cloudkitty(
     'fetcher_keystone/keystone_version': value => $keystone_version;
   }
 
+  if $metrics_config {
+    file {'metrics.yml':
+      ensure                  => present,
+      path                    => $::cloudkitty::params::metrics_yaml,
+      content                 => to_yaml($metrics_config),
+      selinux_ignore_defaults => true,
+      mode                    => '0640',
+      owner                   => 'root',
+      group                   => $::cloudkitty::params::group,
+      tag                     => 'cloudkitty-yamls',
+    }
+  }
 }

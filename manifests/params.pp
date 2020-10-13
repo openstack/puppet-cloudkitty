@@ -10,6 +10,7 @@ class cloudkitty::params {
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
   $group                  = 'cloudkitty'
+  $metrics_yaml           = '/etc/cloudkitty/metrics.yml'
 
   case $::osfamily {
     'RedHat': {
