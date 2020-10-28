@@ -65,7 +65,7 @@
             "version_requirement": ">= 6.0.0 < 7.0.0"
         }
     ],
-    "source": "git://github.com/openstack/puppet-cloudkitty.git",
+    "source": "https://opendev.org/openstack/puppet-cloudkitty.git",
     "summary": "Puppet module for OpenStack cloudkitty",
     "version": "7.0.0"
 }
