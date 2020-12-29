@@ -5,7 +5,7 @@ describe 'cloudkitty::policy' do
   shared_examples_for 'cloudkitty policies' do
     let :params do
       {
-        :policy_path => '/etc/cloudkitty/policy.json',
+        :policy_path => '/etc/cloudkitty/policy.yaml',
         :policies    => {
           'context_is_admin' => {
             'key'   => 'context_is_admin',
@@ -17,13 +17,14 @@ describe 'cloudkitty::policy' do
 
     it 'set up the policies' do
       is_expected.to contain_openstacklib__policy__base('context_is_admin').with({
-        :key        => 'context_is_admin',
-        :value      => 'foo:bar',
-        :file_user  => 'root',
-        :file_group => 'cloudkitty',
+        :key         => 'context_is_admin',
+        :value       => 'foo:bar',
+        :file_user   => 'root',
+        :file_group  => 'cloudkitty',
+        :file_format => 'yaml',
       })
       is_expected.to contain_oslo__policy('cloudkitty_config').with(
-        :policy_file => '/etc/cloudkitty/policy.json',
+        :policy_file => '/etc/cloudkitty/policy.yaml',
       )
     end
   end
