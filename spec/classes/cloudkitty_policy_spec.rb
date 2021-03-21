@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'cloudkitty::policy' do
-
-  shared_examples_for 'cloudkitty policies' do
+  shared_examples 'cloudkitty::policy' do
     let :params do
       {
-        :policy_path => '/etc/cloudkitty/policy.yaml',
-        :policies    => {
+        :enforce_scope => false,
+        :policy_path   => '/etc/cloudkitty/policy.yaml',
+        :policies      => {
           'context_is_admin' => {
             'key'   => 'context_is_admin',
             'value' => 'foo:bar'
@@ -24,20 +24,21 @@ describe 'cloudkitty::policy' do
         :file_format => 'yaml',
       })
       is_expected.to contain_oslo__policy('cloudkitty_config').with(
-        :policy_file => '/etc/cloudkitty/policy.yaml',
+        :enforce_scope => false,
+        :policy_file   => '/etc/cloudkitty/policy.yaml',
       )
     end
   end
 
   on_supported_os({
-    :supported_os   => OSDefaults.get_supported_os
+    :supported_os => OSDefaults.get_supported_os
   }).each do |os,facts|
     context "on #{os}" do
       let (:facts) do
         facts.merge!(OSDefaults.get_facts())
       end
 
-      it_configures 'cloudkitty policies'
+      it_behaves_like 'cloudkitty::policy'
     end
   end
 end

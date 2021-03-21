@@ -4,6 +4,10 @@
 #
 # === Parameters
 #
+# [*enforce_scope*]
+#  (Optional) Whether or not to enforce scope when evaluating policies.
+#  Defaults to $::os_service_default.
+#
 # [*policies*]
 #   (Optional) Set of policies to configure for cloudkitty
 #   Example :
@@ -20,12 +24,13 @@
 #   Defaults to empty hash.
 #
 # [*policy_path*]
-#   (Optional) Path to the nova policy.yaml file
+#   (Optional) Path to the cloudkitty policy.yaml file
 #   Defaults to /etc/cloudkitty/policy.yaml
 #
 class cloudkitty::policy (
-  $policies    = {},
-  $policy_path = '/etc/cloudkitty/policy.yaml',
+  $enforce_scope = $::os_service_default,
+  $policies      = {},
+  $policy_path   = '/etc/cloudkitty/policy.yaml',
 ) {
 
   include cloudkitty::deps
@@ -42,6 +47,9 @@ class cloudkitty::policy (
 
   create_resources('openstacklib::policy::base', $policies)
 
-  oslo::policy { 'cloudkitty_config': policy_file => $policy_path }
+  oslo::policy { 'cloudkitty_config':
+    enforce_scope => $enforce_scope,
+    policy_file   => $policy_path
+  }
 
 }
