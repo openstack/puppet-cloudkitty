@@ -35,6 +35,11 @@ class cloudkitty::deps {
   -> Openstacklib::Policy::Base<||>
   ~> Anchor['cloudkitty::config::end']
 
+  # On any uwsgi config change, we must restart Cloudkitty API.
+  Anchor['cloudkitty::config::begin']
+  -> Cloudkitty_api_uwsgi_config<||>
+  ~> Anchor['cloudkitty::config::end']
+
   # Ensure files are modified in the config block
   Anchor['cloudkitty::config::begin']
   -> File<| tag == 'cloudkitty-yamls' |>
