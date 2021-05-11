@@ -40,15 +40,26 @@
 #   to make cloudkitty-api be a web app using apache mod_wsgi.
 #   Defaults to 'httpd'
 #
+# [*enable_proxy_headers_parsing*]
+#   (Optional) Enable paste middleware to handle SSL requests through
+#   HTTPProxyToWSGI middleware.
+#   Defaults to $::os_service_default.
+#
+# [*max_request_body_size*]
+#   (Optional) Set max request body size
+#   Defaults to $::os_service_default.
+#
 class cloudkitty::api (
-  $package_ensure = 'present',
-  $manage_service = true,
-  $enabled        = true,
-  $host_ip        = $::os_service_default,
-  $port           = $::os_service_default,
-  $pecan_debug    = $::os_service_default,
-  $sync_db        = true,
-  $service_name   = 'httpd',
+  $package_ensure               = 'present',
+  $manage_service               = true,
+  $enabled                      = true,
+  $host_ip                      = $::os_service_default,
+  $port                         = $::os_service_default,
+  $pecan_debug                  = $::os_service_default,
+  $sync_db                      = true,
+  $service_name                 = 'httpd',
+  $enable_proxy_headers_parsing = $::os_service_default,
+  $max_request_body_size        = $::os_service_default,
 ) {
 
   include cloudkitty
@@ -102,6 +113,11 @@ class cloudkitty::api (
     'api/host_ip':     value => $host_ip;
     'api/port':        value => $port;
     'api/pecan_debug': value => $pecan_debug;
+  }
+
+  oslo::middleware { 'cloudkitty_config':
+    enable_proxy_headers_parsing => $enable_proxy_headers_parsing,
+    max_request_body_size        => $max_request_body_size,
   }
 
 }

@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    The following parameters have been added to the ``cloudkitty::api`` class,
+    to support parameters of oslo.middleware.
+
+    - ``enable_proxy_headers_parsing``
+    - ``max_request_body_size``

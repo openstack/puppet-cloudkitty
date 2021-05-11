@@ -3,11 +3,13 @@ require 'spec_helper'
 describe 'cloudkitty::api' do
 
   let :params do
-    { :enabled        => true,
-      :manage_service => true,
-      :host_ip        => '127.0.0.1',
-      :port           => '8889',
-      :pecan_debug    => false }
+    { :enabled                      => true,
+      :manage_service               => true,
+      :host_ip                      => '127.0.0.1',
+      :port                         => '8889',
+      :pecan_debug                  => false,
+      :enable_proxy_headers_parsing => true,
+      :max_request_body_size        => 102400,}
   end
 
   let :pre_condition do
@@ -29,6 +31,10 @@ describe 'cloudkitty::api' do
       it { is_expected.to contain_cloudkitty_config('api/host_ip').with_value( params[:host_ip] ) }
       it { is_expected.to contain_cloudkitty_config('api/port').with_value( params[:port] ) }
       it { is_expected.to contain_cloudkitty_config('api/pecan_debug').with_value( params[:pecan_debug] ) }
+      it { is_expected.to contain_oslo__middleware('cloudkitty_config').with(
+        :enable_proxy_headers_parsing => params[:enable_proxy_headers_parsing],
+        :max_request_body_size        => params[:max_request_body_size],
+      ) }
 
       it 'installs cloudkitty-api package' do
         is_expected.to contain_package('cloudkitty-api').with(
