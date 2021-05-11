@@ -8,10 +8,6 @@
 #    (Optional) Ensure state for package.
 #    Defaults to 'present'
 #
-# [*rpc_response_timeout*]
-#   (Optional) Configure the timeout (in seconds) for rpc responses
-#   Defaults to $::os_service_default.
-#
 # [*rabbit_ha_queues*]
 #   (optional) Use HA queues in RabbitMQ (x-ha-policy: all).
 #   Defaults to $::os_service_default.
@@ -174,22 +170,6 @@
 # [*notification_topics*]
 #   (optional) AMQP topic used for OpenStack notifications
 #   Defaults to ::os_service_default
-#
-# [*flavor*]
-#   (optional) Specifies the Authentication method.
-#   Set to 'standalone' to get cloudkitty to work with a remote OpenStack
-#   Tested versions include 0.9 and 2.2
-#   Defaults to $::os_service_default.
-#
-# [*region_name*]
-#   (Optional) Region name for services. This is the
-#   default region name that cloudkitty talks to service endpoints on.
-#   Defaults to $::os_service_default.
-#
-# [*enable_proxy_headers_parsing*]
-#   (Optional) Enable paste middleware to handle SSL requests through
-#   HTTPProxyToWSGI middleware.
-#   Defaults to $::os_service_default.
 #
 # [*purge_config*]
 #   (optional) Whether to set only the specified config options
