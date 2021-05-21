@@ -4,9 +4,8 @@
 #
 class cloudkitty::params {
   include openstacklib::defaults
-  $pyvers = $::openstacklib::defaults::pyvers
 
-  $client_package_name    = "python${pyvers}-cloudkittyclient"
+  $client_package_name    = 'python3-cloudkittyclient'
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
   $group                  = 'cloudkitty'
