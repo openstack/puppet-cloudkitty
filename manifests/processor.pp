@@ -44,6 +44,14 @@
 #   (optional) Config Section from which to load plugin specific options
 #   Default to 'keystone_authtoken'.
 #
+# [*region_name*]
+#   (optional) Region name for gnocchi collector
+#   Default to $::os_service_default
+#
+# [*interface*]
+#   (optional) Endpoint URL type
+#   Default to $::os_service_default
+#
 class cloudkitty::processor (
   $package_ensure    = 'present',
   $manage_service    = true,
@@ -55,6 +63,8 @@ class cloudkitty::processor (
   $services          = $::os_service_default,
   $auth_type         = 'password',
   $auth_section      = 'keystone_authtoken',
+  $region_name       = $::os_service_default,
+  $interface         = $::os_service_default,
 ) {
 
   include cloudkitty::deps
@@ -98,7 +108,9 @@ class cloudkitty::processor (
   cloudkitty_config {
     'collect/collector':              value => $collector;
     'collector_gnocchi/auth_type':    value => $auth_type;
-    'collector_gnocchi/auth_section': value => $auth_section
+    'collector_gnocchi/auth_section': value => $auth_section;
+    'collector_gnocchi/region_name':  value => $region_name;
+    'collector_gnocchi/interface':    value => $interface;
   }
 
 }

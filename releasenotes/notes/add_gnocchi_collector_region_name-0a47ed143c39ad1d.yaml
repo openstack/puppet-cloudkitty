@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Add parameters region_name and interface for gnocchi collector.
