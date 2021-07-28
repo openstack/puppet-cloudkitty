@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    Add max_workers parameter for orchestrator.

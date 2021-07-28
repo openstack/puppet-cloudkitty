@@ -10,7 +10,8 @@ describe 'cloudkitty::processor' do
       :wait_periods   => '1',
       :window         => '3600',
       :region_name    => 'RegionOne',
-      :interface      => 'publicURL',}
+      :interface      => 'publicURL',
+      :max_workers    => '6',}
   end
 
   shared_examples_for 'cloudkitty-processor' do
@@ -27,6 +28,7 @@ describe 'cloudkitty::processor' do
       it { is_expected.to contain_cloudkitty_config('collector_gnocchi/auth_section').with_value('keystone_authtoken') }
       it { is_expected.to contain_cloudkitty_config('collector_gnocchi/region_name').with_value( params[:region_name] ) }
       it { is_expected.to contain_cloudkitty_config('collector_gnocchi/interface').with_value( params[:interface] ) }
+      it { is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value( params[:max_workers] ) }
 
       it 'installs cloudkitty-processor package' do
         is_expected.to contain_package('cloudkitty-processor').with(

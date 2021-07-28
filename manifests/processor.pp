@@ -52,6 +52,10 @@
 #   (optional) Endpoint URL type
 #   Default to $::os_service_default
 #
+# [*max_workers*]
+#   (optional) Number of max workers for processor
+#   Default to $::os_service_default
+#
 class cloudkitty::processor (
   $package_ensure    = 'present',
   $manage_service    = true,
@@ -65,6 +69,7 @@ class cloudkitty::processor (
   $auth_section      = 'keystone_authtoken',
   $region_name       = $::os_service_default,
   $interface         = $::os_service_default,
+  $max_workers       = $::os_service_default,
 ) {
 
   include cloudkitty::deps
@@ -111,6 +116,7 @@ class cloudkitty::processor (
     'collector_gnocchi/auth_section': value => $auth_section;
     'collector_gnocchi/region_name':  value => $region_name;
     'collector_gnocchi/interface':    value => $interface;
+    'orchestrator/max_workers':       value => $max_workers;
   }
 
 }
