@@ -30,6 +30,7 @@ describe 'cloudkitty::logging' do
      :syslog_log_facility            => 'LOG_FOO',
      :log_dir                        => '/var/log',
      :log_file                       => '/var/tmp/cloudkitty_random.log',
+     :watch_log_file                 => true,
      :debug                          => true,
     }
   end
@@ -66,6 +67,7 @@ describe 'cloudkitty::logging' do
         :syslog_log_facility => '<SERVICE DEFAULT>',
         :log_dir             => '/var/log/cloudkitty',
         :log_file            => '<SERVICE DEFAULT>',
+        :watch_log_file      => '<SERVICE DEFAULT>',
         :debug               => '<SERVICE DEFAULT>',
       )
     end
@@ -81,6 +83,7 @@ describe 'cloudkitty::logging' do
         :syslog_log_facility => 'LOG_FOO',
         :log_dir             => '/var/log',
         :log_file            => '/var/tmp/cloudkitty_random.log',
+        :watch_log_file      => true,
         :debug               => true,
       )
     end
