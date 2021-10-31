@@ -1,0 +1,18 @@
+---
+features:
+  - |
+    The new ``cloudkitty::fetcher::keystone`` class has been aded.
+
+upgrade:
+  - |
+    Default of the ``cloudkitty::fetcher::keystone`` parameter will be updated
+    in a future release. Please explicitly set the parameter or use new
+    parameters to define keystone credentials.
+
+deprecations:
+  - |
+    The following two parameters of the ``cloudkitty`` class have been
+    deprecated and will be removed in a future release.
+
+    - ``auth_section``
+    - ``keystone_version``

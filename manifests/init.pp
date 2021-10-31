@@ -220,14 +220,6 @@
 #   (Optional) Driver used to fetch tenant list.
 #   Defaults to $::os_service_default.
 #
-# [*auth_section*]
-#   (Optional) Config Section from which to load plugin specific options
-#   Defaults to 'keystone_authtoken'
-#
-# [*keystone_version*]
-#   (Optional) Keystone version to use.
-#   Defaults to '3'
-#
 # [*metrics_config*]
 #   (Optional) A hash of the metrics.yaml configuration.
 #   Defaults to undef
@@ -242,6 +234,14 @@
 # [*amqp_allow_insecure_clients*]
 #   (Optional) Accept clients using either SSL or plain TCP
 #   Defaults to undef.
+#
+# [*auth_section*]
+#   (Optional) Config Section from which to load plugin specific options
+#   Defaults to undef
+#
+# [*keystone_version*]
+#   (Optional) Keystone version to use.
+#   Defaults to undef
 #
 class cloudkitty(
   $package_ensure                     = 'present',
@@ -291,12 +291,12 @@ class cloudkitty(
   $storage_backend                    = $::os_service_default,
   $storage_version                    = $::os_service_default,
   $fetcher_backend                    = $::os_service_default,
-  $auth_section                       = 'keystone_authtoken',
-  $keystone_version                   = '3',
   Optional[Hash] $metrics_config      = undef,
   # DEPRECATED PARAMETERS
   $tenant_fetcher_backend             = undef,
   $amqp_allow_insecure_clients        = undef,
+  $auth_section                       = undef,
+  $keystone_version                   = undef,
 ) {
 
   if $tenant_fetcher_backend != undef {
@@ -307,6 +307,14 @@ class cloudkitty(
     warning('The amqp_allow_insecure_clients parameter is deprecated and \
 will be removed in a future release.')
   }
+
+  if $auth_section != undef {
+    warning('The cloudkitty::auth_section parameter is deprecated. Use the cloudkitty::fetcher_keystone class')
+  }
+  if $keystone_version != undef {
+    warning('The cloudkitty::keystone_version parameter is deprecated. Use the cloudkitty::fetcher_keystone class')
+  }
+  include cloudkitty::fetcher::keystone
 
   include cloudkitty::params
   include cloudkitty::db
@@ -390,11 +398,6 @@ will be removed in a future release.')
     'storage/backend': value => $storage_backend;
     'storage/version': value => $storage_version;
     'fetcher/backend': value => $fetcher_backend;
-  }
-
-  cloudkitty_config {
-    'fetcher_keystone/auth_section':     value => $auth_section;
-    'fetcher_keystone/keystone_version': value => $keystone_version;
   }
 
   if $metrics_config {
