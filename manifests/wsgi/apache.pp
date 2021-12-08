@@ -126,11 +126,6 @@ class cloudkitty::wsgi::apache (
 
   include cloudkitty::deps
   include cloudkitty::params
-  include apache
-  include apache::mod::wsgi
-  if $ssl_real {
-    include apache::mod::ssl
-  }
 
   ::openstacklib::wsgi::apache { 'cloudkitty_wsgi':
     bind_host                   => $bind_host,

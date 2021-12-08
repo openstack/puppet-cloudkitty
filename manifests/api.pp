@@ -94,7 +94,6 @@ class cloudkitty::api (
       tag        => 'cloudkitty-service',
     }
   } elsif $service_name == 'httpd' {
-    include apache::params
     service { 'cloudkitty-api':
       ensure => 'stopped',
       name   => $::cloudkitty::params::api_service_name,
