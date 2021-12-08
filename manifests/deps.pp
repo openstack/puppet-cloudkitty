@@ -26,6 +26,11 @@ class cloudkitty::deps {
   ~> Service<| tag == 'cloudkitty-service' |>
   ~> anchor { 'cloudkitty::service::end': }
 
+  # paste-api.ini config should occur in the config block also.
+  Anchor['cloudkitty::config::begin']
+  -> Cloudkitty_api_paste_ini<||>
+  ~> Anchor['cloudkitty::config::end']
+
   # all db settings should be applied and all packages should be installed
   # before dbsync starts
   Oslo::Db<||> -> Anchor['cloudkitty::dbsync::begin']
