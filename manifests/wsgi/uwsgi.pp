@@ -29,7 +29,7 @@ class cloudkitty::wsgi::uwsgi (
 
   include cloudkitty::deps
 
-  if $::os_package_type != 'debian'{
+  if $::operatingsystem != 'Debian'{
     warning('This class is only valid for Debian, as other operating systems are not using uwsgi by default.')
   }
 
