@@ -127,6 +127,8 @@ class cloudkitty::wsgi::apache (
   include cloudkitty::deps
   include cloudkitty::params
 
+  Anchor['cloudkitty::install::end'] -> Class['apache']
+
   ::openstacklib::wsgi::apache { 'cloudkitty_wsgi':
     bind_host                   => $bind_host,
     bind_port                   => $port,
@@ -155,6 +157,5 @@ class cloudkitty::wsgi::apache (
     access_log_file             => $access_log_file,
     access_log_format           => $access_log_format,
     error_log_file              => $error_log_file,
-    require                     => Anchor['cloudkitty::install::end'],
   }
 }
