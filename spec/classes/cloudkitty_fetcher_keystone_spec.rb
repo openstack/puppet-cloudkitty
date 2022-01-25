@@ -17,20 +17,24 @@ describe 'cloudkitty::fetcher::keystone' do
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_url').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_rating_role').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_disabled_tenants').with_value('<SERVICE DEFAULT>')
       end
     end
 
     context 'with parameters set' do
       let :params do
         {
-          :auth_section        => '<SERVICE DEFAULT>',
-          :username            => 'cloudkitty',
-          :password            => 'cloudkitty_password',
-          :project_name        => 'service',
-          :user_domain_name    => 'Default',
-          :project_domain_name => 'Default',
-          :auth_url            => 'http://127.0.0.1:5000',
-          :keystone_version    => 3,
+          :auth_section            => '<SERVICE DEFAULT>',
+          :username                => 'cloudkitty',
+          :password                => 'cloudkitty_password',
+          :project_name            => 'service',
+          :user_domain_name        => 'Default',
+          :project_domain_name     => 'Default',
+          :auth_url                => 'http://127.0.0.1:5000',
+          :keystone_version        => 3,
+          :ignore_rating_role      => false,
+          :ignore_disabled_tenants => true,
         }
       end
 
@@ -43,6 +47,8 @@ describe 'cloudkitty::fetcher::keystone' do
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('Default')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_url').with_value('http://127.0.0.1:5000')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value(3)
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_rating_role').with_value(false)
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_disabled_tenants').with_value(true)
       end
     end
   end
