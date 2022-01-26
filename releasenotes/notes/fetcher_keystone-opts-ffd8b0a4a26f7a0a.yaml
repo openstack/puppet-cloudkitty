@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The ``ignore_rating_role`` parameter and the ``ignore_disabled_tenants``
+    parameter has been added to the ``cloudkitty::fetcher::keystone`` class.
