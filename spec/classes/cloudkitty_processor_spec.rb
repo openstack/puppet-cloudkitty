@@ -76,15 +76,8 @@ describe 'cloudkitty::processor' do
           :manage_service => false }
       end
 
-      it 'configures cloudkitty-processor service' do
-        is_expected.to contain_service('cloudkitty-processor').with(
-          :ensure     => nil,
-          :name       => platform_params[:processor_service_name],
-          :enable     => false,
-          :hasstatus  => true,
-          :hasrestart => true,
-          :tag        => 'cloudkitty-service',
-        )
+      it 'does not configure cloudkitty-processor service' do
+        is_expected.to_not contain_service('cloudkitty-processor')
       end
     end
   end

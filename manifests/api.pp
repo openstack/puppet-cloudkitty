@@ -73,39 +73,39 @@ class cloudkitty::api (
     tag    => ['openstack', 'cloudkitty-package'],
   }
 
+  if $sync_db {
+    include cloudkitty::db::sync
+  }
+
   if $manage_service {
     if $enabled {
       $service_ensure = 'running'
     } else {
       $service_ensure = 'stopped'
     }
-  }
 
-  if $sync_db {
-    include cloudkitty::db::sync
-  }
+    if $service_name == $::cloudkitty::params::api_service_name {
+      service { 'cloudkitty-api':
+        enable     => $enabled,
+        name       => 'cloudkitty-api',
+        hasstatus  => true,
+        hasrestart => true,
+        tag        => 'cloudkitty-service',
+      }
+    } elsif $service_name == 'httpd' {
+      service { 'cloudkitty-api':
+        ensure => 'stopped',
+        name   => $::cloudkitty::params::api_service_name,
+        enable => false,
+        tag    => 'cloudkitty-service',
+      }
+      Service <| title == 'httpd' |> { tag +> 'cloudkitty-service' }
 
-  if $service_name == $::cloudkitty::params::api_service_name {
-    service { 'cloudkitty-api':
-      enable     => $enabled,
-      name       => 'cloudkitty-api',
-      hasstatus  => true,
-      hasrestart => true,
-      tag        => 'cloudkitty-service',
+      # we need to make sure cloudkitty-api/eventlet is stopped before trying to start apache
+      Service['cloudkitty-api'] -> Service[$service_name]
+    } else {
+      fail('Invalid service_name. Only httpd for being run by a httpd server')
     }
-  } elsif $service_name == 'httpd' {
-    service { 'cloudkitty-api':
-      ensure => 'stopped',
-      name   => $::cloudkitty::params::api_service_name,
-      enable => false,
-      tag    => 'cloudkitty-service',
-    }
-    Service <| title == 'httpd' |> { tag +> 'cloudkitty-service' }
-
-    # we need to make sure cloudkitty-api/eventlet is stopped before trying to start apache
-    Service['cloudkitty-api'] -> Service[$service_name]
-  } else {
-    fail('Invalid service_name. Only httpd for being run by a httpd server')
   }
 
   cloudkitty_config {
