@@ -1,5 +1,6 @@
 # == Class: cloudkitty::ui
 #
+# DEPRECATAD !!
 # Installs & configure the cloudkitty ui component
 #
 # === Parameters
@@ -14,6 +15,8 @@ class cloudkitty::ui (
 
   include cloudkitty::deps
   include cloudkitty::params
+
+  warning('The cloudkitty::ui class is deprecated. Use horizon::dashboard instead.')
 
   package { 'cloudkitty-ui':
     ensure => $package_ensure,
