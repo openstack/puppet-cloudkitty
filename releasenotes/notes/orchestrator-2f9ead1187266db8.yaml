@@ -1,0 +1,9 @@
+---
+features:
+  - |
+    The new ``cloudkitty::orchestrator`` class has been added.
+
+deprecations:
+  - |
+    The ``cloudkitty::processor::max_workers`` parameter has been deprecated
+    in favor of the new ``cloudkitty::orchestrator::max_workers`` parameter.
