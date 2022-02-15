@@ -95,15 +95,15 @@ class cloudkitty::processor (
     } else {
       $service_ensure = 'stopped'
     }
-  }
 
-  service { 'cloudkitty-processor':
-    ensure     => $service_ensure,
-    name       => $::cloudkitty::params::processor_service_name,
-    enable     => $enabled,
-    hasstatus  => true,
-    hasrestart => true,
-    tag        => 'cloudkitty-service',
+    service { 'cloudkitty-processor':
+      ensure     => $service_ensure,
+      name       => $::cloudkitty::params::processor_service_name,
+      enable     => $enabled,
+      hasstatus  => true,
+      hasrestart => true,
+      tag        => 'cloudkitty-service',
+    }
   }
 
   cloudkitty_config {
