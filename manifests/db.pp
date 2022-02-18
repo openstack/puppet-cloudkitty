@@ -43,12 +43,6 @@
 #   Cluster (NDB).
 #   Defaults to $::os_service_default
 #
-# DEPRECATED PARAMETERS
-#
-# [*database_min_pool_size*]
-#   (Optional) Minimum number of SQL connections to keep open in a pool.
-#   Defaults to undef
-#
 class cloudkitty::db (
   $database_connection              = 'sqlite:////var/lib/cloudkitty/cloudkitty.sqlite',
   $database_connection_recycle_time = $::os_service_default,
@@ -59,15 +53,9 @@ class cloudkitty::db (
   $database_max_overflow            = $::os_service_default,
   $database_pool_timeout            = $::os_service_default,
   $mysql_enable_ndb                 = $::os_service_default,
-  # DEPRECATED PARAMETERS
-  $database_min_pool_size           = undef,
 ) {
 
   include cloudkitty::deps
-
-  if $database_min_pool_size {
-    warning('The database_min_pool_size parameter is deprecated, and will be removed in a future release.')
-  }
 
   oslo::db { 'cloudkitty_config':
     connection              => $database_connection,
