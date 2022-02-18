@@ -231,10 +231,6 @@
 #   Defaults to $::os_service_default.
 #   Deprecated, use fetcher_backend instead
 #
-# [*amqp_allow_insecure_clients*]
-#   (Optional) Accept clients using either SSL or plain TCP
-#   Defaults to undef.
-#
 # [*auth_section*]
 #   (Optional) Config Section from which to load plugin specific options
 #   Defaults to undef
@@ -294,18 +290,12 @@ class cloudkitty(
   Optional[Hash] $metrics_config      = undef,
   # DEPRECATED PARAMETERS
   $tenant_fetcher_backend             = undef,
-  $amqp_allow_insecure_clients        = undef,
   $auth_section                       = undef,
   $keystone_version                   = undef,
 ) {
 
   if $tenant_fetcher_backend != undef {
     warning('The parameter cloudkitty::tenant_fetcher_backend was deprecated and has no effect. Use fetcher_backend instead.')
-  }
-
-  if $amqp_allow_insecure_clients != undef {
-    warning('The amqp_allow_insecure_clients parameter is deprecated and \
-will be removed in a future release.')
   }
 
   if $auth_section != undef {
