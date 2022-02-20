@@ -132,7 +132,7 @@ class cloudkitty::wsgi::apache (
   ::openstacklib::wsgi::apache { 'cloudkitty_wsgi':
     bind_host                   => $bind_host,
     bind_port                   => $port,
-    group                       => 'cloudkitty',
+    group                       => $::cloudkitty::params::group,
     path                        => $path,
     priority                    => $priority,
     servername                  => $servername,
@@ -145,7 +145,7 @@ class cloudkitty::wsgi::apache (
     ssl_crl_path                => $ssl_crl_path,
     ssl_key                     => $ssl_key,
     threads                     => $threads,
-    user                        => 'cloudkitty',
+    user                        => $::cloudkitty::params::user,
     workers                     => $workers,
     wsgi_daemon_process         => 'cloudkitty',
     wsgi_process_display_name   => $wsgi_process_display_name,

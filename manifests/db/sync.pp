@@ -18,11 +18,12 @@ class cloudkitty::db::sync(
 ) {
 
   include cloudkitty::deps
+  include cloudkitty::params
 
   exec { 'cloudkitty-db-sync':
     command     => "cloudkitty-dbsync upgrade ${extra_params}",
     path        => [ '/bin', '/usr/bin', ],
-    user        => 'cloudkitty',
+    user        => $::cloudkitty::params::user,
     refreshonly => true,
     try_sleep   => 5,
     tries       => 10,
