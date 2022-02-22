@@ -8,6 +8,7 @@ class cloudkitty::params {
   $client_package_name    = 'python3-cloudkittyclient'
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
+  $user                   = 'cloudkitty'
   $group                  = 'cloudkitty'
   $metrics_yaml           = '/etc/cloudkitty/metrics.yml'
 
