@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The `cloudkitty::fetcher::keystone::system_scope`` parameter has been
+    added.

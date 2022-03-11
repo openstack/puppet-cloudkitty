@@ -33,6 +33,10 @@
 #  (Optional) Name of domain for $project_name
 #  Defaults to $::os_service_default.
 #
+# [*system_scope*]
+#  (Optional) Scope for system operations.
+#  Defaults to $::os_service_default
+#
 # [*auth_type*]
 #  (Optional) An authentication type to use with an OpenStack Identity server.
 #  Defaults to $::os_service_default.
@@ -57,6 +61,7 @@ class cloudkitty::fetcher::keystone (
   $project_name            = $::os_service_default,
   $user_domain_name        = $::os_service_default,
   $project_domain_name     = $::os_service_default,
+  $system_scope            = $::os_service_default,
   $auth_type               = $::os_service_default,
   $keystone_version        = $::os_service_default,
   $ignore_rating_role      = $::os_service_default,
@@ -75,13 +80,22 @@ class cloudkitty::fetcher::keystone (
   }
   $keystone_version_real = pick($::cloudkitty::keystone_version, $keystone_version)
 
+  if is_service_default($system_scope) {
+    $project_name_real = $project_name
+    $project_domain_name_real = $project_domain_name
+  } else {
+    $project_name_real = $::os_service_default
+    $project_domain_name_real = $::os_service_default
+  }
+
   cloudkitty_config {
     'fetcher_keystone/auth_section':            value => $auth_section_real;
     'fetcher_keystone/username':                value => $username;
     'fetcher_keystone/password':                value => $password, secret => true;
-    'fetcher_keystone/project_name':            value => $project_name;
+    'fetcher_keystone/project_name':            value => $project_name_real;
     'fetcher_keystone/user_domain_name':        value => $user_domain_name;
-    'fetcher_keystone/project_domain_name':     value => $project_domain_name;
+    'fetcher_keystone/project_domain_name':     value => $project_domain_name_real;
+    'fetcher_keystone/system_scope':            value => $system_scope;
     'fetcher_keystone/auth_url':                value => $auth_url;
     'fetcher_keystone/keystone_version':        value => $keystone_version_real;
     'fetcher_keystone/ignore_rating_role':      value => $ignore_rating_role;

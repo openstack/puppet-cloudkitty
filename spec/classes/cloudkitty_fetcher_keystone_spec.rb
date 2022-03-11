@@ -15,6 +15,7 @@ describe 'cloudkitty::fetcher::keystone' do
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_name').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/user_domain_name').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/system_scope').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_url').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_rating_role').with_value('<SERVICE DEFAULT>')
@@ -45,10 +46,26 @@ describe 'cloudkitty::fetcher::keystone' do
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_name').with_value('service')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/user_domain_name').with_value('Default')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('Default')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/system_scope').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_url').with_value('http://127.0.0.1:5000')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value(3)
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_rating_role').with_value(false)
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_disabled_tenants').with_value(true)
+      end
+    end
+
+    context 'when system_scope is set' do
+      let :params do
+        {
+          :project_name        => 'service',
+          :project_domain_name => 'Default',
+          :system_scope        => 'all'
+        }
+      end
+      it 'configures system-scoped credential' do
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/project_name').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/system_scope').with_value('all')
       end
     end
   end
