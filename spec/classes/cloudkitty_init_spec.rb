@@ -211,7 +211,7 @@ describe 'cloudkitty' do
         is_expected.to contain_file('metrics.yml')
           .with_ensure('present')
           .with_path('/etc/cloudkitty/metrics.yml')
-          .with_selinux_ignore_defaults(TRUE)
+          .with_selinux_ignore_defaults(true)
           .with_mode('0640')
           .with_owner('root')
           .with_group('cloudkitty')
