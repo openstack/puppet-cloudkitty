@@ -13,7 +13,7 @@
 #   Defaults to $::os_service_default
 #
 # [*max_threads*]
-#   (Optional) Maximal numer of threads to use per worker.
+#   (Optional) Maximal number of threads to use per worker.
 #   Defaults to $::os_service_default
 #
 class cloudkitty::orchestrator (

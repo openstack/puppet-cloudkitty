@@ -201,7 +201,7 @@ describe 'cloudkitty' do
       end
     end
 
-    context 'with metrics_donfig' do
+    context 'with metrics_config' do
       let :params do
         { :metrics_config => {'metrics' => {}},
         }

@@ -1,6 +1,6 @@
 # == Class: cloudkitty::ui
 #
-# DEPRECATAD !!
+# DEPRECATED !!
 # Installs & configure the cloudkitty ui component
 #
 # === Parameters
