@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    The ``cloudkitty::tenant_fetcher_backend`` parameter has been removed.

@@ -226,11 +226,6 @@
 #
 # DEPRECATED PARAMETERS
 #
-# [*tenant_fetcher_backend*]
-#   (Optional) Driver used to fetch tenant list.
-#   Defaults to $::os_service_default.
-#   Deprecated, use fetcher_backend instead
-#
 # [*auth_section*]
 #   (Optional) Config Section from which to load plugin specific options
 #   Defaults to undef
@@ -289,14 +284,9 @@ class cloudkitty(
   $fetcher_backend                    = $::os_service_default,
   Optional[Hash] $metrics_config      = undef,
   # DEPRECATED PARAMETERS
-  $tenant_fetcher_backend             = undef,
   $auth_section                       = undef,
   $keystone_version                   = undef,
 ) {
-
-  if $tenant_fetcher_backend != undef {
-    warning('The parameter cloudkitty::tenant_fetcher_backend was deprecated and has no effect. Use fetcher_backend instead.')
-  }
 
   if $auth_section != undef {
     warning('The cloudkitty::auth_section parameter is deprecated. Use the cloudkitty::fetcher_keystone class')
