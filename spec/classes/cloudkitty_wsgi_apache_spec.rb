@@ -19,13 +19,15 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_script_dir             => platform_params[:wsgi_script_path],
         :wsgi_script_file            => 'app',
         :wsgi_script_source          => '/usr/bin/cloudkitty-api',
+        :headers                     => nil,
+        :request_headers             => nil,
         :custom_wsgi_process_options => {},
         :access_log_file             => false,
         :access_log_format           => false,
       )}
     end
 
-    context 'when overriding parameters using different ports' do
+    context 'when overriding parameters' do
       let :params do
         {
           :servername                  => 'dummy.host',
@@ -34,12 +36,14 @@ describe 'cloudkitty::wsgi::apache' do
           :ssl                         => true,
           :wsgi_process_display_name   => 'cloudkitty',
           :workers                     => 37,
+          :access_log_file             => '/var/log/httpd/access_log',
+          :access_log_format           => 'some format',
+          :error_log_file              => '/var/log/httpd/error_log',
           :custom_wsgi_process_options => {
             'python_path' => '/my/python/admin/path',
           },
-          :access_log_file             => '/var/log/httpd/access_log',
-          :access_log_format           => 'some format',
-          :error_log_file              => '/var/log/httpd/error_log'
+          :headers                     => ['set X-XSS-Protection "1; mode=block"'],
+          :request_headers             => ['set Content-Type "application/json"'],
         }
       end
       it { is_expected.to contain_class('cloudkitty::params') }
@@ -59,6 +63,8 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_script_dir             => platform_params[:wsgi_script_path],
         :wsgi_script_file            => 'app',
         :wsgi_script_source          => '/usr/bin/cloudkitty-api',
+        :headers                     => ['set X-XSS-Protection "1; mode=block"'],
+        :request_headers             => ['set Content-Type "application/json"'],
         :custom_wsgi_process_options => {
           'python_path'  => '/my/python/admin/path',
         },
