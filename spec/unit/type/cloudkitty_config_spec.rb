@@ -32,7 +32,7 @@ describe 'Puppet::Type.type(:cloudkitty_config)' do
     expect(@cloudkitty_config[:value]).to eq(['bar'])
   end
 
-  it 'should not accept a value with whitespace' do
+  it 'should accept a value with whitespace' do
     @cloudkitty_config[:value] = 'b ar'
     expect(@cloudkitty_config[:value]).to eq(['b ar'])
   end
