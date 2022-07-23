@@ -10,7 +10,7 @@ describe 'cloudkitty::db::postgresql' do
     { :password => 'cloudkittypass' }
   end
 
-  shared_examples_for 'cloudkitty-db-postgresql' do
+  shared_examples_for 'cloudkitty::db::postgresql' do
     context 'with only required parameters' do
       let :params do
         required_params
@@ -33,13 +33,14 @@ describe 'cloudkitty::db::postgresql' do
   }).each do |os,facts|
     context "on #{os}" do
       let (:facts) do
-        facts.merge!(OSDefaults.get_facts({ :concat_basedir => '/var/lib/puppet/concat' }))
+        facts.merge!(OSDefaults.get_facts({
+          # puppet-postgresql requires the service_provider fact provided by
+          # puppetlabs-postgresql.
+          :service_provider => 'systemd'
+        }))
       end
 
-      # TODO(tkajinam): Remove this once puppet-postgresql supports CentOS 9
-      unless facts[:osfamily] == 'RedHat' and facts[:operatingsystemmajrelease].to_i >= 9
-        it_behaves_like 'cloudkitty-db-postgresql'
-      end
+      it_behaves_like 'cloudkitty::db::postgresql'
     end
   end
 end
