@@ -86,6 +86,14 @@
 #     { python-path => '/my/python/virtualenv' }
 #     Defaults to {}
 #
+#   [*headers*]
+#     (optional) Headers for the vhost.
+#     Defaults to undef
+#
+#   [*request_headers*]
+#     (optional) Modifies collected request headers in various ways.
+#     Defaults to undef
+#
 # == Dependencies
 #
 #   requires Class['apache'] & Class['cloudkitty']
@@ -117,6 +125,8 @@ class cloudkitty::wsgi::apache (
   $access_log_format           = false,
   $error_log_file              = undef,
   $custom_wsgi_process_options = {},
+  $headers                     = undef,
+  $request_headers             = undef,
 ) {
 
   include cloudkitty::deps
@@ -148,6 +158,8 @@ class cloudkitty::wsgi::apache (
     wsgi_script_dir             => $::cloudkitty::params::cloudkitty_wsgi_script_path,
     wsgi_script_file            => 'app',
     wsgi_script_source          => $::cloudkitty::params::cloudkitty_wsgi_script_source,
+    headers                     => $headers,
+    request_headers             => $request_headers,
     custom_wsgi_process_options => $custom_wsgi_process_options,
     access_log_file             => $access_log_file,
     access_log_format           => $access_log_format,
