@@ -9,6 +9,7 @@ describe 'cloudkitty::wsgi::apache' do
         :bind_port                   => 8889,
         :group                       => 'cloudkitty',
         :path                        => '/',
+        :priority                    => 10,
         :servername                  => facts[:fqdn],
         :ssl                         => false,
         :threads                     => 1,
@@ -22,8 +23,8 @@ describe 'cloudkitty::wsgi::apache' do
         :headers                     => nil,
         :request_headers             => nil,
         :custom_wsgi_process_options => {},
-        :access_log_file             => false,
-        :access_log_format           => false,
+        :access_log_file             => nil,
+        :access_log_format           => nil,
       )}
     end
 
