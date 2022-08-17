@@ -13,11 +13,12 @@ class cloudkitty::storage(
 ){
 
   include cloudkitty::deps
+  include cloudkitty::params
 
   exec { 'cloudkitty-storage-init':
     command     => "cloudkitty-storage-init ${extra_params}",
     path        => '/usr/bin',
-    user        => 'cloudkitty',
+    user        => $::cloudkitty::params::user,
     refreshonly => true,
     try_sleep   => 5,
     tries       => 10,
