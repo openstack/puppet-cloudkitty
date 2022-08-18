@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``cloudkitty::storage::elasticsearch`` class has been added. This
+    class can be used to set up the Elasticsearch storage backend.
