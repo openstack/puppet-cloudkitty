@@ -29,48 +29,40 @@ describe 'basic cloudkitty' do
       }
 
       # Cloudkitty resources
-      case $::osfamily {
-        'Debian': {
-          warning('Cloudkitty is not yet packaged on Debian systems.')
-        }
-        'RedHat': {
-          class { 'cloudkitty::db':
-            database_connection => 'mysql+pymysql://cloudkitty:a_big_secret@127.0.0.1/cloudkitty?charset=utf8',
-          }
-          class { 'cloudkitty::logging':
-            debug => true,
-          }
-          class { 'cloudkitty':
-            default_transport_url => 'rabbit://cloudkitty:an_even_bigger_secret@127.0.0.1:5672',
-            # NOTE(tobias-urdin): Cloudkitty in Stein has moved to storage v2 by default and the
-            # only driver available is InfluxDB which we do not deploy. This sets it back to the
-            # old sqlalchemy storage driver in version 1.
-            storage_backend       => 'sqlalchemy',
-            storage_version       => '1',
-          }
-          class { 'cloudkitty::keystone::auth':
-            password => 'a_big_secret',
-          }
-          class { 'cloudkitty::keystone::authtoken':
-            password  => 'a_big_secret',
-          }
-          class { 'cloudkitty::db::mysql':
-            password => 'a_big_secret',
-          }
-          class { 'cloudkitty::api':
-            service_name => 'httpd',
-          }
-          include apache
-          class { 'cloudkitty::wsgi::apache':
-            ssl => false,
-          }
-          class { 'cloudkitty::processor': }
-          class { 'cloudkitty::client': }
-        }
-        default: {
-          fail("Unsupported osfamily (${::osfamily})")
-        }
+      class { 'cloudkitty::db':
+        database_connection => 'mysql+pymysql://cloudkitty:a_big_secret@127.0.0.1/cloudkitty?charset=utf8',
       }
+      class { 'cloudkitty::logging':
+        debug => true,
+      }
+      class { 'cloudkitty':
+        default_transport_url => 'rabbit://cloudkitty:an_even_bigger_secret@127.0.0.1:5672',
+        # NOTE(tobias-urdin): Cloudkitty in Stein has moved to storage v2 by default and the
+        # only driver available is InfluxDB which we do not deploy. This sets it back to the
+        # old sqlalchemy storage driver in version 1.
+        storage_backend       => 'sqlalchemy',
+        storage_version       => '1',
+      }
+      class { 'cloudkitty::keystone::auth':
+        password => 'a_big_secret',
+      }
+      class { 'cloudkitty::keystone::authtoken':
+        password  => 'a_big_secret',
+      }
+      class { 'cloudkitty::db::mysql':
+        charset  => $::openstack_integration::params::mysql_charset,
+        collate  => $::openstack_integration::params::mysql_collate,
+        password => 'a_big_secret',
+      }
+      class { 'cloudkitty::api':
+        service_name => 'httpd',
+      }
+      include apache
+      class { 'cloudkitty::wsgi::apache':
+        ssl => false,
+      }
+      class { 'cloudkitty::processor': }
+      class { 'cloudkitty::client': }
       EOS
 
 
@@ -79,10 +71,8 @@ describe 'basic cloudkitty' do
       apply_manifest(pp, :catch_changes => true)
     end
 
-    if os[:family].casecmp('RedHat') == 0
-      describe port(8889) do
-        it { is_expected.to be_listening }
-      end
+    describe port(8889) do
+      it { is_expected.to be_listening }
     end
 
   end
