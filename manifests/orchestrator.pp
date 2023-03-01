@@ -6,20 +6,20 @@
 #
 # [*coordination_url*]
 #   (Optional) Coordination backend URL.
-#   Defaults to $::os_service_default
+#   Defaults to $facts['os_service_default']
 #
 # [*max_workers*]
 #   (Optional) Maximal number of workers to run.
-#   Defaults to $::os_service_default
+#   Defaults to $facts['os_service_default']
 #
 # [*max_threads*]
 #   (Optional) Maximal number of threads to use per worker.
-#   Defaults to $::os_service_default
+#   Defaults to $facts['os_service_default']
 #
 class cloudkitty::orchestrator (
-  $coordination_url = $::os_service_default,
-  $max_workers      = $::os_service_default,
-  $max_threads      = $::os_service_default
+  $coordination_url = $facts['os_service_default'],
+  $max_workers      = $facts['os_service_default'],
+  $max_threads      = $facts['os_service_default']
 ) {
 
   include cloudkitty::deps

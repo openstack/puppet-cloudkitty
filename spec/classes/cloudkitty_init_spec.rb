@@ -229,7 +229,7 @@ describe 'cloudkitty' do
       end
 
       let(:platform_params) do
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'Debian'
           { :cloudkitty_common_package => 'cloudkitty-common' }
         when 'RedHat'

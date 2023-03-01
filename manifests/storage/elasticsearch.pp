@@ -16,11 +16,11 @@
 #   alive. (interer value)
 #
 class cloudkitty::storage::elasticsearch(
-  String                     $host            = $::os_service_default,
-  String                     $index_name      = $::os_service_default,
-  Variant[String[0],Boolean] $insecure        = $::os_service_default,
-  String                     $cafile          = $::os_service_default,
-  Variant[String[0],Integer] $scroll_duration = $::os_service_default,
+  String                     $host            = $facts['os_service_default'],
+  String                     $index_name      = $facts['os_service_default'],
+  Variant[String[0],Boolean] $insecure        = $facts['os_service_default'],
+  String                     $cafile          = $facts['os_service_default'],
+  Variant[String[0],Integer] $scroll_duration = $facts['os_service_default'],
 ){
 
   include cloudkitty::deps

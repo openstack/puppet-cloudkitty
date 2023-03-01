@@ -22,19 +22,19 @@
 #
 # [*window*]
 #   (Optional) Number of samples to collect per call.
-#   Defaults to $::os_service_default.
+#   Defaults to $facts['os_service_default'].
 #
 # [*period*]
 #   (Optional) Rating period in seconds.
-#   Defaults to $::os_service_default.
+#   Defaults to $facts['os_service_default'].
 #
 # [*wait_periods*]
 #   (optional) Wait for N periods before collecting new data.
-#   Defaults to $::os_service_default.
+#   Defaults to $facts['os_service_default'].
 #
 # [*services*]
 #   (optional) Services to monitor.
-#   Defaults to $::os_service_default.
+#   Defaults to $facts['os_service_default'].
 #
 # [*auth_type*]
 #   (optional) Authentication type to load.
@@ -46,31 +46,31 @@
 #
 # [*region_name*]
 #   (optional) Region name for gnocchi collector
-#   Default to $::os_service_default
+#   Default to $facts['os_service_default']
 #
 # [*interface*]
 #   (optional) Endpoint URL type
-#   Default to $::os_service_default
+#   Default to $facts['os_service_default']
 #
 # DEPRECATED PARAMETERS
 #
 # [*max_workers*]
 #   (optional) Number of max workers for processor
-#   Default to $::os_service_default
+#   Default to $facts['os_service_default']
 #
 class cloudkitty::processor (
   $package_ensure    = 'present',
   $manage_service    = true,
   $enabled           = true,
   $collector         = 'gnocchi',
-  $window            = $::os_service_default,
-  $period            = $::os_service_default,
-  $wait_periods      = $::os_service_default,
-  $services          = $::os_service_default,
+  $window            = $facts['os_service_default'],
+  $period            = $facts['os_service_default'],
+  $wait_periods      = $facts['os_service_default'],
+  $services          = $facts['os_service_default'],
   $auth_type         = 'password',
   $auth_section      = 'keystone_authtoken',
-  $region_name       = $::os_service_default,
-  $interface         = $::os_service_default,
+  $region_name       = $facts['os_service_default'],
+  $interface         = $facts['os_service_default'],
   # DEPRECATED PARAMETERS
   $max_workers       = undef,
 ) {

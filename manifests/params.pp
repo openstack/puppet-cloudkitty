@@ -12,7 +12,7 @@ class cloudkitty::params {
   $group                  = 'cloudkitty'
   $metrics_yaml           = '/etc/cloudkitty/metrics.yml'
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat': {
     # package names
     $api_package_name              = 'openstack-cloudkitty-api'
@@ -32,7 +32,7 @@ class cloudkitty::params {
     $cloudkitty_wsgi_script_path   = '/usr/lib/cgi-bin/cloudkitty'
     }
     default: {
-      fail("Unsupported osfamily: ${::osfamily} operatingsystem")
+      fail("Unsupported osfamily: ${facts['os']['family']}")
     }
 
   }

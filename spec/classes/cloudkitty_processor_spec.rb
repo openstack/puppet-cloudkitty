@@ -91,7 +91,7 @@ describe 'cloudkitty::processor' do
       end
 
       let(:platform_params) do
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'Debian'
           { :processor_package_name => 'cloudkitty-processor',
             :processor_service_name => 'cloudkitty-processor' }

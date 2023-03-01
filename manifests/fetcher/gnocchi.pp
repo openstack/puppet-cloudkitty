@@ -31,15 +31,15 @@
 #   value)
 #
 class cloudkitty::fetcher::gnocchi(
-  String $scope_attribute   = $::os_service_default,
-  String $resource_types    = $::os_service_default,
-  String $gnocchi_auth_type = $::os_service_default,
-  String $gnocchi_user      = $::os_service_default,
-  String $gnocchi_endpoint  = $::os_service_default,
-  String $interface         = $::os_service_default,
-  String $region_name       = $::os_service_default,
-  String $auth_type         = $::os_service_default,
-  String $auth_section      = $::os_service_default,
+  String $scope_attribute   = $facts['os_service_default'],
+  String $resource_types    = $facts['os_service_default'],
+  String $gnocchi_auth_type = $facts['os_service_default'],
+  String $gnocchi_user      = $facts['os_service_default'],
+  String $gnocchi_endpoint  = $facts['os_service_default'],
+  String $interface         = $facts['os_service_default'],
+  String $region_name       = $facts['os_service_default'],
+  String $auth_type         = $facts['os_service_default'],
+  String $auth_section      = $facts['os_service_default'],
 ){
   include cloudkitty::deps
 

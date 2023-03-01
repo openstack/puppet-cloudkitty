@@ -25,15 +25,15 @@
 #   connections (string value)
 #
 class cloudkitty::storage::influxdb(
-  String                     $username         = $::os_service_default,
-  String                     $password         = $::os_service_default,
-  String                     $database         = $::os_service_default,
-  String                     $retention_policy = $::os_service_default,
-  String                     $host             = $::os_service_default,
-  Variant[String[0],Integer] $port             = $::os_service_default,
-  Variant[String[0],Boolean] $use_ssl          = $::os_service_default,
-  Variant[String[0],Boolean] $insecure         = $::os_service_default,
-  String                     $cafile           = $::os_service_default,
+  String                     $username         = $facts['os_service_default'],
+  String                     $password         = $facts['os_service_default'],
+  String                     $database         = $facts['os_service_default'],
+  String                     $retention_policy = $facts['os_service_default'],
+  String                     $host             = $facts['os_service_default'],
+  Variant[String[0],Integer] $port             = $facts['os_service_default'],
+  Variant[String[0],Boolean] $use_ssl          = $facts['os_service_default'],
+  Variant[String[0],Boolean] $insecure         = $facts['os_service_default'],
+  String                     $cafile           = $facts['os_service_default'],
 ){
 
   include cloudkitty::deps
