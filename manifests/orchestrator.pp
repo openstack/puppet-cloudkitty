@@ -32,7 +32,7 @@ class cloudkitty::orchestrator (
   }
 
   cloudkitty_config {
-    'orchestrator/coordination_url': value => $coordination_url;
+    'orchestrator/coordination_url': value => $coordination_url, secret => true;
     'orchestrator/max_workers':      value => $max_workers_real;
     'orchestrator/max_threads':      value => $max_threads;
   }

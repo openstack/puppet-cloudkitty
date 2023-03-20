@@ -9,7 +9,7 @@ describe 'cloudkitty::orchestrator' do
 
       it 'configures orchestrator' do
         is_expected.to contain_cloudkitty_config('orchestrator/coordination_url')\
-          .with_value('<SERVICE DEFAULT>')
+          .with_value('<SERVICE DEFAULT>').with_secret(true)
         is_expected.to contain_oslo__coordination('cloudkitty_config').with(
           :backend_url   => '<SERVICE DEFAULT>',
           :manage_config => false,
@@ -30,7 +30,7 @@ describe 'cloudkitty::orchestrator' do
 
       it 'configures orchestrator' do
         is_expected.to contain_cloudkitty_config('orchestrator/coordination_url')\
-          .with_value('etcd3+http://127.0.0.1:2379')
+          .with_value('etcd3+http://127.0.0.1:2379').with_secret(true)
         is_expected.to contain_oslo__coordination('cloudkitty_config').with(
           :backend_url   => 'etcd3+http://127.0.0.1:2379',
           :manage_config => false,
