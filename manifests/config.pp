@@ -24,14 +24,11 @@
 #   or Puppet catalog compilation will fail with duplicate resources.
 #
 class cloudkitty::config (
-  $cloudkitty_config        = {},
-  $cloudkitty_api_paste_ini = {},
+  Hash $cloudkitty_config        = {},
+  Hash $cloudkitty_api_paste_ini = {},
 ) {
 
   include cloudkitty::deps
-
-  validate_legacy(Hash, 'validate_hash', $cloudkitty_config)
-  validate_legacy(Hash, 'validate_hash', $cloudkitty_api_paste_ini)
 
   create_resources('cloudkitty_config', $cloudkitty_config)
   create_resources('cloudkitty_api_paste_ini', $cloudkitty_api_paste_ini)
