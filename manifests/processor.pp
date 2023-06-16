@@ -59,20 +59,20 @@
 #   Default to $facts['os_service_default']
 #
 class cloudkitty::processor (
-  $package_ensure    = 'present',
-  $manage_service    = true,
-  $enabled           = true,
-  $collector         = 'gnocchi',
-  $window            = $facts['os_service_default'],
-  $period            = $facts['os_service_default'],
-  $wait_periods      = $facts['os_service_default'],
-  $services          = $facts['os_service_default'],
-  $auth_type         = 'password',
-  $auth_section      = 'keystone_authtoken',
-  $region_name       = $facts['os_service_default'],
-  $interface         = $facts['os_service_default'],
+  $package_ensure         = 'present',
+  Boolean $manage_service = true,
+  Boolean $enabled        = true,
+  $collector              = 'gnocchi',
+  $window                 = $facts['os_service_default'],
+  $period                 = $facts['os_service_default'],
+  $wait_periods           = $facts['os_service_default'],
+  $services               = $facts['os_service_default'],
+  $auth_type              = 'password',
+  $auth_section           = 'keystone_authtoken',
+  $region_name            = $facts['os_service_default'],
+  $interface              = $facts['os_service_default'],
   # DEPRECATED PARAMETERS
-  $max_workers       = undef,
+  $max_workers            = undef,
 ) {
 
   include cloudkitty::deps
