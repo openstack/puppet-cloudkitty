@@ -34,7 +34,7 @@
 #   Defaults to 'utf8_general_ci'
 #
 class cloudkitty::db::mysql(
-  $password,
+  String[1] $password,
   $dbname        = 'cloudkitty',
   $user          = 'cloudkitty',
   $host          = '127.0.0.1',
@@ -44,8 +44,6 @@ class cloudkitty::db::mysql(
 ) {
 
   include cloudkitty::deps
-
-  validate_legacy(String, 'validate_string', $password)
 
   ::openstacklib::db::mysql { 'cloudkitty':
     user          => $user,
