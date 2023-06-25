@@ -67,6 +67,7 @@ class cloudkitty::policy (
     file_group   => $::cloudkitty::params::group,
     file_format  => 'yaml',
     purge_config => $purge_config,
+    tag          => 'cloudkitty',
   }
 
   create_resources('openstacklib::policy', { $policy_path => $policy_parameters })
