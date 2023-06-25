@@ -33,6 +33,7 @@ describe 'cloudkitty::policy' do
           :file_group   => 'cloudkitty',
           :file_format  => 'yaml',
           :purge_config => false,
+          :tag          => 'cloudkitty',
         )
         is_expected.to contain_oslo__policy('cloudkitty_config').with(
           :enforce_scope        => false,
@@ -63,6 +64,7 @@ describe 'cloudkitty::policy' do
           :file_group   => 'cloudkitty',
           :file_format  => 'yaml',
           :purge_config => true,
+          :tag          => 'cloudkitty',
         )
         is_expected.to contain_oslo__policy('cloudkitty_config').with(
           :enforce_scope        => false,
