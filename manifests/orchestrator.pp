@@ -24,8 +24,6 @@ class cloudkitty::orchestrator (
 
   include cloudkitty::deps
 
-  $max_workers_real = pick($::cloudkitty::processor::max_workers, $max_workers)
-
   oslo::coordination{ 'cloudkitty_config':
     backend_url   => $coordination_url,
     manage_config => false,
@@ -33,7 +31,7 @@ class cloudkitty::orchestrator (
 
   cloudkitty_config {
     'orchestrator/coordination_url': value => $coordination_url, secret => true;
-    'orchestrator/max_workers':      value => $max_workers_real;
+    'orchestrator/max_workers':      value => $max_workers;
     'orchestrator/max_threads':      value => $max_threads;
   }
 }
