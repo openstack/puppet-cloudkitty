@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    The ``cloudkitty::processor::max_workers`` parameter has been removed.

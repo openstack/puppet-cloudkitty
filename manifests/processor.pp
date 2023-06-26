@@ -52,12 +52,6 @@
 #   (optional) Endpoint URL type
 #   Default to $facts['os_service_default']
 #
-# DEPRECATED PARAMETERS
-#
-# [*max_workers*]
-#   (optional) Number of max workers for processor
-#   Default to $facts['os_service_default']
-#
 class cloudkitty::processor (
   $package_ensure         = 'present',
   Boolean $manage_service = true,
@@ -71,17 +65,10 @@ class cloudkitty::processor (
   $auth_section           = 'keystone_authtoken',
   $region_name            = $facts['os_service_default'],
   $interface              = $facts['os_service_default'],
-  # DEPRECATED PARAMETERS
-  $max_workers            = undef,
 ) {
 
   include cloudkitty::deps
   include cloudkitty::params
-
-  if $max_workers != undef {
-    warning('The max_workers parameter is deprecated. Use the cloudkitty::orchestrator class.')
-  }
-  include cloudkitty::orchestrator
 
   package { 'cloudkitty-processor':
     ensure => $package_ensure,
