@@ -4,12 +4,12 @@
 #
 # === Parameters
 #
+# [*password*]
+#   (Required) Password to create for the service user
+#
 # [*username*]
 #   (Optional) The name of the service user
 #   Defaults to 'cloudkitty'
-#
-# [*password*]
-#   (Required) Password to create for the service user
 #
 # [*auth_url*]
 #   (Optional) The URL to use for authentication.
@@ -191,7 +191,7 @@
 #  Defaults to $facts['os_service_default'].
 #
 class cloudkitty::keystone::authtoken(
-  $password,
+  String[1] $password,
   $username                       = 'cloudkitty',
   $auth_url                       = 'http://localhost:5000',
   $project_name                   = 'services',
