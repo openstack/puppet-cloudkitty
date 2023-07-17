@@ -270,7 +270,7 @@ class cloudkitty(
   $rpc_response_timeout               = $facts['os_service_default'],
   $control_exchange                   = $facts['os_service_default'],
   $notification_transport_url         = $facts['os_service_default'],
-  $purge_config                       = false,
+  Boolean $purge_config               = false,
   $auth_strategy                      = 'keystone',
   $api_paste_config                   = $facts['os_service_default'],
   $host                               = $facts['os_service_default'],
