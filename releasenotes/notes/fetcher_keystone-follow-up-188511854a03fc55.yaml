@@ -1,0 +1,11 @@
+---
+upgrade:
+  - |
+    Default of the ``cloudkitty::fetcher::keystone`` parameter has been
+    changed.
+
+  - |
+    The following two parameters of the ``cloudkitty`` class have been removed.
+
+    - ``auth_section``
+    - ``keystone_version``

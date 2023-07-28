@@ -100,8 +100,6 @@ describe 'cloudkitty' do
           :control_exchange                   => 'cloudkitty',
           :storage_backend                    => 'gnocchi',
           :storage_version                    => '1',
-          :auth_section                       => 'keystone_authtoken',
-          :keystone_version                   => '3',
         }
       end
 
@@ -130,8 +128,6 @@ describe 'cloudkitty' do
       it 'configures various things' do
         is_expected.to contain_cloudkitty_config('storage/backend').with_value('gnocchi')
         is_expected.to contain_cloudkitty_config('storage/version').with_value('1')
-        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_section').with_value('keystone_authtoken')
-        is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value('3')
       end
 
     end

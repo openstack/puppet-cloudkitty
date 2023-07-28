@@ -9,7 +9,7 @@ describe 'cloudkitty::fetcher::keystone' do
       end
 
       it 'configures the fetcher_keystone parameters' do
-        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_section').with_value('keystone_authtoken')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_section').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/username').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/password').with_value('<SERVICE DEFAULT>').with_secret(true)
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_name').with_value('<SERVICE DEFAULT>')
@@ -26,7 +26,7 @@ describe 'cloudkitty::fetcher::keystone' do
     context 'with parameters set' do
       let :params do
         {
-          :auth_section            => '<SERVICE DEFAULT>',
+          :auth_section            => 'keystone_authtoken',
           :username                => 'cloudkitty',
           :password                => 'cloudkitty_password',
           :project_name            => 'service',
@@ -40,7 +40,7 @@ describe 'cloudkitty::fetcher::keystone' do
       end
 
       it 'configures the fetcher_keystone parameters' do
-        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_section').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_section').with_value('keystone_authtoken')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/username').with_value('cloudkitty')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/password').with_value('cloudkitty_password').with_secret(true)
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_name').with_value('service')

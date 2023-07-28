@@ -224,16 +224,6 @@
 #   (Optional) A hash of the metrics.yaml configuration.
 #   Defaults to undef
 #
-# DEPRECATED PARAMETERS
-#
-# [*auth_section*]
-#   (Optional) Config Section from which to load plugin specific options
-#   Defaults to undef
-#
-# [*keystone_version*]
-#   (Optional) Keystone version to use.
-#   Defaults to undef
-#
 class cloudkitty(
   $package_ensure                     = 'present',
   $rabbit_use_ssl                     = $facts['os_service_default'],
@@ -283,18 +273,7 @@ class cloudkitty(
   $storage_version                    = $facts['os_service_default'],
   $fetcher_backend                    = $facts['os_service_default'],
   Optional[Hash] $metrics_config      = undef,
-  # DEPRECATED PARAMETERS
-  $auth_section                       = undef,
-  $keystone_version                   = undef,
 ) {
-
-  if $auth_section != undef {
-    warning('The cloudkitty::auth_section parameter is deprecated. Use the cloudkitty::fetcher_keystone class')
-  }
-  if $keystone_version != undef {
-    warning('The cloudkitty::keystone_version parameter is deprecated. Use the cloudkitty::fetcher_keystone class')
-  }
-  include cloudkitty::fetcher::keystone
 
   include cloudkitty::params
   include cloudkitty::db
