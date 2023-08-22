@@ -12,6 +12,7 @@ describe 'basic cloudkitty' do
       include openstack_integration::rabbitmq
       include openstack_integration::memcached
       include openstack_integration::mysql
+      include openstack_integration::redis
       include openstack_integration::keystone
 
       if $::openstack_integration::config::ssl {
@@ -92,6 +93,11 @@ describe 'basic cloudkitty' do
         workers   => 2,
       }
       class { 'cloudkitty::processor': }
+      class { 'cloudkitty::orchestrator':
+        coordination_url => $::openstack_integration::config::tooz_url,
+        max_workers      => 2,
+        max_threads      => 4,
+      }
       class { 'cloudkitty::client': }
       EOS
 
