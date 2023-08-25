@@ -87,6 +87,7 @@ class cloudkitty::fetcher::keystone (
     'fetcher_keystone/project_domain_name':     value => $project_domain_name_real;
     'fetcher_keystone/system_scope':            value => $system_scope;
     'fetcher_keystone/auth_url':                value => $auth_url;
+    'fetcher_keystone/auth_type':               value => $auth_type;
     'fetcher_keystone/keystone_version':        value => $keystone_version;
     'fetcher_keystone/ignore_rating_role':      value => $ignore_rating_role;
     'fetcher_keystone/ignore_disabled_tenants': value => $ignore_disabled_tenants;

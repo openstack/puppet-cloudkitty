@@ -17,6 +17,7 @@ describe 'cloudkitty::fetcher::keystone' do
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/system_scope').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_url').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_type').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_rating_role').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_disabled_tenants').with_value('<SERVICE DEFAULT>')
@@ -33,6 +34,7 @@ describe 'cloudkitty::fetcher::keystone' do
           :user_domain_name        => 'Default',
           :project_domain_name     => 'Default',
           :auth_url                => 'http://127.0.0.1:5000',
+          :auth_type               => 'password',
           :keystone_version        => 3,
           :ignore_rating_role      => false,
           :ignore_disabled_tenants => true,
@@ -48,6 +50,7 @@ describe 'cloudkitty::fetcher::keystone' do
         is_expected.to contain_cloudkitty_config('fetcher_keystone/project_domain_name').with_value('Default')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/system_scope').with_value('<SERVICE DEFAULT>')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_url').with_value('http://127.0.0.1:5000')
+        is_expected.to contain_cloudkitty_config('fetcher_keystone/auth_type').with_value('password')
         is_expected.to contain_cloudkitty_config('fetcher_keystone/keystone_version').with_value(3)
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_rating_role').with_value(false)
         is_expected.to contain_cloudkitty_config('fetcher_keystone/ignore_disabled_tenants').with_value(true)
