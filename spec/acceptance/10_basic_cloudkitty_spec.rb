@@ -98,6 +98,15 @@ describe 'basic cloudkitty' do
         max_workers      => 2,
         max_threads      => 4,
       }
+      class { 'cloudkitty::fetcher::keystone':
+        auth_type           => 'password',
+        username            => 'cloudkitty',
+        password            => 'a_big_secret',
+        project_name        => 'services',
+        user_domain_name    => 'Default',
+        project_domain_name => 'Default',
+        auth_url            => $::openstack_integration::config::keystone_admin_uri,
+      }
       class { 'cloudkitty::client': }
       EOS
 
