@@ -42,7 +42,7 @@ class cloudkitty::deps {
   # policy config should occur in the config block also.
   Anchor['cloudkitty::config::begin']
   -> Openstacklib::Policy<| tag == 'cloudkitty' |>
-  ~> Anchor['cloudkitty::config::end']
+  -> Anchor['cloudkitty::config::end']
 
   # On any uwsgi config change, we must restart Cloudkitty API.
   Anchor['cloudkitty::config::begin']
