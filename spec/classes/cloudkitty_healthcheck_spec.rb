@@ -13,6 +13,7 @@ describe 'cloudkitty::healthcheck' do
         is_expected.to contain_oslo__healthcheck('cloudkitty_config').with(
           :detailed              => '<SERVICE DEFAULT>',
           :backends              => '<SERVICE DEFAULT>',
+          :allowed_source_ranges => '<SERVICE DEFAULT>',
           :disable_by_file_path  => '<SERVICE DEFAULT>',
           :disable_by_file_paths => '<SERVICE DEFAULT>',
         )
@@ -24,6 +25,7 @@ describe 'cloudkitty::healthcheck' do
         {
           :detailed              => true,
           :backends              => ['disable_by_file'],
+          :allowed_source_ranges => ['10.0.0.0/24', '10.0.1.0/24'],
           :disable_by_file_path  => '/etc/cloudkitty/healthcheck/disabled',
           :disable_by_file_paths => ['8889:/etc/cloudkitty/healthcheck/disabled'],
         }
@@ -33,6 +35,7 @@ describe 'cloudkitty::healthcheck' do
         is_expected.to contain_oslo__healthcheck('cloudkitty_config').with(
           :detailed              => true,
           :backends              => ['disable_by_file'],
+          :allowed_source_ranges => ['10.0.0.0/24', '10.0.1.0/24'],
           :disable_by_file_path  => '/etc/cloudkitty/healthcheck/disabled',
           :disable_by_file_paths => ['8889:/etc/cloudkitty/healthcheck/disabled'],
         )
