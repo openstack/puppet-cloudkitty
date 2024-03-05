@@ -6,7 +6,7 @@ describe 'cloudkitty::storage' do
 
     it 'runs cloudkitty-storage-init' do
       is_expected.to contain_exec('cloudkitty-storage-init').with(
-        :command     => 'cloudkitty-storage-init --config-file /etc/cloudkitty/cloudkitty.conf',
+        :command     => 'cloudkitty-storage-init ',
         :path        => '/usr/bin',
         :refreshonly => 'true',
         :user        => 'cloudkitty',
