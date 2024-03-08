@@ -6,10 +6,10 @@
 # [*extra_params*]
 #   (optional) String of extra command line parameters to append
 #   to the cloudkitty-storage-init command.
-#   Defaults to '--config-file /etc/cloudkitty/cloudkitty.conf'
+#   Defaults to ''
 #
 class cloudkitty::storage(
-  $extra_params = '--config-file /etc/cloudkitty/cloudkitty.conf',
+  $extra_params = ''
 ){
 
   include cloudkitty::deps
