@@ -1,0 +1,4 @@
+---
+features:
+  - |
+    The new ``cloudkitty::notification_retry`` parameter has been added.

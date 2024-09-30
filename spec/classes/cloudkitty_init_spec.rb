@@ -51,7 +51,8 @@ describe 'cloudkitty' do
         is_expected.to contain_oslo__messaging__notifications('cloudkitty_config').with(
           :transport_url => '<SERVICE DEFAULT>',
           :driver        => '<SERVICE DEFAULT>',
-          :topics        => '<SERVICE DEFAULT>'
+          :topics        => '<SERVICE DEFAULT>',
+          :retry         => '<SERVICE DEFAULT>',
         )
       end
 
@@ -84,11 +85,13 @@ describe 'cloudkitty' do
           :amqp_durable_queues                => true,
           :kombu_compression                  => 'gzip',
           :package_ensure                     => '2012.1.1-15.el6',
-          :notification_driver                => 'messagingv1',
-          :notification_topics                => 'openstack',
           :default_transport_url              => 'rabbit://rabbit_user:password@localhost:5673',
           :rpc_response_timeout               => '120',
           :control_exchange                   => 'cloudkitty',
+          :notification_transport_url         => 'rabbit://rabbit_user:password@localhost:5673',
+          :notification_driver                => 'messagingv1',
+          :notification_topics                => 'openstack',
+          :notification_retry                 => 10,
           :storage_backend                    => 'gnocchi',
           :storage_version                    => '1',
         }
@@ -115,9 +118,10 @@ describe 'cloudkitty' do
           :enable_cancel_on_failover       => false,
         )
         is_expected.to contain_oslo__messaging__notifications('cloudkitty_config').with(
-          :transport_url => '<SERVICE DEFAULT>',
+          :transport_url => 'rabbit://rabbit_user:password@localhost:5673',
           :driver        => 'messagingv1',
-          :topics        => 'openstack'
+          :topics        => 'openstack',
+          :retry         => 10,
         )
       end
 
