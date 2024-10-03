@@ -61,5 +61,5 @@
     ],
     "source": "https://opendev.org/openstack/puppet-cloudkitty.git",
     "summary": "Puppet module for OpenStack cloudkitty",
-    "version": "15.0.0"
+    "version": "14.0.0"
 }
