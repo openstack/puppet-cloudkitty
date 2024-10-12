@@ -43,6 +43,10 @@
 #   (Optional) Should the admin role be configured for the service user?
 #   Defaults to true
 #
+# [*configure_service*]
+#   (Optional) Should the service be configurd?
+#   Defaults to True
+#
 # [*service_type*]
 #   (Optional) Type of service.
 #   Defaults to 'rating'.
@@ -92,6 +96,7 @@ class cloudkitty::keystone::auth (
   Boolean $configure_endpoint             = true,
   Boolean $configure_user                 = true,
   Boolean $configure_user_role            = true,
+  Boolean $configure_service              = true,
   String[1] $service_name                 = 'cloudkitty',
   String[1] $service_description          = 'OpenStack Rating Service',
   String[1] $service_type                 = 'rating',
@@ -111,6 +116,7 @@ class cloudkitty::keystone::auth (
     configure_user      => $configure_user,
     configure_user_role => $configure_user_role,
     configure_endpoint  => $configure_endpoint,
+    configure_service   => $configure_service,
     service_name        => $service_name,
     service_type        => $service_type,
     service_description => $service_description,
