@@ -45,7 +45,7 @@ class cloudkitty::db::mysql(
 
   include cloudkitty::deps
 
-  ::openstacklib::db::mysql { 'cloudkitty':
+  openstacklib::db::mysql { 'cloudkitty':
     user          => $user,
     password      => $password,
     dbname        => $dbname,

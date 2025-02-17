@@ -34,7 +34,7 @@ class cloudkitty::db::postgresql(
 
   include cloudkitty::deps
 
-  ::openstacklib::db::postgresql { 'cloudkitty':
+  openstacklib::db::postgresql { 'cloudkitty':
     password   => $password,
     dbname     => $dbname,
     user       => $user,

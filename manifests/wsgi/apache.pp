@@ -154,7 +154,7 @@ class cloudkitty::wsgi::apache (
 
   Anchor['cloudkitty::install::end'] -> Class['apache']
 
-  ::openstacklib::wsgi::apache { 'cloudkitty_wsgi':
+  openstacklib::wsgi::apache { 'cloudkitty_wsgi':
     bind_host                   => $bind_host,
     bind_port                   => $port,
     group                       => $::cloudkitty::params::group,
