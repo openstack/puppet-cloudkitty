@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    The ``cloudkitty::logging::watch_log_file`` parameter has been removed.
