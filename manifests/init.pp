@@ -333,14 +333,13 @@ class cloudkitty(
 
   if $metrics_config {
     file {'metrics.yml':
-      ensure                  => present,
-      path                    => $::cloudkitty::params::metrics_yaml,
-      content                 => to_yaml($metrics_config),
-      selinux_ignore_defaults => true,
-      mode                    => '0640',
-      owner                   => 'root',
-      group                   => $::cloudkitty::params::group,
-      tag                     => 'cloudkitty-yamls',
+      ensure  => present,
+      path    => $::cloudkitty::params::metrics_yaml,
+      content => to_yaml($metrics_config),
+      mode    => '0640',
+      owner   => 'root',
+      group   => $::cloudkitty::params::group,
+      tag     => 'cloudkitty-yamls',
     }
   }
 }

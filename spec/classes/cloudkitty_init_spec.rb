@@ -184,14 +184,14 @@ describe 'cloudkitty' do
       end
 
       it 'configures metrics.yml' do
-        is_expected.to contain_file('metrics.yml')
-          .with_ensure('present')
-          .with_path('/etc/cloudkitty/metrics.yml')
-          .with_selinux_ignore_defaults(true)
-          .with_mode('0640')
-          .with_owner('root')
-          .with_group('cloudkitty')
-          .with_tag('cloudkitty-yamls')
+        is_expected.to contain_file('metrics.yml').with(
+          :ensure => 'present',
+          :path   => '/etc/cloudkitty/metrics.yml',
+          :mode   => '0640',
+          :owner  => 'root',
+          :group  => 'cloudkitty',
+          :tag    => 'cloudkitty-yamls'
+        )
       end
     end
   end
