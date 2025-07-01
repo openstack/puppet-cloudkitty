@@ -27,6 +27,10 @@
 #   every 30 seconds.
 #   Defaults to $facts['os_service_default'].
 #
+# [*rabbit_qos_prefetch_count*]
+#   (Optional) Specifies the number of messages to prefetch.
+#   Defaults to $facts['os_service_default']
+#
 # [*rabbit_quorum_queue*]
 #   (Optional) Use quorum queues in RabbitMQ.
 #   Defaults to $facts['os_service_default']
@@ -224,6 +228,7 @@ class cloudkitty(
   $rabbit_heartbeat_timeout_threshold = $facts['os_service_default'],
   $rabbit_heartbeat_rate              = $facts['os_service_default'],
   $rabbit_ha_queues                   = $facts['os_service_default'],
+  $rabbit_qos_prefetch_count          = $facts['os_service_default'],
   $rabbit_quorum_queue                = $facts['os_service_default'],
   $rabbit_transient_queues_ttl        = $facts['os_service_default'],
   $rabbit_transient_quorum_queue      = $facts['os_service_default'],
@@ -289,6 +294,7 @@ class cloudkitty(
     heartbeat_timeout_threshold     => $rabbit_heartbeat_timeout_threshold,
     heartbeat_rate                  => $rabbit_heartbeat_rate,
     heartbeat_in_pthread            => $rabbit_heartbeat_in_pthread,
+    rabbit_qos_prefetch_count       => $rabbit_qos_prefetch_count,
     kombu_ssl_version               => $kombu_ssl_version,
     kombu_ssl_keyfile               => $kombu_ssl_keyfile,
     kombu_ssl_certfile              => $kombu_ssl_certfile,
