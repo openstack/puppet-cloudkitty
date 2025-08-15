@@ -278,7 +278,7 @@ class cloudkitty(
 
   package { 'cloudkitty-common':
     ensure => $package_ensure,
-    name   => $::cloudkitty::params::common_package_name,
+    name   => $cloudkitty::params::common_package_name,
     tag    => ['openstack','cloudkitty-package'],
   }
 
@@ -350,13 +350,13 @@ class cloudkitty(
   }
 
   if $metrics_config {
-    file {'metrics.yml':
-      ensure  => present,
-      path    => $::cloudkitty::params::metrics_yaml,
+    file { 'metrics.yml':
+      ensure  => file,
+      path    => $cloudkitty::params::metrics_yaml,
       content => stdlib::to_yaml($metrics_config),
       mode    => '0640',
       owner   => 'root',
-      group   => $::cloudkitty::params::group,
+      group   => $cloudkitty::params::group,
       tag     => 'cloudkitty-yamls',
     }
   }

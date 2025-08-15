@@ -194,7 +194,7 @@ describe 'cloudkitty' do
 
       it 'configures metrics.yml' do
         is_expected.to contain_file('metrics.yml').with(
-          :ensure => 'present',
+          :ensure => 'file',
           :path   => '/etc/cloudkitty/metrics.yml',
           :mode   => '0640',
           :owner  => 'root',

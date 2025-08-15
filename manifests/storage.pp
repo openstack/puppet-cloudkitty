@@ -18,7 +18,7 @@ class cloudkitty::storage(
   exec { 'cloudkitty-storage-init':
     command     => "cloudkitty-storage-init ${extra_params}",
     path        => '/usr/bin',
-    user        => $::cloudkitty::params::user,
+    user        => $cloudkitty::params::user,
     refreshonly => true,
     try_sleep   => 5,
     tries       => 10,

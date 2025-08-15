@@ -69,7 +69,7 @@ class cloudkitty::api (
 
   package { 'cloudkitty-api':
     ensure => $package_ensure,
-    name   => $::cloudkitty::params::api_package_name,
+    name   => $cloudkitty::params::api_package_name,
     tag    => ['openstack', 'cloudkitty-package'],
   }
 
@@ -84,7 +84,7 @@ class cloudkitty::api (
       $service_ensure = 'stopped'
     }
 
-    if $service_name == $::cloudkitty::params::api_service_name {
+    if $service_name == $cloudkitty::params::api_service_name {
       service { 'cloudkitty-api':
         enable     => $enabled,
         name       => 'cloudkitty-api',
@@ -95,7 +95,7 @@ class cloudkitty::api (
     } elsif $service_name == 'httpd' {
       service { 'cloudkitty-api':
         ensure => 'stopped',
-        name   => $::cloudkitty::params::api_service_name,
+        name   => $cloudkitty::params::api_service_name,
         enable => false,
         tag    => 'cloudkitty-service',
       }

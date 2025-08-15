@@ -23,7 +23,7 @@ class cloudkitty::db::sync(
   exec { 'cloudkitty-db-sync':
     command     => "cloudkitty-dbsync upgrade ${extra_params}",
     path        => [ '/bin', '/usr/bin', ],
-    user        => $::cloudkitty::params::user,
+    user        => $cloudkitty::params::user,
     refreshonly => true,
     try_sleep   => 5,
     tries       => 10,

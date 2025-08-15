@@ -17,7 +17,7 @@ class cloudkitty::client (
 
   package { 'python-cloudkittyclient':
     ensure => $ensure,
-    name   => $::cloudkitty::params::client_package_name,
+    name   => $cloudkitty::params::client_package_name,
     tag    => 'openstack',
   }
 

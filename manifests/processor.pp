@@ -72,7 +72,7 @@ class cloudkitty::processor (
 
   package { 'cloudkitty-processor':
     ensure => $package_ensure,
-    name   => $::cloudkitty::params::processor_package_name,
+    name   => $cloudkitty::params::processor_package_name,
     tag    => ['openstack', 'cloudkitty-package'],
   }
 
@@ -85,7 +85,7 @@ class cloudkitty::processor (
 
     service { 'cloudkitty-processor':
       ensure     => $service_ensure,
-      name       => $::cloudkitty::params::processor_service_name,
+      name       => $cloudkitty::params::processor_service_name,
       enable     => $enabled,
       hasstatus  => true,
       hasrestart => true,
