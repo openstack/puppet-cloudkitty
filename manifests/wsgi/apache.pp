@@ -148,7 +148,6 @@ class cloudkitty::wsgi::apache (
   $headers                     = undef,
   $request_headers             = undef,
 ) {
-
   include cloudkitty::deps
   include cloudkitty::params
 

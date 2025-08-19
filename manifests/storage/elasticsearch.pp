@@ -15,14 +15,13 @@
 #   Duration (in seconds) for which the ES scroll contexts should be kept
 #   alive. (interer value)
 #
-class cloudkitty::storage::elasticsearch(
+class cloudkitty::storage::elasticsearch (
   String                     $host            = $facts['os_service_default'],
   String                     $index_name      = $facts['os_service_default'],
   Variant[String[0],Boolean] $insecure        = $facts['os_service_default'],
   String                     $cafile          = $facts['os_service_default'],
   Variant[String[0],Integer] $scroll_duration = $facts['os_service_default'],
-){
-
+) {
   include cloudkitty::deps
 
   cloudkitty_config {

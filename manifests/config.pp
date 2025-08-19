@@ -27,7 +27,6 @@ class cloudkitty::config (
   Hash $cloudkitty_config        = {},
   Hash $cloudkitty_api_paste_ini = {},
 ) {
-
   include cloudkitty::deps
 
   create_resources('cloudkitty_config', $cloudkitty_config)

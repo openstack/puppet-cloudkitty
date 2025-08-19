@@ -21,10 +21,9 @@ class cloudkitty::orchestrator (
   $max_workers      = $facts['os_service_default'],
   $max_threads      = $facts['os_service_default']
 ) {
-
   include cloudkitty::deps
 
-  oslo::coordination{ 'cloudkitty_config':
+  oslo::coordination { 'cloudkitty_config':
     backend_url   => $coordination_url,
     manage_config => false,
   }

@@ -67,7 +67,6 @@ class cloudkitty::fetcher::keystone (
   $ignore_rating_role      = $facts['os_service_default'],
   $ignore_disabled_tenants = $facts['os_service_default'],
 ) {
-
   include cloudkitty::deps
 
   if is_service_default($system_scope) {

@@ -57,5 +57,4 @@ class cloudkitty::deps {
   # Installation or config changes will always restart services.
   Anchor['cloudkitty::install::end'] ~> Anchor['cloudkitty::service::begin']
   Anchor['cloudkitty::config::end']  ~> Anchor['cloudkitty::service::begin']
-
 }

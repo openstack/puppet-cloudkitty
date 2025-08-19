@@ -66,7 +66,6 @@ class cloudkitty::processor (
   $region_name            = $facts['os_service_default'],
   $interface              = $facts['os_service_default'],
 ) {
-
   include cloudkitty::deps
   include cloudkitty::params
 
@@ -112,5 +111,4 @@ class cloudkitty::processor (
     'collector_gnocchi/region_name':  value => $region_name;
     'collector_gnocchi/interface':    value => $interface;
   }
-
 }

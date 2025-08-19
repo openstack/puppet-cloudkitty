@@ -33,7 +33,7 @@
 #   Only used with mysql modules >= 2.2.
 #   Defaults to 'utf8_general_ci'
 #
-class cloudkitty::db::mysql(
+class cloudkitty::db::mysql (
   String[1] $password,
   $dbname        = 'cloudkitty',
   $user          = 'cloudkitty',
@@ -42,7 +42,6 @@ class cloudkitty::db::mysql(
   $collate       = 'utf8_general_ci',
   $allowed_hosts = undef
 ) {
-
   include cloudkitty::deps
 
   openstacklib::db::mysql { 'cloudkitty':
@@ -58,5 +57,4 @@ class cloudkitty::db::mysql(
   Anchor['cloudkitty::db::begin']
   ~> Class['cloudkitty::db::mysql']
   ~> Anchor['cloudkitty::db::end']
-
 }

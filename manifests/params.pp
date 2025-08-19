@@ -32,6 +32,5 @@ class cloudkitty::params {
     default: {
       fail("Unsupported osfamily: ${facts['os']['family']}")
     }
-
   }
 }
