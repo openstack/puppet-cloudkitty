@@ -19,7 +19,7 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_process_group          => 'cloudkitty',
         :wsgi_script_dir             => platform_params[:wsgi_script_path],
         :wsgi_script_file            => 'app',
-        :wsgi_script_source          => '/usr/bin/cloudkitty-api',
+        :wsgi_script_source          => platform_params[:wsgi_script_source],
         :headers                     => nil,
         :request_headers             => nil,
         :custom_wsgi_process_options => {},
@@ -65,7 +65,7 @@ describe 'cloudkitty::wsgi::apache' do
         :wsgi_process_group          => 'cloudkitty',
         :wsgi_script_dir             => platform_params[:wsgi_script_path],
         :wsgi_script_file            => 'app',
-        :wsgi_script_source          => '/usr/bin/cloudkitty-api',
+        :wsgi_script_source          => platform_params[:wsgi_script_source],
         :headers                     => ['set X-XSS-Protection "1; mode=block"'],
         :request_headers             => ['set Content-Type "application/json"'],
         :custom_wsgi_process_options => {
@@ -154,10 +154,12 @@ describe 'cloudkitty::wsgi::apache' do
         when 'Debian'
           {
             :wsgi_script_path   => '/usr/lib/cgi-bin/cloudkitty',
+            :wsgi_script_source => '/usr/bin/cloudkitty-api',
           }
         when 'RedHat'
           {
             :wsgi_script_path   => '/var/www/cgi-bin/cloudkitty',
+            :wsgi_script_source => '/usr/lib/python3.9/site-packages/cloudkitty/wsgi/api.py',
           }
         end
       end
