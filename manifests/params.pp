@@ -5,6 +5,8 @@
 class cloudkitty::params {
   include openstacklib::defaults
 
+  $pyver3 = $openstacklib::defaults::pyver3
+
   $client_package_name    = 'python3-cloudkittyclient'
   $api_service_name       = 'cloudkitty-api'
   $processor_service_name = 'cloudkitty-processor'
@@ -18,7 +20,7 @@ class cloudkitty::params {
     $api_package_name              = 'openstack-cloudkitty-api'
     $processor_package_name        = 'openstack-cloudkitty-processor'
     $common_package_name           = 'openstack-cloudkitty-common'
-    $cloudkitty_wsgi_script_source = '/usr/bin/cloudkitty-api'
+    $cloudkitty_wsgi_script_source = "/usr/lib/python${pyver3}/site-packages/cloudkitty/wsgi/api.py"
     $cloudkitty_wsgi_script_path   = '/var/www/cgi-bin/cloudkitty'
     }
     'Debian': {
