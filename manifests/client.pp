@@ -11,7 +11,6 @@
 class cloudkitty::client (
   $ensure = 'present'
 ) {
-
   include cloudkitty::deps
   include cloudkitty::params
 
@@ -20,5 +19,4 @@ class cloudkitty::client (
     name   => $cloudkitty::params::client_package_name,
     tag    => 'openstack',
   }
-
 }

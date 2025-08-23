@@ -24,14 +24,13 @@
 #    (Optional) Privileges given to the database user.
 #    Default to 'ALL'
 #
-class cloudkitty::db::postgresql(
+class cloudkitty::db::postgresql (
   $password,
   $dbname     = 'cloudkitty',
   $user       = 'cloudkitty',
   $encoding   = undef,
   $privileges = 'ALL',
 ) {
-
   include cloudkitty::deps
 
   openstacklib::db::postgresql { 'cloudkitty':
@@ -45,5 +44,4 @@ class cloudkitty::db::postgresql(
   Anchor['cloudkitty::db::begin']
   ~> Class['cloudkitty::db::postgresql']
   ~> Anchor['cloudkitty::db::end']
-
 }

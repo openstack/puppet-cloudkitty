@@ -107,7 +107,6 @@ class cloudkitty::keystone::auth (
   Boolean $manage_rating_role             = true,
   String[1] $rating_role                  = 'rating',
 ) {
-
   include cloudkitty::deps
 
   Keystone::Resource::Service_identity['cloudkitty'] -> Anchor['cloudkitty::service::end']
@@ -138,5 +137,4 @@ class cloudkitty::keystone::auth (
       ensure => present,
     }
   }
-
 }

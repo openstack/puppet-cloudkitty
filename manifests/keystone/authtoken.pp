@@ -190,7 +190,7 @@
 #  "public", "internal" or "admin".
 #  Defaults to $facts['os_service_default'].
 #
-class cloudkitty::keystone::authtoken(
+class cloudkitty::keystone::authtoken (
   String[1] $password,
   $username                       = 'cloudkitty',
   $auth_url                       = 'http://localhost:5000',
@@ -229,7 +229,6 @@ class cloudkitty::keystone::authtoken(
   $service_type                   = $facts['os_service_default'],
   $interface                      = $facts['os_service_default'],
 ) {
-
   include cloudkitty::deps
 
   keystone::resource::authtoken { 'cloudkitty_config':
@@ -272,4 +271,3 @@ class cloudkitty::keystone::authtoken(
     interface                      => $interface,
   }
 }
-

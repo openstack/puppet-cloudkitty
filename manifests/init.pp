@@ -222,7 +222,7 @@
 #   will be run through a green thread.
 #   Defaults to undef
 #
-class cloudkitty(
+class cloudkitty (
   $package_ensure                     = 'present',
   $rabbit_use_ssl                     = $facts['os_service_default'],
   $rabbit_heartbeat_timeout_threshold = $facts['os_service_default'],
@@ -270,7 +270,6 @@ class cloudkitty(
   # DEPRECATED PARAMETERS
   $rabbit_heartbeat_in_pthread        = undef,
 ) {
-
   include cloudkitty::params
   include cloudkitty::db
   include cloudkitty::deps

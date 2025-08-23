@@ -40,7 +40,7 @@
 #   value)
 #   Defaults to $facts['os_service_default'].
 #
-class cloudkitty::fetcher::gnocchi(
+class cloudkitty::fetcher::gnocchi (
   String $scope_attribute   = $facts['os_service_default'],
   String $resource_types    = $facts['os_service_default'],
   String $gnocchi_auth_type = $facts['os_service_default'],
@@ -50,7 +50,7 @@ class cloudkitty::fetcher::gnocchi(
   String $region_name       = $facts['os_service_default'],
   String $auth_type         = $facts['os_service_default'],
   String $auth_section      = $facts['os_service_default'],
-){
+) {
   include cloudkitty::deps
 
   cloudkitty_config {

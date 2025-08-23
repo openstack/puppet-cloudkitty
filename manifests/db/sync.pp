@@ -12,17 +12,16 @@
 #   (Optional) Timeout for the execution of the db_sync
 #   Defaults to 300
 #
-class cloudkitty::db::sync(
+class cloudkitty::db::sync (
   $extra_params    = undef,
   $db_sync_timeout = 300,
 ) {
-
   include cloudkitty::deps
   include cloudkitty::params
 
   exec { 'cloudkitty-db-sync':
     command     => "cloudkitty-dbsync upgrade ${extra_params}",
-    path        => [ '/bin', '/usr/bin', ],
+    path        => ['/bin', '/usr/bin'],
     user        => $cloudkitty::params::user,
     refreshonly => true,
     try_sleep   => 5,

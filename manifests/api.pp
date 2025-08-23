@@ -61,7 +61,6 @@ class cloudkitty::api (
   $enable_proxy_headers_parsing = $facts['os_service_default'],
   $max_request_body_size        = $facts['os_service_default'],
 ) {
-
   include cloudkitty
   include cloudkitty::deps
   include cloudkitty::params
@@ -118,5 +117,4 @@ class cloudkitty::api (
     enable_proxy_headers_parsing => $enable_proxy_headers_parsing,
     max_request_body_size        => $max_request_body_size,
   }
-
 }

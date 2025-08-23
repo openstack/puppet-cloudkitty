@@ -8,10 +8,9 @@
 #   to the cloudkitty-storage-init command.
 #   Defaults to ''
 #
-class cloudkitty::storage(
+class cloudkitty::storage (
   $extra_params = ''
-){
-
+) {
   include cloudkitty::deps
   include cloudkitty::params
 

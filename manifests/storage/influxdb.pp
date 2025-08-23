@@ -24,7 +24,7 @@
 #   Path of the CA certificate to trust for HTTPS
 #   connections (string value)
 #
-class cloudkitty::storage::influxdb(
+class cloudkitty::storage::influxdb (
   String                     $username         = $facts['os_service_default'],
   String                     $password         = $facts['os_service_default'],
   String                     $database         = $facts['os_service_default'],
@@ -34,8 +34,7 @@ class cloudkitty::storage::influxdb(
   Variant[String[0],Boolean] $use_ssl          = $facts['os_service_default'],
   Variant[String[0],Boolean] $insecure         = $facts['os_service_default'],
   String                     $cafile           = $facts['os_service_default'],
-){
-
+) {
   include cloudkitty::deps
 
   cloudkitty_config {
