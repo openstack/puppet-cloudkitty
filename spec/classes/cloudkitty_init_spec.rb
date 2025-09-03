@@ -31,7 +31,6 @@ describe 'cloudkitty' do
           :rabbit_use_ssl                  => '<SERVICE DEFAULT>',
           :heartbeat_timeout_threshold     => '<SERVICE DEFAULT>',
           :heartbeat_rate                  => '<SERVICE DEFAULT>',
-          :heartbeat_in_pthread            => nil,
           :kombu_reconnect_delay           => '<SERVICE DEFAULT>',
           :kombu_failover_strategy         => '<SERVICE DEFAULT>',
           :amqp_durable_queues             => '<SERVICE DEFAULT>',
@@ -81,7 +80,6 @@ describe 'cloudkitty' do
           :rabbit_ha_queues                   => true,
           :rabbit_heartbeat_timeout_threshold => 60,
           :rabbit_heartbeat_rate              => 10,
-          :rabbit_heartbeat_in_pthread        => true,
           :rabbit_quorum_queue                => true,
           :rabbit_qos_prefetch_count          => 10,
           :rabbit_transient_quorum_queue      => false,
@@ -118,7 +116,6 @@ describe 'cloudkitty' do
         is_expected.to contain_oslo__messaging__rabbit('cloudkitty_config').with(
           :heartbeat_timeout_threshold     => 60,
           :heartbeat_rate                  => 10,
-          :heartbeat_in_pthread            => true,
           :kombu_reconnect_delay           => 5.0,
           :amqp_durable_queues             => true,
           :amqp_auto_delete                => true,

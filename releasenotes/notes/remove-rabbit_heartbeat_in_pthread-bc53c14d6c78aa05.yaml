@@ -1,0 +1,4 @@
+---
+upgrade:
+  - |
+    The ``cloudkitty::heartbeat_in_pthread`` parameter has been removed.
