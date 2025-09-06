@@ -28,6 +28,10 @@ class cloudkitty::orchestrator (
     manage_config => false,
   }
 
+  # all coordination settings should be applied and all packages should be
+  # installed before service startup
+  Oslo::Coordination['cloudkitty_config'] -> Anchor['cloudkitty::service::begin']
+
   cloudkitty_config {
     'orchestrator/coordination_url': value => $coordination_url, secret => true;
     'orchestrator/max_workers':      value => $max_workers;

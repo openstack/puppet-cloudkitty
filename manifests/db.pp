@@ -67,4 +67,8 @@ class cloudkitty::db (
     pool_timeout            => $database_pool_timeout,
     mysql_enable_ndb        => $mysql_enable_ndb,
   }
+
+  # all db settings should be applied and all packages should be installed
+  # before dbsync starts
+  Oslo::Db['cloudkitty_config'] -> Anchor['cloudkitty::dbsync::begin']
 }

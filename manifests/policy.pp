@@ -69,6 +69,11 @@ class cloudkitty::policy (
 
   create_resources('openstacklib::policy', { $policy_path => $policy_parameters })
 
+  # policy config should occur in the config block also.
+  Anchor['cloudkitty::config::begin']
+  -> Openstacklib::Policy[$policy_path]
+  -> Anchor['cloudkitty::config::end']
+
   oslo::policy { 'cloudkitty_config':
     enforce_scope        => $enforce_scope,
     enforce_new_defaults => $enforce_new_defaults,
