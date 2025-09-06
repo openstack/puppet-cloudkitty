@@ -91,6 +91,8 @@ class cloudkitty::api (
         hasrestart => true,
         tag        => 'cloudkitty-service',
       }
+
+      Cloudkitty_api_paste_ini<||> ~> Service['cloudkitty-api']
     } elsif $service_name == 'httpd' {
       service { 'cloudkitty-api':
         ensure => 'stopped',
@@ -102,6 +104,8 @@ class cloudkitty::api (
 
       # we need to make sure cloudkitty-api/eventlet is stopped before trying to start apache
       Service['cloudkitty-api'] -> Service[$service_name]
+
+      Cloudkitty_api_paste_ini<||> ~> Service[$service_name]
     } else {
       fail('Invalid service_name. Only httpd for being run by a httpd server')
     }
