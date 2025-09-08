@@ -14,9 +14,9 @@ describe 'cloudkitty::orchestrator' do
           :backend_url   => '<SERVICE DEFAULT>',
           :manage_config => false,
         )
-        is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value('<SERVICE DEFAULT>')
-        is_expected.to contain_cloudkitty_config('orchestrator/max_workers_reprocessing').with_value('<SERVICE DEFAULT>')
-        is_expected.to contain_cloudkitty_config('orchestrator/max_threads').with_value('<SERVICE DEFAULT>')
+        is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value(4)
+        is_expected.to contain_cloudkitty_config('orchestrator/max_workers_reprocessing').with_value(4)
+        is_expected.to contain_cloudkitty_config('orchestrator/max_threads').with_value(16)
       end
     end
 
@@ -49,7 +49,9 @@ describe 'cloudkitty::orchestrator' do
   }).each do |os,facts|
     context "on #{os}" do
       let (:facts) do
-        facts.merge!(OSDefaults.get_facts())
+        facts.merge!(OSDefaults.get_facts(
+          :os_workers => 4,
+        ))
       end
 
       it_configures 'cloudkitty::orchestrator'
