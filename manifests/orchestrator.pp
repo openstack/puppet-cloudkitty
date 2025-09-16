@@ -10,21 +10,21 @@
 #
 # [*max_workers*]
 #   (Optional) Maximum number of workers to execute the rating process.
-#   Defaults to $facts['os_service_default']
+#   Defaults to $facts['os_workers']
 #
 # [*max_workers_reprocessing*]
 #   (Optional) Maximum number of workers to execute the reprocessing.
-#   Defaults to $facts['os_service_default']
+#   Defaults to $facts['os_workers']
 #
 # [*max_threads*]
-#   (Optional) Maximal number of threads to use per worker.
-#   Defaults to $facts['os_service_default']
+#   (Optional) Maximum number of threads to use per worker.
+#   Defaults to 16,
 #
 class cloudkitty::orchestrator (
   $coordination_url         = $facts['os_service_default'],
-  $max_workers              = $facts['os_service_default'],
-  $max_workers_reprocessing = $facts['os_service_default'],
-  $max_threads              = $facts['os_service_default']
+  $max_workers              = $facts['os_workers'],
+  $max_workers_reprocessing = $facts['os_workers'],
+  $max_threads              = 16,
 ) {
   include cloudkitty::deps
 

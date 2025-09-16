@@ -1,0 +1,11 @@
+---
+upgrade:
+  - |
+    Default values of the following parameters have been changed to avoid
+    using too many processes or threads in node with many cores.
+
+    - ``cloudkitty::orchestrator::max_workers`` now defaults to
+      the ``os_workers`` fact.
+    - ``cloudkitty::orchestrator::max_workers_reprocessing`` now defaults to
+      the ``os_workers`` fact.
+    - ``cloudkitty::orchestrator::max_threads`` now defaults to `16`.
