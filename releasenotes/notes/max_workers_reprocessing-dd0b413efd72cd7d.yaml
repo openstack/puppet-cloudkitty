@@ -1,0 +1,5 @@
+---
+features:
+  - |
+    The new ``cloudkitty::orchestrator::max_workers_reprocessing`` parmaeter
+    has been added.
