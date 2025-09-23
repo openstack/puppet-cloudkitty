@@ -50,16 +50,16 @@
 #   Defaults to $facts['os_service_default'].
 #
 class cloudkitty::api (
-  $package_ensure               = 'present',
-  Boolean $manage_service       = true,
-  Boolean $enabled              = true,
-  $host_ip                      = $facts['os_service_default'],
-  $port                         = $facts['os_service_default'],
-  $pecan_debug                  = $facts['os_service_default'],
-  Boolean $sync_db              = true,
-  $service_name                 = 'httpd',
-  $enable_proxy_headers_parsing = $facts['os_service_default'],
-  $max_request_body_size        = $facts['os_service_default'],
+  Stdlib::Ensure::Package $package_ensure = 'present',
+  Boolean $manage_service                 = true,
+  Boolean $enabled                        = true,
+  $host_ip                                = $facts['os_service_default'],
+  $port                                   = $facts['os_service_default'],
+  $pecan_debug                            = $facts['os_service_default'],
+  Boolean $sync_db                        = true,
+  $service_name                           = 'httpd',
+  $enable_proxy_headers_parsing           = $facts['os_service_default'],
+  $max_request_body_size                  = $facts['os_service_default'],
 ) {
   include cloudkitty
   include cloudkitty::deps
