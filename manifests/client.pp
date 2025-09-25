@@ -9,7 +9,7 @@
 #    Defaults to 'present'.
 #
 class cloudkitty::client (
-  $ensure = 'present'
+  Stdlib::Ensure::Package $ensure = 'present'
 ) {
   include cloudkitty::deps
   include cloudkitty::params
