@@ -67,21 +67,14 @@ describe 'cloudkitty::api' do
 
       it 'configures cloudkitty-api service as standalone' do
         is_expected.to contain_service('cloudkitty-api').with(
-          :enable     => true,
+          :ensure     => 'running',
           :name       => platform_params[:api_service_name],
+          :enable     => true,
           :hasstatus  => true,
           :hasrestart => true,
           :tag        => 'cloudkitty-service',
         )
       end
-    end
-
-    context 'when service_name is not valid' do
-      before do
-        params.merge!({ :service_name => 'foobar' })
-      end
-
-      it_raises 'a Puppet::Error', /Invalid service_name/
     end
 
     context 'with $sync_db set to false in ::cloudkitty' do
