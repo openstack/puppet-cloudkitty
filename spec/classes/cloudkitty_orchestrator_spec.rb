@@ -11,8 +11,10 @@ describe 'cloudkitty::orchestrator' do
         is_expected.to contain_cloudkitty_config('orchestrator/coordination_url')\
           .with_value('<SERVICE DEFAULT>').with_secret(true)
         is_expected.to contain_oslo__coordination('cloudkitty_config').with(
-          :backend_url   => '<SERVICE DEFAULT>',
-          :manage_config => false,
+          :backend_url            => '<SERVICE DEFAULT>',
+          :manage_backend_package => true,
+          :package_ensure         => 'present',
+          :manage_config          => false,
         )
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value(4)
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers_reprocessing').with_value(4)
@@ -27,6 +29,8 @@ describe 'cloudkitty::orchestrator' do
           :max_workers              => 4,
           :max_workers_reprocessing => 5,
           :max_threads              => 20,
+          :manage_backend_package   => false,
+          :backend_package_ensure   => 'latest',
         }
       end
 
@@ -34,8 +38,10 @@ describe 'cloudkitty::orchestrator' do
         is_expected.to contain_cloudkitty_config('orchestrator/coordination_url')\
           .with_value('etcd3+http://127.0.0.1:2379').with_secret(true)
         is_expected.to contain_oslo__coordination('cloudkitty_config').with(
-          :backend_url   => 'etcd3+http://127.0.0.1:2379',
-          :manage_config => false,
+          :backend_url            => 'etcd3+http://127.0.0.1:2379',
+          :manage_backend_package => false,
+          :package_ensure         => 'latest',
+          :manage_config          => false,
         )
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value(4)
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers_reprocessing').with_value(5)

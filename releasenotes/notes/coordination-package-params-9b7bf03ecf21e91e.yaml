@@ -1,0 +1,8 @@
+---
+features:
+  - |
+    The following parameters have been added to
+    the ``cloudkitty::orchestrator`` class.
+
+    - ``manage_backend_package``
+    - ``backend_package_ensure``

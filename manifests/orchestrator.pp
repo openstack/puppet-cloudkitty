@@ -20,17 +20,29 @@
 #   (Optional) Maximum number of threads to use per worker.
 #   Defaults to 16,
 #
+# [*manage_backend_package*]
+#   (Optional) Whether to install the backend package.
+#   Defaults to true.
+#
+# [*backend_package_ensure*]
+#   (Optional) ensure state for backend package.
+#   Defaults to 'present'
+#
 class cloudkitty::orchestrator (
-  $coordination_url         = $facts['os_service_default'],
-  $max_workers              = $facts['os_workers'],
-  $max_workers_reprocessing = $facts['os_workers'],
-  $max_threads              = 16,
+  $coordination_url                               = $facts['os_service_default'],
+  $max_workers                                    = $facts['os_workers'],
+  $max_workers_reprocessing                       = $facts['os_workers'],
+  $max_threads                                    = 16,
+  Boolean $manage_backend_package                 = true,
+  Stdlib::Ensure::Package $backend_package_ensure = present,
 ) {
   include cloudkitty::deps
 
   oslo::coordination { 'cloudkitty_config':
-    backend_url   => $coordination_url,
-    manage_config => false,
+    backend_url            => $coordination_url,
+    manage_backend_package => $manage_backend_package,
+    package_ensure         => $backend_package_ensure,
+    manage_config          => false,
   }
 
   # all coordination settings should be applied and all packages should be
