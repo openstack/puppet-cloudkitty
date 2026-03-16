@@ -154,7 +154,7 @@ describe 'cloudkitty::wsgi::apache' do
         when 'Debian'
           {
             :wsgi_script_path   => '/usr/lib/cgi-bin/cloudkitty',
-            :wsgi_script_source => '/usr/bin/cloudkitty-api',
+            :wsgi_script_source => '/usr/lib/python3/dist-packages/cloudkitty/wsgi/api.py',
           }
         when 'RedHat'
           {
