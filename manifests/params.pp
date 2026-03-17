@@ -28,7 +28,7 @@ class cloudkitty::params {
       $api_package_name              = 'cloudkitty-api'
       $processor_package_name        = 'cloudkitty-processor'
       $common_package_name           = 'cloudkitty-common'
-      $cloudkitty_wsgi_script_source = "${pybasedir}/cloudkitty/wsgi/api.py"
+      $cloudkitty_wsgi_script_source = '/usr/bin/cloudkitty-api'
       $cloudkitty_wsgi_script_path   = '/usr/lib/cgi-bin/cloudkitty'
     }
     default: {
