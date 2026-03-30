@@ -18,7 +18,7 @@ describe 'cloudkitty::orchestrator' do
         )
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value(4)
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers_reprocessing').with_value(4)
-        is_expected.to contain_cloudkitty_config('orchestrator/max_threads').with_value(16)
+        is_expected.to contain_cloudkitty_config('orchestrator/max_threads').with_value('<SERVICE DEFAULT>')
       end
     end
 
@@ -28,7 +28,7 @@ describe 'cloudkitty::orchestrator' do
           :coordination_url         => 'etcd3+http://127.0.0.1:2379',
           :max_workers              => 4,
           :max_workers_reprocessing => 5,
-          :max_threads              => 20,
+          :max_threads              => 16,
           :manage_backend_package   => false,
           :backend_package_ensure   => 'latest',
         }
@@ -45,7 +45,7 @@ describe 'cloudkitty::orchestrator' do
         )
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers').with_value(4)
         is_expected.to contain_cloudkitty_config('orchestrator/max_workers_reprocessing').with_value(5)
-        is_expected.to contain_cloudkitty_config('orchestrator/max_threads').with_value(20)
+        is_expected.to contain_cloudkitty_config('orchestrator/max_threads').with_value(16)
       end
     end
   end

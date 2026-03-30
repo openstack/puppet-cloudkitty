@@ -32,7 +32,7 @@ class cloudkitty::orchestrator (
   $coordination_url                               = $facts['os_service_default'],
   $max_workers                                    = $facts['os_workers'],
   $max_workers_reprocessing                       = $facts['os_workers'],
-  $max_threads                                    = 16,
+  $max_threads                                    = $facts['os_service_default'],
   Boolean $manage_backend_package                 = true,
   Stdlib::Ensure::Package $backend_package_ensure = present,
 ) {
